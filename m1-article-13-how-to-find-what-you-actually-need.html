@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Find What You Actually Need — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,60px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* Search obstacles */
+  .obstacles-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;}
+  @media(max-width:560px){.obstacles-grid{grid-template-columns:1fr;}}
+  .ob-card{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;}
+  .ob-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+  .ob-text{font-size:14px;line-height:1.6;color:var(--gray-text);}
+  .ob-text strong{color:var(--red);}
+
+  /* Keyword transformation visual */
+  .keyword-transform{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:28px;margin:24px 0;}
+  .kt-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+  .kt-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .kt-before{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+  .kt-before-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);white-space:nowrap;}
+  .kt-before-text{font-size:15px;font-style:italic;color:var(--gray-text);}
+  .kt-arrow{text-align:center;font-size:22px;margin:4px 0 10px;color:var(--purple);}
+  .kt-after-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+  .kt-after-items{display:flex;flex-direction:column;gap:8px;}
+  .kt-after-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--green-pale);border:1.5px solid #86efac;border-radius:10px;font-size:13.5px;color:var(--gray-text);font-style:italic;}
+  .kt-check{width:20px;height:20px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .kt-check svg{width:10px;height:10px;}
+
+  /* AI search prompt demo */
+  .prompt-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pd-prompt{background:var(--purple);border-radius:12px;padding:13px 17px;font-size:14px;color:white;font-style:italic;line-height:1.65;margin-bottom:12px;}
+  .pd-prompt-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:5px;font-style:normal;}
+  .pd-queries{display:flex;flex-direction:column;gap:8px;}
+  .pd-query{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--white);border:1.5px solid var(--purple-mid);border-radius:10px;font-size:13.5px;color:var(--gray-text);font-style:italic;line-height:1.6;}
+  .pd-num{width:22px;height:22px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;margin-top:1px;}
+
+  /* Narrow / Expand accordion */
+  .accordion{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+  .ac-card{border:1.5px solid var(--purple-mid);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.2s ease;}
+  .ac-card:hover{border-color:var(--purple);}
+  .ac-card.open{border-color:var(--purple);}
+  .ac-header{display:flex;align-items:center;gap:14px;padding:20px 24px;background:var(--white);}
+  .ac-icon{font-size:26px;flex-shrink:0;}
+  .ac-name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--purple-dark);flex:1;}
+  .ac-toggle{width:28px;height:28px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 0.3s,background 0.2s;flex-shrink:0;}
+  .ac-card.open .ac-toggle{transform:rotate(45deg);background:var(--purple);color:white;}
+  .ac-body{max-height:0;overflow:hidden;transition:max-height 0.45s ease;}
+  .ac-card.open .ac-body{max-height:600px;}
+  .ac-inner{padding:0 24px 24px;}
+  .ac-desc{font-size:15px;line-height:1.75;color:var(--gray-text);margin:14px 0 12px;}
+  .ac-example-block{margin-top:4px;}
+  .ace-broad{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:10px;font-size:13.5px;color:var(--red);font-style:italic;margin-bottom:8px;}
+  .ace-arrow{text-align:center;font-size:18px;color:var(--purple);margin:6px 0;}
+  .ace-narrow-items{display:flex;flex-direction:column;gap:7px;}
+  .ace-narrow-item{display:flex;align-items:center;gap:10px;padding:9px 13px;background:var(--green-pale);border:1.5px solid #86efac;border-radius:10px;font-size:13.5px;color:var(--gray-text);font-style:italic;}
+  .ace-check{width:18px;height:18px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .ace-check svg{width:9px;height:9px;}
+  .ac-prompt{margin-top:12px;padding:11px 15px;background:var(--purple-pale);border-radius:11px;font-size:13.5px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+  .ac-prompt-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:5px;font-style:normal;}
+
+  /* Background research four cards */
+  .background-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;}
+  @media(max-width:560px){.background-cards{grid-template-columns:1fr;}}
+  .bg-card{border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;background:var(--white);display:flex;gap:13px;align-items:flex-start;transition:all 0.2s ease;}
+  .bg-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .bg-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+  .bg-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:4px;}
+  .bg-desc{font-size:13px;line-height:1.6;color:var(--gray-text);}
+
+  /* Researcher mindset stat bar */
+  .mindset-bar{background:var(--purple);border-radius:20px;padding:32px 36px;margin:24px 0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;text-align:center;}
+  @media(max-width:620px){.mindset-bar{grid-template-columns:1fr;gap:16px;}}
+  .mb-stat{color:white;}
+  .mb-icon{font-size:34px;margin-bottom:10px;display:block;}
+  .mb-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:white;margin-bottom:6px;}
+  .mb-desc{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.5;}
+
+  /* Quiz */
+  .quiz{background:var(--purple);border-radius:24px;padding:40px;margin:24px 0;color:white;}
+  .quiz-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .quiz h2{font-family:'Fraunces',serif;font-size:24px;color:white;margin-bottom:8px;}
+  .quiz-question{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:28px;}
+  .quiz-options{display:flex;flex-direction:column;gap:12px;}
+  .quiz-btn{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+  .quiz-btn:hover{background:rgba(255,255,255,0.2);transform:translateX(4px);}
+  .quiz-btn.correct{background:rgba(74,222,128,0.25);border-color:#4ade80;color:#d1fae5;}
+  .quiz-btn.wrong{background:rgba(248,113,113,0.2);border-color:#f87171;color:#fecaca;}
+  .quiz-feedback{margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:15px;line-height:1.6;display:none;}
+  .quiz-feedback.show{display:block;animation:fadeIn 0.3s ease;}
+
+  /* Reflection */
+  .reflection{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:24px;padding:36px;margin:24px 0;}
+  .reflection-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .reflection-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .reflection h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .ri-number{width:30px;height:30px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .ri-text{font-size:15.5px;line-height:1.7;color:var(--gray-text);}
+
+  /* Summary */
+  .summary{background:var(--purple-pale);border-radius:24px;padding:40px;margin:24px 0 32px;}
+  .summary-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+  .summary h2{font-family:'Fraunces',serif;font-size:26px;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-points{display:flex;flex-direction:column;gap:14px;}
+  .summary-point{display:flex;gap:14px;align-items:flex-start;}
+  .point-dot{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .point-dot svg{width:12px;height:12px;}
+  .summary-point p{font-size:16px;line-height:1.65;margin:0;}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:600px){
+    .hero,.content{padding-left:24px;padding-right:24px;}
+    .quiz,.summary,.reflection{padding:28px 24px;}
+    .keyword-transform,.prompt-demo{padding:20px;}
+    .mindset-bar{padding:24px;}
+    .ac-header{padding:16px;gap:12px;}
+    .ac-inner{padding:0 16px 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Introduction to AI</div>
+  <h1>How to Find What You Actually Need</h1>
+  <p class="hero-sub">Googling something and getting millions of results isn't research. Knowing how to turn a topic into targeted, useful searches — with AI's help — is a completely different skill. Here's how to build it.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <div class="section fade-in">
+    <p>Have you ever searched something on Google, gotten millions of results, and still felt like you didn't find what you were actually looking for? You scroll past ads, opinion pieces, and random blogs — and still leave empty-handed.</p>
+    <p>You're not alone. <mark>Searching is a skill, and most people are never explicitly taught how to do it well.</mark> That's where AI comes in — not to replace search engines, but to help you search smarter, faster, and more accurately.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Why Searching Online Feels Overwhelming</h2>
+    <p>The problem usually isn't effort — it's approach. Here are the four most common reasons searches fail to deliver what you actually need:</p>
+
+    <div class="obstacles-grid">
+      <div class="ob-card">
+        <div class="ob-icon">🎯</div>
+        <div class="ob-text"><strong>Search engines don't read minds.</strong> They guess at what you meant — and if your phrasing is off, the results will be too. Even small word choices dramatically change what you get back.</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-icon">📏</div>
+        <div class="ob-text"><strong>Keywords can be too broad or too specific.</strong> "Climate change" returns millions of irrelevant results. "CO2 emissions 1990s Arctic tundra methane" might return nothing useful either.</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-icon">🗂️</div>
+        <div class="ob-text"><strong>You might not know the right terms yet.</strong> Every field has specific vocabulary. Without the right jargon, you'll miss the best sources — because they use words you haven't learned yet.</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-icon">🗑️</div>
+        <div class="ob-text"><strong>Results are cluttered with noise.</strong> Ads, opinion pieces, outdated pages, and content optimized for clicks — not accuracy — all compete for your attention at the top of every results page.</div>
+      </div>
+    </div>
+
+    <p>Good research starts with good searches. And good searches start with knowing how to translate a topic into the specific language that surfaces what you're actually looking for.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>Better keywords don't just give you more results. They give you better results — which means less time sifting and more time actually learning.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Turning a Topic Into Searchable Keywords</h2>
+    <p>Here's one of the most immediately useful things AI can do for your research: take a broad topic and generate a set of specific, targeted search queries you'd never have thought of yourself. Here's what that transformation actually looks like:</p>
+
+    <div class="keyword-transform">
+      <div class="kt-label">🔄 Keyword Transformation — "Fast Fashion"</div>
+      <div class="kt-before">
+        <div class="kt-before-label">❌ Too broad</div>
+        <div class="kt-before-text">"fast fashion" → 847,000,000 results, mostly news and shopping</div>
+      </div>
+      <div class="kt-arrow">↓ Ask AI to generate specific queries ↓</div>
+      <div class="kt-after-label">✅ Targeted searches AI generates</div>
+      <div class="kt-after-items">
+        <div class="kt-after-item"><div class="kt-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"environmental impact of fast fashion industry statistics"</div>
+        <div class="kt-after-item"><div class="kt-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"fast fashion supply chain labor conditions developing countries"</div>
+        <div class="kt-after-item"><div class="kt-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"fast fashion vs sustainable fashion consumer behavior research"</div>
+        <div class="kt-after-item"><div class="kt-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"textile waste landfill statistics United States 2020 2023"</div>
+        <div class="kt-after-item"><div class="kt-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"how does fast fashion contribute to microplastic water pollution"</div>
+      </div>
+    </div>
+
+    <p>Each of these searches targets a specific angle of the topic — meaning you'll find sources with actual data, research, and expert analysis instead of general news coverage and brand websites.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Asking AI to Build Your Searches for You</h2>
+    <p>Instead of guessing what to type into Google, try this approach. Give AI your topic and ask it to do the keyword work:</p>
+
+    <div class="prompt-demo">
+      <div class="pd-label">💬 The Prompt That Unlocks Better Searches</div>
+      <div class="pd-prompt">
+        <div class="pd-prompt-who">You type:</div>
+        "Give me five specific search queries I can use to research the health effects of social media on teenagers. Make them targeted enough to find academic sources and recent data."
+      </div>
+      <div class="pd-queries">
+        <div class="pd-query"><div class="pd-num">1</div>"social media use and depression rates teenagers research study 2022 2023"</div>
+        <div class="pd-query"><div class="pd-num">2</div>"Instagram algorithm effects on adolescent body image peer-reviewed"</div>
+        <div class="pd-query"><div class="pd-num">3</div>"screen time sleep quality teenagers CDC data"</div>
+        <div class="pd-query"><div class="pd-num">4</div>"cyberbullying mental health outcomes adolescents longitudinal study"</div>
+        <div class="pd-query"><div class="pd-num">5</div>"social comparison theory social media youth anxiety statistics"</div>
+      </div>
+    </div>
+
+    <p>Notice the difference: these queries include specific terms like "peer-reviewed," "longitudinal study," and "CDC data" — which signals to search engines that you're looking for credible, research-backed sources rather than general content.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Narrowing or Expanding Your Topic</h2>
+    <p>AI isn't just useful for generating keywords — it can also help you calibrate your topic to a size that's actually researchable. Click each strategy to see it in action:</p>
+
+    <div class="accordion">
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-icon">🔬</div>
+          <div class="ac-name">Narrowing a Topic That's Too Broad</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">If your topic is enormous — covering decades, continents, or entire fields of science — you'll never find focused, useful sources because everything touches your topic tangentially. AI can suggest specific angles that make your topic manageable and researchable.</p>
+          <div class="ac-example-block">
+            <div class="ace-broad">❌ Too broad: "Global warming"</div>
+            <div class="ace-arrow">↓ AI narrows it to…</div>
+            <div class="ace-narrow-items">
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"Effects of global warming on Great Barrier Reef coral bleaching since 2000"</div>
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"How rising temperatures are changing hurricane intensity in the Gulf of Mexico"</div>
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"Global warming impact on agricultural yields in sub-Saharan Africa"</div>
+            </div>
+          </div>
+          <div class="ac-prompt">
+            <div class="ac-prompt-label">💬 Try This Prompt</div>
+            "My topic is global warming but it's too broad for a five-page paper. Give me five specific, focused angles I could research instead."
+          </div>
+        </div></div>
+      </div>
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-icon">🔭</div>
+          <div class="ac-name">Expanding a Topic That's Too Narrow</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">Sometimes the opposite problem: your topic is so specific that there aren't enough sources to work with. AI can help you zoom out or identify related angles that connect to your original interest and give you more to research.</p>
+          <div class="ac-example-block">
+            <div class="ace-broad">❌ Too narrow: "Carbon emissions from one specific factory in Ohio"</div>
+            <div class="ace-arrow">↓ AI expands it to…</div>
+            <div class="ace-narrow-items">
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"Industrial carbon emissions from manufacturing in the Midwest United States"</div>
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"EPA regulations on factory emissions and enforcement challenges"</div>
+              <div class="ace-narrow-item"><div class="ace-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>"Community health impacts of industrial air pollution in urban areas"</div>
+            </div>
+          </div>
+          <div class="ac-prompt">
+            <div class="ac-prompt-label">💬 Try This Prompt</div>
+            "My research topic is too specific and I can't find enough sources. Here's my topic: [your topic]. What are some related, broader angles I could research instead?"
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Getting Background Before You Dive Deep</h2>
+    <p>Before you start searching for specific sources, it helps to understand the basics of your topic first. AI is excellent at giving you a quick, clear foundation that helps you search more intelligently:</p>
+
+    <div class="background-cards">
+      <div class="bg-card">
+        <div class="bg-icon">📖</div>
+        <div>
+          <div class="bg-title">Background Summaries</div>
+          <p class="bg-desc">Ask AI to give you a plain-language overview of your topic so you understand the landscape before you start searching for specific sources.</p>
+        </div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">🔤</div>
+        <div>
+          <div class="bg-title">Key Vocabulary</div>
+          <p class="bg-desc">Ask AI for the important terms and jargon used in your field — because the right vocabulary is what unlocks the academic sources that use it.</p>
+        </div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">⚖️</div>
+        <div>
+          <div class="bg-title">Key Debates and Disagreements</div>
+          <p class="bg-desc">Ask AI what the main disagreements or controversies are in your topic — this tells you where the most interesting and well-sourced research tends to live.</p>
+        </div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">🗺️</div>
+        <div>
+          <div class="bg-title">Subtopics Worth Exploring</div>
+          <p class="bg-desc">Ask AI to map out the subtopics within your subject — this helps you discover angles you didn't know existed and find areas with more available research.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-demo">
+      <div class="pd-label">💬 Background Research Prompt</div>
+      <div class="pd-prompt">
+        <div class="pd-prompt-who">You type:</div>
+        "I'm starting research on food deserts in American cities. Give me: (1) a plain-language overview, (2) key vocabulary I'll need to know, (3) the main debates in this field, and (4) five subtopics I could research more deeply."
+      </div>
+      <div class="pd-queries">
+        <div class="pd-query"><div class="pd-num">→</div>You get a structured research primer that makes your actual searching dramatically more efficient</div>
+        <div class="pd-query"><div class="pd-num">→</div>You learn terms like "food access," "USDA food desert definition," and "grocery gap" — which unlock the right academic sources</div>
+        <div class="pd-query"><div class="pd-num">→</div>You discover angles you didn't know about — like the debate over whether food deserts are about supply or income — before you've wasted time searching</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="mindset-bar">
+      <div class="mb-stat">
+        <span class="mb-icon">🎯</span>
+        <div class="mb-title">Spot Patterns</div>
+        <p class="mb-desc">Strong searchers notice which sources keep citing each other — and trace back to the original research</p>
+      </div>
+      <div class="mb-stat">
+        <span class="mb-icon">🗝️</span>
+        <div class="mb-title">Choose Better Keywords</div>
+        <p class="mb-desc">Over time you build an instinct for which terms surface credible sources vs. noise</p>
+      </div>
+      <div class="mb-stat">
+        <span class="mb-icon">🧩</span>
+        <div class="mb-title">Understand Deeply</div>
+        <p class="mb-desc">The more you research a topic with good searches, the faster you start connecting ideas across sources</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>Smart searches save time, prevent frustration, and help you find higher-quality information. Over time, you stop being a student who searches and start thinking like a researcher.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="quiz">
+      <div class="quiz-label">🎯 Knowledge Check</div>
+      <h2>Quick Question</h2>
+      <p class="quiz-question">A student is researching the topic "social media" for a paper. Which of the following is the best use of AI to improve their search strategy?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">A. Ask AI to write a summary of social media so they don't have to search at all</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">B. Search "social media" on Google and ask AI which of the first five results is most reliable</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,true)">C. Ask AI to generate specific, focused search queries on their angle of the topic so they can find targeted, credible sources</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">D. Ask AI what the most popular opinion about social media is, then search for sources that confirm it</button>
+      </div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflect</div>
+      <h3>Think It Through</h3>
+      <div class="reflection-items">
+        <div class="reflection-item">
+          <div class="ri-number">1</div>
+          <div class="ri-text">What's the biggest challenge you personally face when searching for information online — too many results, wrong results, not knowing the right terms, or something else?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">2</div>
+          <div class="ri-text">How could AI help you come up with better keywords for a topic you're currently studying or curious about? What would you ask it?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">3</div>
+          <div class="ri-text">Think of a topic that felt too broad when you tried to research it. How could AI have helped you narrow it into something actually manageable?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">4</div>
+          <div class="ri-text">Why do you think strong search skills matter outside of school? Think of a real-life situation where knowing how to find accurate information quickly would genuinely matter.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="summary">
+      <div class="summary-label">📌 Article Summary</div>
+      <h2>What You Just Learned</h2>
+      <div class="summary-points">
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Searching is a skill — and most people are never taught it. Broad keywords, missing vocabulary, and cluttered results are the main reasons searches fail, not lack of effort.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>AI can transform a vague topic into a set of targeted, specific search queries that surface credible sources — including terms and angles you'd never think to search on your own.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>AI can help you calibrate your topic — narrowing something too broad into a researchable angle, or expanding something too specific into related territory with more available sources.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Getting background context first — key terms, major debates, and subtopics — makes every subsequent search more efficient because you know what you're actually looking for before you look.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/t*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function toggleAC(c){const o=c.classList.contains('open');document.querySelectorAll('.ac-card').forEach(x=>x.classList.remove('open'));if(!o)c.classList.add('open');}
+  let answered=false;
+  function checkAnswer(btn,correct){if(answered)return;answered=true;document.querySelectorAll('.quiz-btn').forEach(b=>b.style.pointerEvents='none');const f=document.getElementById('quizFeedback');if(correct){btn.classList.add('correct');f.innerHTML='✅ <strong>That\'s exactly right.</strong> The best use of AI here is as a search strategist — generating specific, focused queries that will actually surface credible, relevant sources. Asking AI to write a summary skips the research entirely. Evaluating random Google results reactively is inefficient. And searching for confirmation of a predetermined opinion is a form of bias called confirmation bias, which undermines the whole point of research.';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-btn')[1].classList.add('correct');f.innerHTML='❌ <strong>Not quite.</strong> The most powerful use of AI in the research process is generating targeted search queries before you go to Google — not writing summaries that replace research, not evaluating random results reactively, and definitely not looking for sources to confirm an opinion you already have (that\'s confirmation bias). Better searches lead to better sources. That\'s where AI adds the most value.';}f.classList.add('show');}
+</script>
+</body>
+</html>
