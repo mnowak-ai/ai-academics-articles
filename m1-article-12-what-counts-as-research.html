@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Counts as Research? — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,60px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* Research pitfalls strip */
+  .pitfalls-strip{display:flex;flex-direction:column;gap:10px;margin:24px 0;}
+  .pitfall-item{display:flex;align-items:flex-start;gap:14px;padding:15px 20px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;}
+  .pi-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+  .pi-text{font-size:14.5px;line-height:1.65;color:var(--gray-text);}
+  .pi-text strong{color:var(--red);}
+
+  /* Primary vs Secondary two-col */
+  .sources-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:580px){.sources-compare{grid-template-columns:1fr;}}
+  .sc-col{border-radius:16px;padding:24px;border:1.5px solid var(--purple-mid);background:var(--white);}
+  .sc-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:100px;padding:4px 12px;margin-bottom:12px;}
+  .sc-icon{font-size:30px;margin-bottom:10px;display:block;}
+  .sc-title{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .sc-def{font-size:14px;color:var(--gray-muted);margin-bottom:12px;line-height:1.55;font-style:italic;}
+  .sc-examples{display:flex;flex-direction:column;gap:7px;}
+  .sc-example{display:flex;gap:9px;font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+  .sc-dot{width:18px;height:18px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .sc-dot svg{width:9px;height:9px;}
+
+  /* AI source prompt demo */
+  .prompt-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pd-prompt{background:var(--purple);border-radius:12px;padding:13px 17px;font-size:14px;color:white;font-style:italic;line-height:1.65;margin-bottom:12px;}
+  .pd-prompt-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:5px;font-style:normal;}
+  .pd-result{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:12px;padding:14px 17px;}
+  .pd-result-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+  .pd-result-text{font-size:13.5px;line-height:1.7;color:var(--gray-text);}
+
+  /* Reliable vs Unreliable accordion */
+  .accordion{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+  .ac-card{border:1.5px solid var(--purple-mid);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.2s ease;}
+  .ac-card:hover{border-color:var(--purple);}
+  .ac-card.open{border-color:var(--purple);}
+  .ac-header{display:flex;align-items:center;gap:14px;padding:20px 24px;background:var(--white);}
+  .ac-icon{font-size:26px;flex-shrink:0;}
+  .ac-name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--purple-dark);flex:1;}
+  .ac-toggle{width:28px;height:28px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 0.3s,background 0.2s;flex-shrink:0;}
+  .ac-card.open .ac-toggle{transform:rotate(45deg);background:var(--purple);color:white;}
+  .ac-body{max-height:0;overflow:hidden;transition:max-height 0.45s ease;}
+  .ac-card.open .ac-body{max-height:600px;}
+  .ac-inner{padding:0 24px 24px;}
+  .ac-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
+  @media(max-width:560px){.ac-split{grid-template-columns:1fr;}}
+  .ac-col{border-radius:12px;padding:16px;}
+  .ac-col.good{background:var(--green-pale);border:1.5px solid #86efac;}
+  .ac-col.bad{background:var(--red-pale);border:1.5px solid #FCA5A5;}
+  .ac-col-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+  .ac-col.good .ac-col-label{color:var(--green);}
+  .ac-col.bad .ac-col-label{color:var(--red);}
+  .ac-col-items{display:flex;flex-direction:column;gap:7px;}
+  .ac-col-item{font-size:13px;line-height:1.55;color:var(--gray-text);display:flex;gap:8px;}
+  .ac-desc{font-size:15px;line-height:1.75;color:var(--gray-text);margin:14px 0 0;}
+  .ac-prompt{margin-top:12px;padding:11px 15px;background:var(--purple-pale);border-radius:11px;font-size:13.5px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+  .ac-prompt-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:5px;font-style:normal;}
+
+  /* Good vs Bad questions */
+  .questions-block{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:560px){.questions-block{grid-template-columns:1fr;}}
+  .qb-col{border-radius:16px;padding:22px;border:1.5px solid;}
+  .qb-col.bad-q{background:var(--red-pale);border-color:#FCA5A5;}
+  .qb-col.good-q{background:var(--green-pale);border-color:#86efac;}
+  .qb-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;}
+  .qb-col.bad-q .qb-label{color:var(--red);}
+  .qb-col.good-q .qb-label{color:var(--green);}
+  .qb-items{display:flex;flex-direction:column;gap:9px;}
+  .qb-item{font-size:13.5px;line-height:1.6;color:var(--gray-text);display:flex;gap:9px;align-items:flex-start;}
+
+  /* What makes a good question — 4 traits */
+  .traits-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;}
+  @media(max-width:560px){.traits-grid{grid-template-columns:1fr;}}
+  .trait-card{border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;background:var(--white);display:flex;gap:14px;align-items:flex-start;transition:all 0.2s ease;}
+  .trait-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .trait-num{width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:white;flex-shrink:0;}
+  .trait-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:4px;}
+  .trait-desc{font-size:13px;line-height:1.6;color:var(--gray-text);}
+
+  /* Life skills strip */
+  .skills-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:24px 0;}
+  @media(max-width:660px){.skills-strip{grid-template-columns:1fr;}}
+  .ss-card{border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px;background:var(--white);text-align:center;transition:all 0.2s ease;}
+  .ss-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .ss-icon{font-size:28px;margin-bottom:10px;display:block;}
+  .ss-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--purple-dark);margin-bottom:5px;}
+  .ss-desc{font-size:13px;line-height:1.55;color:var(--gray-text);}
+
+  /* Callout */
+  .callout{background:var(--purple);border-radius:20px;padding:32px 36px;margin:24px 0;display:flex;gap:20px;align-items:flex-start;}
+  .callout-icon{font-size:32px;flex-shrink:0;}
+  .callout h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:white;margin-bottom:8px;}
+  .callout p{font-size:15.5px;color:rgba(255,255,255,0.85);line-height:1.65;margin:0;}
+
+  /* Quiz */
+  .quiz{background:var(--purple);border-radius:24px;padding:40px;margin:24px 0;color:white;}
+  .quiz-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .quiz h2{font-family:'Fraunces',serif;font-size:24px;color:white;margin-bottom:8px;}
+  .quiz-question{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:28px;}
+  .quiz-options{display:flex;flex-direction:column;gap:12px;}
+  .quiz-btn{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+  .quiz-btn:hover{background:rgba(255,255,255,0.2);transform:translateX(4px);}
+  .quiz-btn.correct{background:rgba(74,222,128,0.25);border-color:#4ade80;color:#d1fae5;}
+  .quiz-btn.wrong{background:rgba(248,113,113,0.2);border-color:#f87171;color:#fecaca;}
+  .quiz-feedback{margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:15px;line-height:1.6;display:none;}
+  .quiz-feedback.show{display:block;animation:fadeIn 0.3s ease;}
+
+  /* Reflection */
+  .reflection{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:24px;padding:36px;margin:24px 0;}
+  .reflection-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .reflection-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .reflection h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .ri-number{width:30px;height:30px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .ri-text{font-size:15.5px;line-height:1.7;color:var(--gray-text);}
+
+  /* Summary */
+  .summary{background:var(--purple-pale);border-radius:24px;padding:40px;margin:24px 0 32px;}
+  .summary-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+  .summary h2{font-family:'Fraunces',serif;font-size:26px;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-points{display:flex;flex-direction:column;gap:14px;}
+  .summary-point{display:flex;gap:14px;align-items:flex-start;}
+  .point-dot{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .point-dot svg{width:12px;height:12px;}
+  .summary-point p{font-size:16px;line-height:1.65;margin:0;}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:600px){
+    .hero,.content{padding-left:24px;padding-right:24px;}
+    .callout{flex-direction:column;gap:12px;padding:24px;}
+    .quiz,.summary,.reflection{padding:28px 24px;}
+    .prompt-demo{padding:20px;}
+    .ac-header{padding:16px;gap:12px;}
+    .ac-inner{padding:0 16px 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Introduction to AI</div>
+  <h1>What Counts as Research?</h1>
+  <p class="hero-sub">Research isn't Googling something and hoping the first link is right. It's asking good questions, finding reliable sources, and figuring out what's actually true — and AI can help you get much better at all three.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <div class="section fade-in">
+    <p>With millions of websites, social media posts, videos, and AI tools all competing for your attention, figuring out what counts as "real research" can feel genuinely overwhelming. You open your laptop with a topic, start searching, and immediately get buried.</p>
+    <p><mark>Research is the process of asking good questions, finding reliable information, and deciding what's actually true.</mark> That sounds simple — but it's a skill most students are never explicitly taught. Let's fix that.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Why Research Is Harder Than It Looks</h2>
+    <p>Most students aren't taught how to research — they're just told to "go find sources." So you open your browser and suddenly you're dealing with all of this:</p>
+
+    <div class="pitfalls-strip">
+      <div class="pitfall-item">
+        <div class="pi-icon">💻</div>
+        <div class="pi-text"><strong>Random blogs with opinions disguised as facts</strong> — written to sound authoritative but with no real evidence behind them</div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pi-icon">🤖</div>
+        <div class="pi-text"><strong>AI answers that sound convincing but might be wrong</strong> — AI can generate confident-sounding information that is completely made up</div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pi-icon">🔎</div>
+        <div class="pi-text"><strong>Search results optimized for clicks, not accuracy</strong> — the top result isn't necessarily the most reliable or relevant one</div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pi-icon">⁉️</div>
+        <div class="pi-text"><strong>Confusing academic language</strong> — legitimate research is often written for experts, making it hard for students to extract what they actually need</div>
+      </div>
+      <div class="pitfall-item">
+        <div class="pi-icon">📑</div>
+        <div class="pi-text"><strong>Long articles with unclear main points</strong> — even good sources can be dense and hard to navigate without a system for pulling out what matters</div>
+      </div>
+    </div>
+
+    <p>It's not your fault if research feels hard. Finding good information takes skill — and that skill starts with understanding the types of sources you're dealing with.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>The goal of research isn't to find information. It's to find reliable information — and know the difference between the two.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Primary vs. Secondary Sources</h2>
+    <p>Every source you encounter falls into one of two categories — and knowing which you're looking at (and which you need) is one of the most foundational research skills there is:</p>
+
+    <div class="sources-compare">
+      <div class="sc-col">
+        <div class="sc-badge">Type 1</div>
+        <span class="sc-icon">📄</span>
+        <div class="sc-title">Primary Sources</div>
+        <div class="sc-def">Original, first-hand information — the raw material of research</div>
+        <div class="sc-examples">
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Interviews and firsthand accounts</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Original experiments and data</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Historical documents and letters</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Surveys and raw census data</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Original literary or artistic works</span></div>
+        </div>
+      </div>
+      <div class="sc-col">
+        <div class="sc-badge">Type 2</div>
+        <span class="sc-icon">📚</span>
+        <div class="sc-title">Secondary Sources</div>
+        <div class="sc-def">Someone else's analysis or interpretation of primary information</div>
+        <div class="sc-examples">
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Textbooks and academic reviews</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>News articles and journalism</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Documentaries and explainer videos</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Biographies and historical analyses</span></div>
+          <div class="sc-example"><div class="sc-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Literary criticism and book reviews</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p>Both types are valuable — and the right one depends on your assignment. AI can help you figure out which kind you actually need before you waste time searching for the wrong thing:</p>
+
+    <div class="prompt-demo">
+      <div class="pd-label">💬 Example Prompt</div>
+      <div class="pd-prompt">
+        <div class="pd-prompt-who">You type:</div>
+        "I'm writing a paper on the impacts of climate change on coastal communities. Do I need primary or secondary sources — and what's the difference for this topic specifically?"
+      </div>
+      <div class="pd-result">
+        <div class="pd-result-who">✅ What AI Helps You Understand</div>
+        <div class="pd-result-text">AI will explain that for this topic, primary sources might include climate data from NOAA, scientific studies measuring sea level rise, or interviews with affected residents — while secondary sources would include news coverage, textbook explanations of climate science, or documentary analyses. It helps you understand what you're looking for before you go looking for it.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Reliable vs. Unreliable Sources</h2>
+    <p>Not everything online deserves your trust — and the difference between a reliable and unreliable source isn't always obvious. Click each category to see how to spot them:</p>
+
+    <div class="accordion">
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-icon">✅</div>
+          <div class="ac-name">Signs of a Reliable Source</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">Reliable sources share a few key characteristics — not because they're "official," but because they're transparent about where their information comes from and how they arrived at their conclusions.</p>
+          <div class="ac-split">
+            <div class="ac-col good">
+              <div class="ac-col-label">✅ Look For</div>
+              <div class="ac-col-items">
+                <div class="ac-col-item"><span>✔</span><span>Named authors with verifiable credentials</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Citations and references to other sources</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Published recently or clearly dated</span></div>
+                <div class="ac-col-item"><span>✔</span><span>From institutions, universities, or known publications</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Presents evidence, not just conclusions</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Acknowledges uncertainty or limitations</span></div>
+              </div>
+            </div>
+            <div class="ac-col bad">
+              <div class="ac-col-label">🚩 Watch Out For</div>
+              <div class="ac-col-items">
+                <div class="ac-col-item"><span>✘</span><span>No author listed or anonymous</span></div>
+                <div class="ac-col-item"><span>✘</span><span>No citations or "trust me" language</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Undated or very old for a fast-moving topic</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Website you've never heard of with no "About" page</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Makes dramatic claims without evidence</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Strongly one-sided with no counterargument</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ac-prompt">
+            <div class="ac-prompt-label">💬 Try This Prompt</div>
+            "Here are two sources I found about vaccine safety. Can you compare them and tell me which seems more credible and why?" [paste both URLs or summaries]
+          </div>
+        </div></div>
+      </div>
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-icon">⚠️</div>
+          <div class="ac-name">A Special Warning: AI as a Source</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">Here's something important that often gets overlooked: <strong>AI itself is not a reliable research source.</strong> AI tools like ChatGPT can generate information that sounds completely accurate but is actually fabricated — this is called "hallucination." AI is trained on patterns in text, not on verified facts, which means it can confidently state things that are simply wrong.</p>
+          <div class="ac-split">
+            <div class="ac-col good">
+              <div class="ac-col-label">✅ Good AI Research Uses</div>
+              <div class="ac-col-items">
+                <div class="ac-col-item"><span>✔</span><span>Helping you form better research questions</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Explaining confusing concepts simply</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Comparing sources you already found</span></div>
+                <div class="ac-col-item"><span>✔</span><span>Suggesting what types of sources to look for</span></div>
+              </div>
+            </div>
+            <div class="ac-col bad">
+              <div class="ac-col-label">🚩 Don't Use AI For</div>
+              <div class="ac-col-items">
+                <div class="ac-col-item"><span>✘</span><span>Citing as a primary or secondary source</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Verifying facts without cross-checking</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Statistics or specific data claims</span></div>
+                <div class="ac-col-item"><span>✘</span><span>Quotes from real people or documents</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="ac-desc" style="margin-top:12px;">Always verify anything AI tells you against a real, citable source before including it in your work.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Asking Better Research Questions</h2>
+    <p>Research always starts with a question — and the quality of your question determines the quality of your results. Most students start with questions that are too broad to be useful. Here's the difference:</p>
+
+    <div class="questions-block">
+      <div class="qb-col bad-q">
+        <div class="qb-label">❌ Weak Research Questions</div>
+        <div class="qb-items">
+          <div class="qb-item"><span>→</span><span>"Tell me everything about space."</span></div>
+          <div class="qb-item"><span>→</span><span>"What is climate change?"</span></div>
+          <div class="qb-item"><span>→</span><span>"Why is history important?"</span></div>
+          <div class="qb-item"><span>→</span><span>"How does technology work?"</span></div>
+        </div>
+      </div>
+      <div class="qb-col good-q">
+        <div class="qb-label">✅ Strong Research Questions</div>
+        <div class="qb-items">
+          <div class="qb-item"><span>→</span><span>"What challenges do astronauts face during missions longer than six months?"</span></div>
+          <div class="qb-item"><span>→</span><span>"How does rising sea level specifically affect low-income coastal communities?"</span></div>
+          <div class="qb-item"><span>→</span><span>"What role did propaganda play in shaping public opinion during WWII?"</span></div>
+          <div class="qb-item"><span>→</span><span>"How does social media algorithm design influence teen mental health?"</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p>Good research questions share four qualities that make them actually useful:</p>
+
+    <div class="traits-grid">
+      <div class="trait-card">
+        <div class="trait-num">1</div>
+        <div>
+          <div class="trait-title">Clear</div>
+          <p class="trait-desc">You can read it and immediately know exactly what you're asking — no ambiguity about what counts as a good answer.</p>
+        </div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-num">2</div>
+        <div>
+          <div class="trait-title">Specific</div>
+          <p class="trait-desc">Narrow enough that you can actually find and evaluate sources that address it directly, rather than drowning in everything ever written on a broad topic.</p>
+        </div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-num">3</div>
+        <div>
+          <div class="trait-title">Open-Ended</div>
+          <p class="trait-desc">Doesn't have a simple yes/no answer. Invites analysis, comparison, or explanation — which is what research actually produces.</p>
+        </div>
+      </div>
+      <div class="trait-card">
+        <div class="trait-num">4</div>
+        <div>
+          <div class="trait-title">Focused on Real Information</div>
+          <p class="trait-desc">Grounded in verifiable facts or evidence — not just opinions or hypotheticals that can't be researched in a meaningful way.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-demo">
+      <div class="pd-label">💬 Let AI Help Sharpen Your Question</div>
+      <div class="pd-prompt">
+        <div class="pd-prompt-who">You type:</div>
+        "My topic is social media and teens. Help me turn this into a specific, focused research question that would lead to good sources."
+      </div>
+      <div class="pd-result">
+        <div class="pd-result-who">✅ What AI Helps You Do</div>
+        <div class="pd-result-text">AI can generate several sharper versions — like "How does Instagram's algorithm affect body image in girls aged 13–17?" or "What does current research say about social media use and sleep quality in teenagers?" — giving you a concrete starting point instead of a vague topic drift.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="callout">
+      <div class="callout-icon">🔍</div>
+      <div>
+        <h3>Research Is a Skill — Not Just a Task</h3>
+        <p>Most students treat research as something you do once to fill a bibliography. But it's actually a thinking skill — one that gets sharper every time you practice asking better questions, evaluating sources carefully, and deciding what to trust. AI can help you build that skill faster, but the critical thinking part always has to come from you.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Why This Matters Beyond School</h2>
+    <p>Being able to research well isn't just about getting good grades. These skills shape how you move through the world:</p>
+
+    <div class="skills-strip">
+      <div class="ss-card">
+        <span class="ss-icon">🧠</span>
+        <div class="ss-title">Critical Thinking</div>
+        <p class="ss-desc">You question claims instead of accepting them at face value — whether it's a news headline, a product claim, or a political statement.</p>
+      </div>
+      <div class="ss-card">
+        <span class="ss-icon">🚫</span>
+        <div class="ss-title">Spotting Misinformation</div>
+        <p class="ss-desc">You recognize emotional manipulation, missing citations, and one-sided framing — the hallmarks of unreliable information online.</p>
+      </div>
+      <div class="ss-card">
+        <span class="ss-icon">⚖️</span>
+        <div class="ss-title">Making Informed Decisions</div>
+        <p class="ss-desc">From choosing a college to evaluating a news story to making health decisions — good research skills help you make choices based on evidence, not noise.</p>
+      </div>
+      <div class="ss-card">
+        <span class="ss-icon">💼</span>
+        <div class="ss-title">Career Advantage</div>
+        <p class="ss-desc">In virtually every profession, the ability to find, evaluate, and synthesize reliable information is a core skill that sets strong performers apart.</p>
+      </div>
+      <div class="ss-card">
+        <span class="ss-icon">🌍</span>
+        <div class="ss-title">Understanding the World</div>
+        <p class="ss-desc">The more accurately you can understand what's actually happening — and why — the better equipped you are to participate meaningfully in the world around you.</p>
+      </div>
+      <div class="ss-card">
+        <span class="ss-icon">🗣️</span>
+        <div class="ss-title">Arguing With Evidence</div>
+        <p class="ss-desc">Good research makes you a more persuasive communicator — because you can back your positions with real evidence instead of just strong opinions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>In a world full of confident-sounding misinformation, the ability to find and evaluate reliable sources isn't a nice-to-have. It's one of the most important skills you can develop.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="quiz">
+      <div class="quiz-label">🎯 Knowledge Check</div>
+      <h2>Quick Question</h2>
+      <p class="quiz-question">A student is writing a paper about the health effects of sugary drinks. They find a blog post on a nutrition website that says sugar causes cancer, with no citations and no author listed. Which of the following is the best next step?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">A. Use it — it's on a nutrition website so it's probably accurate</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">B. Ask AI if the claim is true before deciding whether to cite it</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,true)">C. Discard it and look for a peer-reviewed study or source from a medical institution that cites its evidence</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">D. Use it as a secondary source since it's summarizing health information</button>
+      </div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflect</div>
+      <h3>Think It Through</h3>
+      <div class="reflection-items">
+        <div class="reflection-item">
+          <div class="ri-number">1</div>
+          <div class="ri-text">What kinds of sources do you usually rely on when researching for school — and why? Have you ever questioned whether they were actually reliable?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">2</div>
+          <div class="ri-text">What makes a source feel trustworthy to you? After reading this, would you evaluate sources any differently than you did before?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">3</div>
+          <div class="ri-text">How could AI help you form better research questions — and where should AI's role stop when it comes to actually finding and verifying sources?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">4</div>
+          <div class="ri-text">Why do you think the ability to research well matters outside of school? Can you think of a specific real-world situation where this skill would directly affect a decision you might make?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="summary">
+      <div class="summary-label">📌 Article Summary</div>
+      <h2>What You Just Learned</h2>
+      <div class="summary-points">
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Research is the process of asking good questions, finding reliable information, and evaluating what's actually true — not just Googling something and citing the first result. It's a skill that requires practice.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Primary sources are original, first-hand information. Secondary sources are analyses or interpretations of primary information. Both matter — and knowing which you need before you search saves significant time and effort.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Reliable sources cite their evidence, name their authors, and come from credible institutions. AI itself is not a reliable research source — it can confidently generate inaccurate information, so always verify AI-provided facts elsewhere.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Good research questions are clear, specific, open-ended, and grounded in verifiable information. AI can help you sharpen a broad topic into a focused, useful question — and compare sources you've already found for credibility.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/t*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function toggleAC(c){const o=c.classList.contains('open');document.querySelectorAll('.ac-card').forEach(x=>x.classList.remove('open'));if(!o)c.classList.add('open');}
+  let answered=false;
+  function checkAnswer(btn,correct){if(answered)return;answered=true;document.querySelectorAll('.quiz-btn').forEach(b=>b.style.pointerEvents='none');const f=document.getElementById('quizFeedback');if(correct){btn.classList.add('correct');f.innerHTML='✅ <strong>Exactly right.</strong> A blog post with no author and no citations fails multiple reliability checks — regardless of what website it appears on. The topic domain ("nutrition") doesn\'t make an uncited anonymous post credible. For a health claim this specific, you need a peer-reviewed study, a source from a medical institution like the CDC or WHO, or at minimum an article that cites verifiable research. Asking AI to verify the claim is also insufficient — AI can confidently confirm misinformation.';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-btn')[1].classList.add('correct');f.innerHTML='❌ <strong>Not quite.</strong> A nutrition website label doesn\'t make an anonymous, uncited post reliable. AI is also not a good fact-checker here — it can confidently confirm incorrect information. And a blog with no citations doesn\'t qualify as a secondary source in the academic sense. The only trustworthy path forward is finding a peer-reviewed study or institutional source that actually cites its evidence for the claim.';}f.classList.add('show');}
+</script>
+</body>
+</html>
