@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planning Your Study Routine with AI — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,60px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* Why plans fail — problem strip */
+  .problem-strip{display:flex;flex-direction:column;gap:10px;margin:24px 0;}
+  .problem-item{display:flex;align-items:flex-start;gap:14px;padding:16px 20px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;}
+  .pi-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+  .pi-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--red);margin-bottom:3px;}
+  .pi-desc{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+
+  /* AI coaching demo block */
+  .coach-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:28px;margin:24px 0;}
+  .cd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .cd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .chat-bubble{border-radius:16px;padding:14px 18px;font-size:14.5px;line-height:1.7;margin-bottom:10px;max-width:88%;}
+  .chat-bubble.user{background:var(--purple);color:white;margin-left:auto;border-bottom-right-radius:4px;}
+  .chat-bubble.ai{background:var(--white);border:1.5px solid var(--purple-mid);color:var(--gray-text);border-bottom-left-radius:4px;}
+  .chat-bubble.ai strong{color:var(--purple-dark);}
+  .chat-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;}
+  .chat-bubble.user .chat-who{color:rgba(255,255,255,0.65);text-align:right;}
+  .chat-bubble.ai .chat-who{color:var(--purple);}
+  .cd-result{margin-top:18px;background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:14px;padding:16px 18px;}
+  .cd-result-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:12px;}
+  .cd-result-items{display:flex;flex-direction:column;gap:8px;}
+  .cd-result-item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray-text);}
+  .cdr-check{width:20px;height:20px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .cdr-check svg{width:10px;height:10px;}
+
+  /* Time blocking benefits */
+  .timeblock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:660px){.timeblock-grid{grid-template-columns:1fr;}}
+  .tb-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:22px;background:var(--white);text-align:center;transition:all 0.2s ease;}
+  .tb-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .tb-icon{font-size:32px;margin-bottom:12px;display:block;}
+  .tb-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:8px;}
+  .tb-desc{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+
+  /* Adapt on the fly demo */
+  .adapt-block{background:var(--purple);border-radius:20px;padding:30px 36px;margin:24px 0;display:flex;gap:20px;align-items:flex-start;}
+  .adapt-icon{font-size:36px;flex-shrink:0;}
+  .adapt-content{}
+  .adapt-content h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:white;margin-bottom:8px;}
+  .adapt-content p{font-size:15px;color:rgba(255,255,255,0.85);line-height:1.65;margin-bottom:12px;}
+  .adapt-prompt{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:10px;padding:12px 16px;font-size:13.5px;color:white;font-style:italic;line-height:1.6;}
+
+  /* Benefits 2x2 grid */
+  .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:580px){.benefits-grid{grid-template-columns:1fr;}}
+  .benefit-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:22px;background:var(--white);transition:all 0.2s ease;}
+  .benefit-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .bfc-icon{font-size:28px;margin-bottom:10px;display:block;}
+  .bfc-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);margin-bottom:7px;}
+  .bfc-desc{font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+  /* Numbered tips */
+  .tips-list{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+  .tip-item{display:flex;align-items:flex-start;gap:16px;padding:20px 22px;border:1.5px solid var(--purple-mid);border-radius:16px;background:var(--white);transition:all 0.2s ease;}
+  .tip-item:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .tip-num{width:36px;height:36px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:white;flex-shrink:0;margin-top:2px;}
+  .tip-content .tip-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);margin-bottom:5px;}
+  .tip-content .tip-desc{font-size:14px;line-height:1.65;color:var(--gray-text);}
+  .tip-example{margin-top:10px;padding:10px 14px;background:var(--purple-pale);border-radius:10px;font-size:13px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+
+  /* Life skills callout strip */
+  .life-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:660px){.life-strip{grid-template-columns:1fr;}}
+  .ls-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:20px;background:var(--white);text-align:center;transition:all 0.2s ease;}
+  .ls-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .ls-icon{font-size:30px;margin-bottom:10px;display:block;}
+  .ls-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .ls-desc{font-size:13px;line-height:1.6;color:var(--gray-text);}
+
+  /* Quiz */
+  .quiz{background:var(--purple);border-radius:24px;padding:40px;margin:24px 0;color:white;}
+  .quiz-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .quiz h2{font-family:'Fraunces',serif;font-size:24px;color:white;margin-bottom:8px;}
+  .quiz-question{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:28px;}
+  .quiz-options{display:flex;flex-direction:column;gap:12px;}
+  .quiz-btn{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+  .quiz-btn:hover{background:rgba(255,255,255,0.2);transform:translateX(4px);}
+  .quiz-btn.correct{background:rgba(74,222,128,0.25);border-color:#4ade80;color:#d1fae5;}
+  .quiz-btn.wrong{background:rgba(248,113,113,0.2);border-color:#f87171;color:#fecaca;}
+  .quiz-feedback{margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:15px;line-height:1.6;display:none;}
+  .quiz-feedback.show{display:block;animation:fadeIn 0.3s ease;}
+
+  /* Reflection */
+  .reflection{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:24px;padding:36px;margin:24px 0;}
+  .reflection-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .reflection-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .reflection h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .ri-number{width:30px;height:30px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .ri-text{font-size:15.5px;line-height:1.7;color:var(--gray-text);}
+
+  /* Summary */
+  .summary{background:var(--purple-pale);border-radius:24px;padding:40px;margin:24px 0 32px;}
+  .summary-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+  .summary h2{font-family:'Fraunces',serif;font-size:26px;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-points{display:flex;flex-direction:column;gap:14px;}
+  .summary-point{display:flex;gap:14px;align-items:flex-start;}
+  .point-dot{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .point-dot svg{width:12px;height:12px;}
+  .summary-point p{font-size:16px;line-height:1.65;margin:0;}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:600px){
+    .hero,.content{padding-left:24px;padding-right:24px;}
+    .adapt-block{flex-direction:column;gap:12px;padding:24px;}
+    .quiz,.summary,.reflection{padding:28px 24px;}
+    .coach-demo{padding:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Introduction to AI</div>
+  <h1>Planning Your Study Routine with AI</h1>
+  <p class="hero-sub">You don't need more hours in the day. You need a plan that actually works for your life. Here's how to use AI to build one — and keep it flexible when things change.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <div class="section fade-in">
+    <p>If you've ever stared at your calendar and thought, "There's no way I'm getting all this done" — you're not alone. Between homework, tests, extracurriculars, sports, social life, and family responsibilities, it can genuinely feel like there aren't enough hours in the day.</p>
+    <p>But here's the honest truth: <mark>you don't need more hours. You need a plan that actually works for you.</mark> And AI can help you build one — fast, flexible, and tailored to your actual life instead of some idealized version of it.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Why Most Study Plans Fail</h2>
+    <p>A lot of students try to tackle big workloads by winging it — grabbing whatever time they can find and hoping it adds up. Unfortunately, this approach almost always leads to the same three problems:</p>
+
+    <div class="problem-strip">
+      <div class="problem-item">
+        <div class="pi-icon">⏰</div>
+        <div>
+          <div class="pi-title">Last-Minute Cramming</div>
+          <p class="pi-desc">Instead of learning steadily over time, you're rushing at the end — right when your brain is most stressed and least able to absorb and retain information.</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="pi-icon">😩</div>
+        <div>
+          <div class="pi-title">Stress and Burnout</div>
+          <p class="pi-desc">Feeling constantly overwhelmed makes it harder to focus — which makes you fall further behind — which makes you more overwhelmed. It's a cycle that's hard to break without structure.</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="pi-icon">🗓️</div>
+        <div>
+          <div class="pi-title">Unbalanced Attention</div>
+          <p class="pi-desc">Without a plan, one subject gets all your attention while others fall quietly behind — until suddenly they're all urgent at the same time.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>The problem usually isn't effort. It's organization. Without a realistic plan, even your best intentions can unravel by Wednesday.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>The goal isn't to study more. It's to study smarter — with a plan designed around your actual life, not an imaginary one where everything goes perfectly.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Enter AI: Your Personal Study Coach</h2>
+    <p>Instead of staring at a blank to-do list and panicking, you can use AI to build a study routine tailored to your specific schedule, commitments, and goals. Here's what that actually looks like:</p>
+
+    <div class="coach-demo">
+      <div class="cd-label">💬 Example Conversation</div>
+      <div class="chat-bubble user">
+        <div class="chat-who">You</div>
+        I have a math test next Friday. I can only study 30 minutes each night because I have soccer practice Tuesday and Thursday. Help me make a plan.
+      </div>
+      <div class="chat-bubble ai">
+        <div class="chat-who">AI</div>
+        <strong>Here's a plan that fits your schedule:</strong><br><br>
+        Monday: Review chapters 4–5 (30 min)<br>
+        Tuesday: Rest — soccer practice<br>
+        Wednesday: Practice problems, sets 1–3 (30 min)<br>
+        Thursday: Rest — soccer practice<br>
+        Friday: Practice problems, sets 4–6 (30 min)<br>
+        Saturday: Full review + timed practice test (45 min)<br>
+        Sunday: Light review of any weak areas (20 min)
+      </div>
+      <div class="cd-result">
+        <div class="cd-result-label">✅ What AI Just Did For You</div>
+        <div class="cd-result-items">
+          <div class="cd-result-item"><div class="cdr-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Broke the material into small, manageable daily chunks</span></div>
+          <div class="cd-result-item"><div class="cdr-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Respected your existing commitments automatically</span></div>
+          <div class="cd-result-item"><div class="cdr-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Built in a full review day before the actual test</span></div>
+          <div class="cd-result-item"><div class="cdr-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span>Created a realistic roadmap — in seconds</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Time-Blocking: The Key to Focused Study</h2>
+    <p>One of the most powerful techniques AI can help you use is called <mark>time-blocking</mark> — setting aside specific chunks of time for focused work on a single subject. It sounds simple, but the research behind it is strong:</p>
+
+    <div class="timeblock-grid">
+      <div class="tb-card">
+        <span class="tb-icon">🎯</span>
+        <div class="tb-title">Reduces Distractions</div>
+        <p class="tb-desc">When your brain knows "this 30 minutes is for math only," it's easier to settle in and focus. No decision fatigue about what to do next.</p>
+      </div>
+      <div class="tb-card">
+        <span class="tb-icon">🔁</span>
+        <div class="tb-title">Builds Consistency</div>
+        <p class="tb-desc">Regular study blocks turn learning into a habit rather than a last-minute scramble. Habits require much less willpower than decisions.</p>
+      </div>
+      <div class="tb-card">
+        <span class="tb-icon">🧠</span>
+        <div class="tb-title">Improves Memory</div>
+        <p class="tb-desc">Short, focused sessions are scientifically proven to boost retention more than long, unfocused ones. Quality of study beats quantity every time.</p>
+      </div>
+    </div>
+
+    <p>AI can help you schedule these blocks instantly — no need to spend an hour figuring out when to study what. Tell it your week, and it handles the puzzle.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="adapt-block">
+      <div class="adapt-icon">🔄</div>
+      <div class="adapt-content">
+        <h3>Adjusting on the Fly</h3>
+        <p>Life doesn't always stick to the plan. A practice runs late. You get sick. A project takes longer than expected. AI can help you adapt your schedule in real time — just update your availability and ask:</p>
+        <div class="adapt-prompt">"I only have two nights left before my test and I'm behind on chapters 5 and 6. Adjust my plan to make this work."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>What Changes When You Plan Smarter</h2>
+    <p>Students who use AI to build structured, realistic study routines consistently report the same four shifts:</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="bfc-icon">🏆</span>
+        <div class="bfc-title">Less Cramming, More Learning</div>
+        <p class="bfc-desc">Studying consistently over time helps information actually stick — instead of loading it all in 12 hours before a test and forgetting it by the weekend.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="bfc-icon">⚖️</span>
+        <div class="bfc-title">Better Balance</div>
+        <p class="bfc-desc">A realistic plan makes room for school, sports, hobbies, and rest — instead of sacrificing one to keep up with another.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="bfc-icon">💪</span>
+        <div class="bfc-title">Increased Confidence</div>
+        <p class="bfc-desc">Knowing exactly what to study and when — and seeing yourself actually stick to it — dramatically reduces the anxiety that comes from feeling behind.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="bfc-icon">🎮</span>
+        <div class="bfc-title">More Control</div>
+        <p class="bfc-desc">You decide your schedule with guidance from AI — instead of being at the mercy of whatever urgent thing shows up next. That shift from reactive to proactive is huge.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Five Tips for Smarter Study Planning — Starting This Week</h2>
+
+    <div class="tips-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <div class="tip-title">Start with Fixed Commitments</div>
+          <p class="tip-desc">Sports, classes, jobs, and family obligations go in first. Then schedule study blocks around them — not the other way around. This keeps your plan realistic from the start.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <div class="tip-title">Break Big Projects into Micro-Tasks</div>
+          <p class="tip-desc">Vague goals like "study history" don't work. Ask AI to break large assignments into specific, timed tasks you can actually complete in one sitting.</p>
+          <div class="tip-example">"Break this history chapter into 20-minute tasks spread across the next three days."</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <div class="tip-title">Check In Mid-Week</div>
+          <p class="tip-desc">Review your progress halfway through the week and ask AI to adjust if things shifted. Flexibility isn't failure — it's what makes a plan actually sustainable.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <div class="tip-title">Schedule Review Time, Not Just New Material</div>
+          <p class="tip-desc">Ask AI to build in short review sessions for topics you've already covered. Revisiting old material is one of the biggest memory boosters — and most students skip it entirely.</p>
+          <div class="tip-example">"Add 15-minute review blocks for last week's content to my study schedule."</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div class="tip-content">
+          <div class="tip-title">Study Your Hardest Subjects at Your Sharpest Times</div>
+          <p class="tip-desc">Notice when you're most focused — morning, afternoon, or evening — and protect that time for your most challenging subjects. AI can help you optimize this once you know your pattern.</p>
+          <div class="tip-example">"I'm most alert in the mornings before school. Schedule my hardest subjects then and easier review at night."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>AI doesn't replace your effort — it amplifies it. You're still doing the work, but in a way that's organized, efficient, and designed to actually stick.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>A Skill That Goes Way Beyond School</h2>
+    <p>Learning to plan effectively isn't just about passing tests. It's one of the most transferable life skills you can develop — and starting now gives you a real head start:</p>
+
+    <div class="life-strip">
+      <div class="ls-card">
+        <span class="ls-icon">🎓</span>
+        <div class="ls-title">College & Career</div>
+        <p class="ls-desc">Deadlines, competing projects, and professional responsibilities all require the same organizational thinking you're building right now.</p>
+      </div>
+      <div class="ls-card">
+        <span class="ls-icon">⚽</span>
+        <div class="ls-title">Personal Goals</div>
+        <p class="ls-desc">Whether it's athletics, creative projects, or side work, balancing multiple priorities becomes dramatically easier when you have a planning system.</p>
+      </div>
+      <div class="ls-card">
+        <span class="ls-icon">🧘</span>
+        <div class="ls-title">Mental Well-Being</div>
+        <p class="ls-desc">A realistic plan reduces the low-level anxiety of feeling behind. Knowing what to do and when — and actually being able to do it — is genuinely good for your mental health.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="quiz">
+      <div class="quiz-label">🎯 Knowledge Check</div>
+      <h2>Quick Question</h2>
+      <p class="quiz-question">A student has a big history essay due in 10 days and keeps putting it off because they don't know where to start. Which is the most effective way to use AI to help?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">A. Ask AI to write a draft of the essay so they can use it as a starting point</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">B. Ask AI to summarize the topic so they can read less of the source material</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,true)">C. Ask AI to break the essay into specific tasks across the 10 days and build a daily study schedule around their existing commitments</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">D. Wait until day 8 and then ask AI to help them cram everything into the final two days</button>
+      </div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflect</div>
+      <h3>Think It Through</h3>
+      <div class="reflection-items">
+        <div class="reflection-item">
+          <div class="ri-number">1</div>
+          <div class="ri-text">What are the biggest obstacles that make your current study routine stressful or inconsistent? Are they time-based, motivation-based, or something else?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">2</div>
+          <div class="ri-text">How could AI help you create a schedule that actually fits your real life — including practices, family commitments, and downtime — instead of an idealized version of it?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">3</div>
+          <div class="ri-text">Which subjects or assignments could benefit most from being broken into small, focused daily blocks instead of tackled all at once?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">4</div>
+          <div class="ri-text">How might planning your time better — and actually sticking to a plan — change how confident and in control you feel going into tests and deadlines?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="summary">
+      <div class="summary-label">📌 Article Summary</div>
+      <h2>What You Just Learned</h2>
+      <div class="summary-points">
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Most study plans fail not because of lack of effort, but because they're unrealistic — they don't account for actual commitments, and they try to tackle too much at once instead of breaking work into manageable pieces.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>AI can act as a personal study coach — building a personalized, time-blocked schedule around your real commitments in seconds, and adjusting it on the fly when life changes.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Time-blocking reduces distractions, builds study habits, and improves memory retention — short, focused sessions consistently outperform long, unfocused cramming sessions.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Planning effectively is a life skill — not just a test-passing trick. The organizational thinking you build now will serve you in college, your career, and every area where you're managing multiple priorities at once.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/t*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  let answered=false;
+  function checkAnswer(btn,correct){if(answered)return;answered=true;document.querySelectorAll('.quiz-btn').forEach(b=>b.style.pointerEvents='none');const f=document.getElementById('quizFeedback');if(correct){btn.classList.add('correct');f.innerHTML='✅ <strong>That\'s the right move.</strong> Breaking a big project into specific daily tasks — spread across available time and built around real commitments — is exactly what AI-powered study planning is designed for. It eliminates the overwhelm of "I don\'t know where to start," turns one intimidating deadline into a series of manageable steps, and dramatically reduces the chance of last-minute panic.';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-btn')[1].classList.add('correct');f.innerHTML='❌ <strong>Not quite.</strong> Having AI write the essay, summarize material to read less, or waiting until the last two days are all shortcuts that either compromise learning or set up a stressful crunch. The most effective AI use here is planning: breaking the project into manageable pieces across the available time and building a realistic daily schedule that fits around everything else going on.';}f.classList.add('show');}
+</script>
+</body>
+</html>
