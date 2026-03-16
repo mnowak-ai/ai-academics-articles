@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staying Focused and Motivated with AI — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,60px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* Why focus is hard — 3 cards */
+  .focus-problems{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:660px){.focus-problems{grid-template-columns:1fr;}}
+  .fp-card{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:16px;padding:22px;text-align:center;}
+  .fp-icon{font-size:32px;margin-bottom:12px;display:block;}
+  .fp-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--red);margin-bottom:8px;}
+  .fp-desc{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+
+  /* Pomodoro visual timer */
+  .pomodoro-block{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:28px;margin:24px 0;}
+  .pb-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+  .pb-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pomodoro-timeline{display:flex;align-items:center;gap:0;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
+  .pom-block{border-radius:10px;padding:10px 14px;text-align:center;flex-shrink:0;}
+  .pom-block.work{background:var(--purple);color:white;min-width:72px;}
+  .pom-block.rest{background:var(--green-pale);border:1.5px solid #86efac;color:var(--green);min-width:52px;}
+  .pom-block.long-rest{background:var(--purple-pale);border:1.5px solid var(--purple-mid);color:var(--purple-dark);min-width:64px;}
+  .pom-arrow{color:var(--gray-muted);font-size:16px;padding:0 6px;flex-shrink:0;}
+  .pom-time{font-family:'Fraunces',serif;font-size:15px;font-weight:700;line-height:1;margin-bottom:3px;}
+  .pom-label{font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;opacity:0.85;}
+  .pb-features{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:580px){.pb-features{grid-template-columns:1fr;}}
+  .pbf-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--white);border:1.5px solid var(--purple-mid);border-radius:12px;font-size:13.5px;color:var(--gray-text);line-height:1.5;}
+  .pbf-icon{font-size:18px;flex-shrink:0;}
+
+  /* Motivation features */
+  .motivation-cards{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+  .mc-item{display:flex;align-items:flex-start;gap:16px;padding:18px 22px;border:1.5px solid var(--purple-mid);border-radius:16px;background:var(--white);transition:all 0.2s ease;}
+  .mc-item:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .mc-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+  .mc-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);margin-bottom:5px;}
+  .mc-desc{font-size:14px;line-height:1.65;color:var(--gray-text);}
+  .mc-example{margin-top:10px;padding:10px 14px;background:var(--purple-pale);border-radius:10px;font-size:13px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+
+  /* Interactive focus session builder */
+  .session-builder{background:var(--purple);border-radius:20px;padding:32px 36px;margin:24px 0;}
+  .sb-title{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:white;margin-bottom:8px;}
+  .sb-sub{font-size:14.5px;color:rgba(255,255,255,0.8);margin-bottom:20px;line-height:1.6;}
+  .sb-prompt{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:14px 18px;font-size:13.5px;color:white;font-style:italic;line-height:1.65;margin-bottom:14px;}
+  .sb-prompt-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:6px;font-style:normal;}
+  .sb-result{background:rgba(255,255,255,0.1);border-radius:12px;padding:16px 18px;}
+  .sb-result-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:10px;}
+  .sb-result-items{display:flex;flex-direction:column;gap:8px;}
+  .sb-result-item{display:flex;gap:10px;font-size:13.5px;color:rgba(255,255,255,0.88);line-height:1.6;align-items:flex-start;}
+  .sbr-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;flex-shrink:0;margin-top:5px;}
+
+  /* Numbered tips */
+  .tips-list{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+  .tip-item{display:flex;align-items:flex-start;gap:16px;padding:20px 22px;border:1.5px solid var(--purple-mid);border-radius:16px;background:var(--white);transition:all 0.2s ease;}
+  .tip-item:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .tip-num{width:36px;height:36px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:white;flex-shrink:0;margin-top:2px;}
+  .tip-title{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);margin-bottom:5px;}
+  .tip-desc{font-size:14px;line-height:1.65;color:var(--gray-text);}
+  .tip-example{margin-top:10px;padding:10px 14px;background:var(--purple-pale);border-radius:10px;font-size:13px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+
+  /* Beyond tests life strip */
+  .life-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:660px){.life-strip{grid-template-columns:1fr;}}
+  .ls-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:22px;background:var(--white);text-align:center;transition:all 0.2s ease;}
+  .ls-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .ls-icon{font-size:32px;margin-bottom:12px;display:block;}
+  .ls-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:7px;}
+  .ls-desc{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+
+  /* Quiz */
+  .quiz{background:var(--purple);border-radius:24px;padding:40px;margin:24px 0;color:white;}
+  .quiz-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .quiz h2{font-family:'Fraunces',serif;font-size:24px;color:white;margin-bottom:8px;}
+  .quiz-question{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:28px;}
+  .quiz-options{display:flex;flex-direction:column;gap:12px;}
+  .quiz-btn{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+  .quiz-btn:hover{background:rgba(255,255,255,0.2);transform:translateX(4px);}
+  .quiz-btn.correct{background:rgba(74,222,128,0.25);border-color:#4ade80;color:#d1fae5;}
+  .quiz-btn.wrong{background:rgba(248,113,113,0.2);border-color:#f87171;color:#fecaca;}
+  .quiz-feedback{margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:15px;line-height:1.6;display:none;}
+  .quiz-feedback.show{display:block;animation:fadeIn 0.3s ease;}
+
+  /* Reflection */
+  .reflection{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:24px;padding:36px;margin:24px 0;}
+  .reflection-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .reflection-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .reflection h3{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:14px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;}
+  .ri-number{width:30px;height:30px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .ri-text{font-size:15.5px;line-height:1.7;color:var(--gray-text);}
+
+  /* Summary */
+  .summary{background:var(--purple-pale);border-radius:24px;padding:40px;margin:24px 0 32px;}
+  .summary-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+  .summary h2{font-family:'Fraunces',serif;font-size:26px;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-points{display:flex;flex-direction:column;gap:14px;}
+  .summary-point{display:flex;gap:14px;align-items:flex-start;}
+  .point-dot{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .point-dot svg{width:12px;height:12px;}
+  .summary-point p{font-size:16px;line-height:1.65;margin:0;}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:600px){
+    .hero,.content{padding-left:24px;padding-right:24px;}
+    .session-builder{padding:24px;}
+    .quiz,.summary,.reflection{padding:28px 24px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Introduction to AI</div>
+  <h1>Staying Focused and Motivated with AI</h1>
+  <p class="hero-sub">Distractions are everywhere. Motivation comes and goes. But what if you had a study partner who never got tired, never judged you, and kept you on track? That's exactly what AI can be.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <div class="section fade-in">
+    <p>Let's be honest: staying focused while studying is tough. You sit down with your textbook, start reading, and two minutes later you're on TikTok, texting, or just staring blankly at the wall. Distractions are everywhere — and without structure and accountability, focus and motivation tend to vanish fast.</p>
+    <p><mark>When your attention drifts, it's not a lack of ability — it's a lack of structure.</mark> And that's something AI can genuinely help you build.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Why Focus Is Hard</h2>
+    <p>Before we talk about solutions, it helps to understand why focus is so difficult in the first place. There are three main culprits — and they're the same ones most students deal with:</p>
+
+    <div class="focus-problems">
+      <div class="fp-card">
+        <span class="fp-icon">📱</span>
+        <div class="fp-title">Constant Notifications</div>
+        <p class="fp-desc">Your phone buzzes, pings, and vibrates — and each interruption pulls your brain out of focus mode. Research shows it takes an average of 23 minutes to fully refocus after a distraction.</p>
+      </div>
+      <div class="fp-card">
+        <span class="fp-icon">😰</span>
+        <div class="fp-title">Overwhelming Tasks</div>
+        <p class="fp-desc">Staring at a large assignment with no clear starting point creates mental paralysis. The bigger it feels, the easier it is to avoid it entirely by doing literally anything else.</p>
+      </div>
+      <div class="fp-card">
+        <span class="fp-icon">💤</span>
+        <div class="fp-title">Fluctuating Motivation</div>
+        <p class="fp-desc">Some days you're energized and ready to go. Others, you'd rather do anything else. Relying on motivation alone — without structure — means your productivity is unpredictable at best.</p>
+      </div>
+    </div>
+
+    <p>The solution to all three isn't willpower. It's a system. And AI can help you build one tailored to exactly how you work.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>Motivation gets you started. Structure keeps you going. AI can provide the structure so you're not relying on motivation alone to carry you through.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>The Pomodoro Technique — Powered by AI</h2>
+    <p>One of the most effective focus strategies is the <mark>Pomodoro Technique</mark>: study for 25 minutes, take a 5-minute break, repeat four times, then take a longer 20-minute break. It works because your brain stays sharp in short bursts and the built-in breaks prevent burnout.</p>
+    <p>AI can build a personalized Pomodoro schedule around your available time in seconds — here's what a typical session looks like:</p>
+
+    <div class="pomodoro-block">
+      <div class="pb-label">⏱️ Pomodoro Session — 2 Hours of Study</div>
+      <div class="pomodoro-timeline">
+        <div class="pom-block work"><div class="pom-time">25m</div><div class="pom-label">Focus</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block rest"><div class="pom-time">5m</div><div class="pom-label">Break</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block work"><div class="pom-time">25m</div><div class="pom-label">Focus</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block rest"><div class="pom-time">5m</div><div class="pom-label">Break</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block work"><div class="pom-time">25m</div><div class="pom-label">Focus</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block rest"><div class="pom-time">5m</div><div class="pom-label">Break</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block work"><div class="pom-time">25m</div><div class="pom-label">Focus</div></div>
+        <div class="pom-arrow">→</div>
+        <div class="pom-block long-rest"><div class="pom-time">20m</div><div class="pom-label">Long Break</div></div>
+      </div>
+      <div class="pb-features">
+        <div class="pbf-item"><span class="pbf-icon">🗓️</span><span>AI generates a personalized schedule based on your available time</span></div>
+        <div class="pbf-item"><span class="pbf-icon">🌈</span><span>Color-coded blocks make your plan clear at a glance</span></div>
+        <div class="pbf-item"><span class="pbf-icon">⚡</span><span>Short bursts keep your brain engaged and prevent burnout</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Boosting Motivation with AI</h2>
+    <p>Focus gets you into a session. Motivation keeps you coming back. AI can act as a personal cheerleader — not in a cheesy way, but in practical, tangible ones that actually help:</p>
+
+    <div class="motivation-cards">
+      <div class="mc-item">
+        <div class="mc-icon">🔔</div>
+        <div>
+          <div class="mc-title">Study Session Reminders</div>
+          <p class="mc-desc">Ask AI to help you design a reminder schedule that prompts you to start your sessions at the same time each day. Consistent timing is one of the fastest ways to turn studying into a habit rather than a decision you have to make every single afternoon.</p>
+          <div class="mc-example">"Remind me that my study block starts at 4pm every weekday. What should I have ready before I sit down?"</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-icon">📊</div>
+        <div>
+          <div class="mc-title">Habit and Progress Tracking</div>
+          <p class="mc-desc">At the end of each session, tell AI what you covered and ask it to log your progress. Over time, seeing how much you've actually accomplished — chapter by chapter, subject by subject — is genuinely motivating in a way that vague effort alone isn't.</p>
+          <div class="mc-example">"I just finished chapters 4 and 5 of biology. Track my progress and tell me what's left before Friday's test."</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-icon">🎉</div>
+        <div>
+          <div class="mc-title">Milestone Encouragement</div>
+          <p class="mc-desc">Small wins matter. Finishing a chapter, completing a Pomodoro block, or getting through a tough concept are all worth acknowledging. Ask AI to celebrate these moments with you — even a simple "You've completed two chapters, only one to go!" can be enough to keep you going on a hard day.</p>
+          <div class="mc-example">"I just finished my second Pomodoro block. Give me an encouraging message and remind me what I'm working toward."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="session-builder">
+      <div class="sb-title">Build a Focused Study Session in Seconds</div>
+      <p class="sb-sub">Here's an example prompt you can use right now to have AI design your next study session from scratch:</p>
+      <div class="sb-prompt">
+        <div class="sb-prompt-label">💬 You Type</div>
+        "I have 90 minutes to study tonight. I need to review chapter 6 of chemistry and practice 10 algebra problems. I get distracted easily. Build me a Pomodoro schedule, include encouraging check-ins between blocks, and remind me to put my phone in another room before I start."
+      </div>
+      <div class="sb-result">
+        <div class="sb-result-label">✅ What You Get Back</div>
+        <div class="sb-result-items">
+          <div class="sb-result-item"><div class="sbr-dot"></div><span>A time-blocked schedule for the full 90 minutes with labeled focus and break periods</span></div>
+          <div class="sb-result-item"><div class="sbr-dot"></div><span>Specific tasks assigned to each block so you never have to decide what to do next</span></div>
+          <div class="sb-result-item"><div class="sbr-dot"></div><span>Motivational check-ins after each block to keep your energy up</span></div>
+          <div class="sb-result-item"><div class="sbr-dot"></div><span>A pre-session distraction checklist so you actually start focused</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Five Tips for Using AI to Stay Focused</h2>
+    <p>Here's how to get the most out of AI as a focus and motivation tool — starting with your very next study session:</p>
+
+    <div class="tips-list">
+      <div class="tip-item">
+        <div class="tip-num">1</div>
+        <div>
+          <div class="tip-title">Set Clear Goals Before You Start</div>
+          <p class="tip-desc">Vague intentions ("I'll study for a while") lead to unfocused sessions. Ask AI to help you define exactly what you want to accomplish — specific chapters, problems, or concepts — before you open a single book.</p>
+          <div class="tip-example">"I have 45 minutes. What's a realistic, specific study goal for chemistry chapter 7 in that time?"</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">2</div>
+        <div>
+          <div class="tip-title">Use Timers for Focused Bursts</div>
+          <p class="tip-desc">Pomodoro or similar methods work because they make time feel finite. Knowing you only have to focus for 25 minutes — not indefinitely — makes starting dramatically easier. AI can build this structure into any session automatically.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">3</div>
+        <div>
+          <div class="tip-title">Ask for Encouragement at Milestones</div>
+          <p class="tip-desc">Explicitly ask AI to acknowledge when you hit a checkpoint — finishing a section, completing a block, or getting through something difficult. Positive reinforcement at the right moments keeps momentum going through longer sessions.</p>
+          <div class="tip-example">"After every two Pomodoro blocks, remind me of my progress and give me an encouraging message."</div>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">4</div>
+        <div>
+          <div class="tip-title">Track Your Habits Consistently</div>
+          <p class="tip-desc">Tell AI what you accomplished at the end of each session. Over time, this log helps you spot patterns — when you're most productive, which subjects take longer than expected, and how your consistency is building week by week.</p>
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="tip-num">5</div>
+        <div>
+          <div class="tip-title">Schedule Breaks — Don't Skip Them</div>
+          <p class="tip-desc">Breaks aren't slacking. They're what make the next focus block possible. Ask AI to build in proper break activities — step outside, stretch, get water — instead of switching from one screen to another, which defeats the purpose entirely.</p>
+          <div class="tip-example">"What should I do during my 5-minute Pomodoro breaks to actually recharge — not just switch apps?"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>AI doesn't do the work for you. But it amplifies your ability to stay on track, stay motivated, and stay consistent — giving you study habits that last far beyond a single assignment.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Skills That Go Way Beyond Tests</h2>
+    <p>Learning to focus and stay motivated isn't just about passing tomorrow's quiz. These are skills that follow you everywhere:</p>
+
+    <div class="life-strip">
+      <div class="ls-card">
+        <span class="ls-icon">🎓</span>
+        <div class="ls-title">College & Career</div>
+        <p class="ls-desc">Deadlines, long-term projects, and professional meetings all demand the same focus and self-discipline you're building right now — without anyone standing over your shoulder.</p>
+      </div>
+      <div class="ls-card">
+        <span class="ls-icon">🎸</span>
+        <div class="ls-title">Hobbies & Personal Goals</div>
+        <p class="ls-desc">Whether it's music, athletics, art, or coding — structured practice consistently beats random bursts of effort. The habit of focused work transfers to everything you care about.</p>
+      </div>
+      <div class="ls-card">
+        <span class="ls-icon">🔋</span>
+        <div class="ls-title">Long-Term Mental Energy</div>
+        <p class="ls-desc">Training your brain to work in focused intervals builds cognitive stamina over time. Students who develop this habit find it easier to sustain effort on hard things — not just in school, but in life.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="quiz">
+      <div class="quiz-label">🎯 Knowledge Check</div>
+      <h2>Quick Question</h2>
+      <p class="quiz-question">A student sits down to study but keeps getting distracted and quitting after 10–15 minutes. They feel overwhelmed by how much they have to cover. Which AI-powered approach would most directly address both the distraction and overwhelm problems?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">A. Ask AI to summarize all the material so they have less to read through</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,true)">B. Ask AI to break the material into small tasks and build a Pomodoro schedule with specific goals for each 25-minute block</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">C. Ask AI to quiz them on everything at once so they can identify what they don't know</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">D. Ask AI to write motivational quotes they can read whenever they feel like quitting</button>
+      </div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflect</div>
+      <h3>Think It Through</h3>
+      <div class="reflection-items">
+        <div class="reflection-item">
+          <div class="ri-number">1</div>
+          <div class="ri-text">What distractions pull your attention away most often when you're trying to study — and what's one concrete thing you could do (with or without AI) to reduce their impact?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">2</div>
+          <div class="ri-text">Which study sessions — which subjects, which times of day — would benefit most from having a structured Pomodoro schedule instead of open-ended "I'll study for a while" time?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">3</div>
+          <div class="ri-text">How could motivational check-ins or progress tracking from AI change how you feel about long study sessions — especially on days when motivation is low?</div>
+        </div>
+        <div class="reflection-item">
+          <div class="ri-number">4</div>
+          <div class="ri-text">What long-term habits — beyond just studying — could you build by training yourself to work in focused, structured blocks with AI's help?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="summary">
+      <div class="summary-label">📌 Article Summary</div>
+      <h2>What You Just Learned</h2>
+      <div class="summary-points">
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Focus is hard because of three main forces: constant notifications, overwhelming tasks, and fluctuating motivation. The solution isn't more willpower — it's better structure, which AI can help you build.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>The Pomodoro Technique — 25 minutes of focused work, 5-minute breaks, longer break after four cycles — is one of the most effective focus methods, and AI can personalize a Pomodoro schedule to your exact available time and goals in seconds.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>AI boosts motivation through study reminders, progress tracking, and milestone encouragement — small nudges that make it easier to start sessions, stick with plans, and feel good about what you're accomplishing.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>Focus and consistency are life skills — not just test-passing tools. Training yourself to work in structured, focused intervals builds cognitive habits that transfer to college, careers, creative pursuits, and every long-term goal you'll ever have.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/t*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  let answered=false;
+  function checkAnswer(btn,correct){if(answered)return;answered=true;document.querySelectorAll('.quiz-btn').forEach(b=>b.style.pointerEvents='none');const f=document.getElementById('quizFeedback');if(correct){btn.classList.add('correct');f.innerHTML='✅ <strong>That\'s exactly right.</strong> Breaking material into small, specific tasks directly addresses overwhelm — because instead of facing a giant, undefined assignment, you have a clear, manageable next step. The Pomodoro schedule addresses distraction by giving your brain a defined, finite window to focus rather than asking it to sustain indefinite effort. Both problems solved with one structure.';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-btn')[1].classList.add('correct');f.innerHTML='❌ <strong>Not quite.</strong> Summarizing material, mass-quizzing, or reading motivational quotes don\'t address the core issues: overwhelm (no clear starting point) and distraction (no structure to stay in). The most effective solution is breaking work into specific, small tasks and scheduling them in time-blocked Pomodoro sessions — so the student always knows exactly what to do next and for how long.';}f.classList.add('show');}
+</script>
+</body>
+</html>
