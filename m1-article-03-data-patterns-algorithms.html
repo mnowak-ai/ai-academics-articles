@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data, Patterns, and Algorithms — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,60px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* Two-column training vs inference */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:600px){.two-col{grid-template-columns:1fr;}}
+  .two-col-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:24px;background:var(--white);transition:all 0.2s ease;}
+  .two-col-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .tcc-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:100px;padding:4px 12px;margin-bottom:12px;}
+  .tcc-icon{font-size:30px;margin-bottom:10px;display:block;}
+  .tcc-title{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--purple-dark);margin-bottom:8px;}
+  .tcc-desc{font-size:14px;line-height:1.65;color:var(--gray-text);}
+  .tcc-analogy{margin-top:12px;padding:10px 14px;background:var(--purple-pale);border-radius:10px;font-size:13px;color:var(--purple-dark);font-style:italic;line-height:1.6;}
+
+  /* Learning types accordion */
+  .accordion{display:flex;flex-direction:column;gap:14px;margin:24px 0;}
+  .ac-card{border:1.5px solid var(--purple-mid);border-radius:20px;overflow:hidden;cursor:pointer;transition:all 0.2s ease;}
+  .ac-card:hover{border-color:var(--purple);}
+  .ac-card.open{border-color:var(--purple);}
+  .ac-header{display:flex;align-items:center;gap:14px;padding:20px 24px;background:var(--white);}
+  .ac-num{width:34px;height:34px;background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);flex-shrink:0;}
+  .ac-card.open .ac-num{background:var(--purple);color:white;border-color:var(--purple);}
+  .ac-name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;color:var(--purple-dark);flex:1;}
+  .ac-toggle{width:28px;height:28px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;transition:transform 0.3s,background 0.2s;flex-shrink:0;}
+  .ac-card.open .ac-toggle{transform:rotate(45deg);background:var(--purple);color:white;}
+  .ac-body{max-height:0;overflow:hidden;transition:max-height 0.45s ease;}
+  .ac-card.open .ac-body{max-height:500px;}
+  .ac-inner{padding:0 24px 24px;}
+  .ac-desc{font-size:15px;line-height:1.75;color:var(--gray-text);margin:14px 0 12px;}
+  .ac-analogy{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;background:var(--purple-pale);border-radius:12px;margin-bottom:12px;font-size:13.5px;color:var(--purple-dark);line-height:1.6;}
+  .ac-analogy-icon{font-size:18px;flex-shrink:0;}
+  .ac-example{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:12px;padding:14px 16px;font-size:13.5px;line-height:1.7;color:var(--gray-text);}
+  .ac-example-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+
+  /* Examples three-card grid */
+  .examples-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:700px){.examples-grid{grid-template-columns:1fr;}}
+  .example-card{border:1.5px solid var(--purple-mid);border-radius:16px;padding:22px;background:var(--white);transition:all 0.2s ease;text-align:center;}
+  .example-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .ec-icon{font-size:32px;margin-bottom:12px;display:block;}
+  .ec-type{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
+  .ec-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:8px;}
+  .ec-desc{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+
+  /* Misconception callout — warning style */
+  .misconception{background:var(--purple-pale);border:2px solid var(--purple);border-radius:20px;padding:32px 36px;margin:24px 0;}
+  .mis-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .mis-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .mis-claim{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin-bottom:16px;line-height:1.4;}
+  .mis-reality{font-size:15.5px;line-height:1.75;color:var(--gray-text);margin-bottom:14px;}
+  .mis-example{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:var(--gray-text);}
+  .mis-example strong{color:var(--purple-dark);}
+
+  /* Callout */
+  .callout{background:var(--purple);border-radius:20px;padding:32px 36px;margin:24px 0;display:flex;gap:20px;align-items:flex-start;}
+  .callout-icon{font-size:32px;flex-shrink:0;}
+  .callout h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:white;margin-bottom:8px;}
+  .callout p{font-size:15.5px;color:rgba(255,255,255,0.85);line-height:1.65;margin:0;}
+
+  /* Quiz */
+  .quiz{background:var(--purple);border-radius:24px;padding:40px;margin:24px 0;color:white;}
+  .quiz-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .quiz h2{font-family:'Fraunces',serif;font-size:24px;color:white;margin-bottom:8px;}
+  .quiz-question{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:28px;}
+  .quiz-options{display:flex;flex-direction:column;gap:12px;}
+  .quiz-btn{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.2);border-radius:12px;padding:16px 20px;color:white;font-family:'DM Sans',sans-serif;font-size:15px;text-align:left;cursor:pointer;transition:all 0.2s ease;}
+  .quiz-btn:hover{background:rgba(255,255,255,0.2);transform:translateX(4px);}
+  .quiz-btn.correct{background:rgba(74,222,128,0.25);border-color:#4ade80;color:#d1fae5;}
+  .quiz-btn.wrong{background:rgba(248,113,113,0.2);border-color:#f87171;color:#fecaca;}
+  .quiz-feedback{margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.1);border-radius:12px;font-size:15px;line-height:1.6;display:none;}
+  .quiz-feedback.show{display:block;animation:fadeIn 0.3s ease;}
+
+  /* Summary */
+  .summary{background:var(--purple-pale);border-radius:24px;padding:40px;margin:24px 0 32px;}
+  .summary-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+  .summary h2{font-family:'Fraunces',serif;font-size:26px;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-points{display:flex;flex-direction:column;gap:14px;}
+  .summary-point{display:flex;gap:14px;align-items:flex-start;}
+  .point-dot{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .point-dot svg{width:12px;height:12px;}
+  .summary-point p{font-size:16px;line-height:1.65;margin:0;}
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:600px){
+    .hero,.content{padding-left:24px;padding-right:24px;}
+    .callout{flex-direction:column;gap:12px;padding:24px;}
+    .quiz,.summary{padding:28px 24px;}
+    .misconception{padding:24px;}
+    .ac-header{padding:16px;gap:12px;}
+    .ac-inner{padding:0 16px 16px;}
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Introduction to AI</div>
+  <h1>Data, Patterns, and Algorithms</h1>
+  <p class="hero-sub">AI might seem like magic — like it just "knows" stuff. But behind the scenes, it's doing something surprisingly logical. Here's exactly how AI actually learns.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <div class="section fade-in">
+    <p>When you see AI do something impressive — like identify your face to unlock your phone, or suggest the perfect song — it can feel like some kind of black magic. But it isn't. AI learns in ways that are structured, logical, and actually pretty understandable once someone explains them clearly.</p>
+    <p>By the end of this article, you'll see that <mark>AI isn't magic — it's a system that finds patterns, makes predictions, and improves over time.</mark> Let's break it down.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Training vs. Inference: Learning vs. Doing</h2>
+    <p>AI learning happens in two main stages. Think of them as two completely different phases — first you learn, then you apply what you learned.</p>
+
+    <div class="two-col">
+      <div class="two-col-card">
+        <div class="tcc-badge">Stage 1</div>
+        <span class="tcc-icon">📚</span>
+        <div class="tcc-title">Training — Learning the Rules</div>
+        <p class="tcc-desc">This is when the AI studies thousands (sometimes millions) of examples to learn patterns. Show it enough cat photos labeled "cat," and it starts recognizing the features that make something a cat: pointy ears, whiskers, fluffy tails.</p>
+        <div class="tcc-analogy">🎒 Like going to school — you study examples and absorb the patterns before the test.</div>
+      </div>
+      <div class="two-col-card">
+        <div class="tcc-badge">Stage 2</div>
+        <span class="tcc-icon">✏️</span>
+        <div class="tcc-title">Inference — Applying the Rules</div>
+        <p class="tcc-desc">Now the AI uses what it learned to make predictions on new data it's never seen before. You show it a new photo, and it says "Yep, that's a cat!" The better the training, the more accurate the predictions.</p>
+        <div class="tcc-analogy">📝 Like taking the test — applying everything you studied to brand new questions.</div>
+      </div>
+    </div>
+
+    <p>Training is the expensive, time-intensive phase that happens before an AI product launches. Inference is what happens every time you use it — fast, behind the scenes, thousands of times per second across millions of users.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>AI isn't magic. It's a very fast, very patient student that has studied an enormous number of examples — and learned to spot what they have in common.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>The Three Main Ways AI Learns</h2>
+    <p>AI doesn't learn in just one way. There are three main learning strategies, each suited for different types of problems. Click each one to explore how it works:</p>
+
+    <div class="accordion">
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-num">1</div>
+          <div class="ac-name">Supervised Learning</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">This is the most common approach. The AI learns from <strong>labeled examples</strong> — data that already has the correct answer attached. You feed it thousands of examples with known outcomes, and it learns the pattern that connects the inputs to the right answers.</p>
+          <div class="ac-analogy"><div class="ac-analogy-icon">🧑‍🏫</div><div>Like learning from a teacher who gives you practice questions and tells you the correct answer every time. Over enough examples, you start to see the pattern yourself.</div></div>
+          <div class="ac-example">
+            <div class="ac-example-label">🔍 Real Examples</div>
+            Email spam filters (labeled "spam" or "not spam"), photo recognition apps that identify faces or pets, AI tools that predict whether a student is at risk of failing based on past performance data.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-num">2</div>
+          <div class="ac-name">Unsupervised Learning</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">Sometimes AI gets data with <strong>no labels at all</strong> — no right answers attached. Instead of learning from examples, it has to find its own structure in the data: grouping similar things together, spotting what's unusual, or finding hidden trends.</p>
+          <div class="ac-analogy"><div class="ac-analogy-icon">🗺️</div><div>Like exploring a new city with no map. You start noticing patterns — where the restaurants cluster, where it gets quieter — and you build your own mental map from observation alone.</div></div>
+          <div class="ac-example">
+            <div class="ac-example-label">🔍 Real Examples</div>
+            Spotify grouping songs into playlists based on audio features, Netflix clustering viewers with similar tastes, businesses using AI to find unusual spending patterns that might signal fraud.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="ac-card" onclick="toggleAC(this)">
+        <div class="ac-header">
+          <div class="ac-num">3</div>
+          <div class="ac-name">Reinforcement Learning</div>
+          <div class="ac-toggle">+</div>
+        </div>
+        <div class="ac-body"><div class="ac-inner">
+          <p class="ac-desc">This one is all about <strong>trial and error</strong>. The AI takes actions in an environment and receives feedback — rewards when it does well, penalties when it doesn't. Over time, it figures out which actions lead to the best outcomes.</p>
+          <div class="ac-analogy"><div class="ac-analogy-icon">🎮</div><div>Like learning to play a new video game with no instructions. You try things, see what works, die a lot, adjust your strategy, and gradually get better through repetition and feedback.</div></div>
+          <div class="ac-example">
+            <div class="ac-example-label">🔍 Real Examples</div>
+            AI learning to play chess or Go at superhuman levels, robotic arms learning to pick up objects, self-driving cars learning to navigate traffic by simulating millions of driving scenarios.
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Examples in Everyday Life</h2>
+    <p>Each of these three learning types is already powering things you interact with every day. Here's how they map to the real world:</p>
+
+    <div class="examples-grid">
+      <div class="example-card">
+        <span class="ec-icon">😺</span>
+        <div class="ec-type">Supervised Learning</div>
+        <div class="ec-title">Photo Recognition</div>
+        <p class="ec-desc">Apps that detect faces, pets, or objects in photos were trained on millions of labeled images — "this is a cat," "this is a dog."</p>
+      </div>
+      <div class="example-card">
+        <span class="ec-icon">🎶</span>
+        <div class="ec-type">Unsupervised Learning</div>
+        <div class="ec-title">Music Recommendations</div>
+        <p class="ec-desc">Spotify groups songs and listeners into clusters based on listening patterns — no one manually labeled which songs "go together."</p>
+      </div>
+      <div class="example-card">
+        <span class="ec-icon">♟️</span>
+        <div class="ec-type">Reinforcement Learning</div>
+        <div class="ec-title">Game-Playing AI</div>
+        <p class="ec-desc">AI agents that play chess, Go, or video games like StarCraft learned by playing millions of games and being rewarded for winning moves.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="callout">
+      <div class="callout-icon">🤔</div>
+      <div>
+        <h3>Which Type Is Used Most?</h3>
+        <p>Supervised learning is by far the most widely used in business today — because most business problems come with historical data that already has known outcomes (sales figures, customer churn, loan defaults). Reinforcement learning is powerful but much harder to set up, so it's more common in research and specialized applications.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>More Data ≠ Better AI</h2>
+    <p>Here's one of the most common misconceptions about AI that's worth addressing head-on:</p>
+
+    <div class="misconception">
+      <div class="mis-label">⚠️ Common Misconception</div>
+      <div class="mis-claim">"If AI gets more data, it will automatically get smarter."</div>
+      <p class="mis-reality">Not exactly. While AI does need a lot of data to learn patterns, <mark>the quality and relevance of the data are what really matter</mark>. Feeding an AI messy, biased, or irrelevant data can actually make it perform worse — not better. This is sometimes called "garbage in, garbage out."</p>
+      <div class="mis-example">
+        <strong>🐯 The Tiger Problem:</strong> Imagine training an AI to detect house cats, but your training photos are mostly tigers. Technically tigers are cats — but your AI will start labeling your fluffy tabby as a tiger. More data didn't help; the <em>wrong</em> data made things worse. Clean, relevant, well-labeled data is the foundation of any good AI system.
+      </div>
+    </div>
+
+    <p>This is why data quality is one of the most important — and most underrated — jobs in AI development. The people who collect, clean, and label training data are just as critical as the engineers who build the models.</p>
+  </div>
+
+  <div class="section fade-in">
+    <div class="pull-quote"><p>It's not "more data, more intelligence." It's "good data, better intelligence." Quality beats quantity every time.</p></div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="quiz">
+      <div class="quiz-label">🎯 Knowledge Check</div>
+      <h2>Quick Question</h2>
+      <p class="quiz-question">A music app wants to group its 50 million songs into playlists based on audio features — without manually labeling any of them. Which type of AI learning is best suited for this task?</p>
+      <div class="quiz-options">
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">A. Supervised Learning — because it learns from labeled examples</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,true)">B. Unsupervised Learning — because it finds patterns and groups in data without labels</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">C. Reinforcement Learning — because it learns through trial and error with rewards</button>
+        <button class="quiz-btn" onclick="checkAnswer(this,false)">D. None of the above — AI can't group music without human input</button>
+      </div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <div class="summary">
+      <div class="summary-label">📌 Article Summary</div>
+      <h2>What You Just Learned</h2>
+      <div class="summary-points">
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>AI learning happens in two stages: <strong>training</strong> (studying examples to find patterns) and <strong>inference</strong> (applying those patterns to new, unseen data). Training is slow and expensive; inference happens instantly at scale.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>There are three main ways AI learns: <strong>supervised</strong> (from labeled examples), <strong>unsupervised</strong> (finding patterns in unlabeled data on its own), and <strong>reinforcement</strong> (trial and error with rewards and penalties).</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>All three types are already powering things you use daily — photo recognition, music playlists, game-playing agents, and recommendation engines all rely on these learning strategies.</p></div>
+        <div class="summary-point"><div class="point-dot"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p>More data doesn't automatically mean better AI. <strong>Data quality matters more than quantity.</strong> Bad, biased, or irrelevant training data produces bad AI — no matter how much of it there is.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const s=window.scrollY,t=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('progressBar').style.width=(s/t*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function toggleAC(c){const o=c.classList.contains('open');document.querySelectorAll('.ac-card').forEach(x=>x.classList.remove('open'));if(!o)c.classList.add('open');}
+  let answered=false;
+  function checkAnswer(btn,correct){if(answered)return;answered=true;document.querySelectorAll('.quiz-btn').forEach(b=>b.style.pointerEvents='none');const f=document.getElementById('quizFeedback');if(correct){btn.classList.add('correct');f.innerHTML='✅ <strong>Exactly right.</strong> When there are no labels and the task is to group or cluster data on its own, that\'s unsupervised learning. Spotify, Netflix, and other platforms use this to find patterns in massive datasets — like grouping songs by audio features — without anyone manually telling the AI which songs belong together.';}else{btn.classList.add('wrong');document.querySelectorAll('.quiz-btn')[1].classList.add('correct');f.innerHTML='❌ <strong>Not quite.</strong> Supervised learning needs labeled examples with known answers — there are no labels here. Reinforcement learning needs a reward system for trial-and-error tasks. The right fit is unsupervised learning, which is specifically designed to find patterns and groupings in data without any labels attached.';}f.classList.add('show');}
+</script>
+</body>
+</html>
