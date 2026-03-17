@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Get Accurate Citations Every Time — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* CITATION STYLE SWITCHER */
+  .style-switcher{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:24px;padding:28px;margin:24px 0;}
+  .ss-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .ss-tab{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:700;cursor:pointer;border:1.5px solid var(--purple-mid);background:var(--white);color:var(--gray-muted);transition:all 0.2s;}
+  .ss-tab.active{background:var(--purple);border-color:var(--purple);color:white;}
+  .ss-panel{display:none;}
+  .ss-panel.active{display:block;}
+  .ss-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+  .ss-example{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:14px;padding:14px 18px;font-size:14px;color:var(--gray-text);line-height:1.8;font-family:Georgia,serif;}
+  .ss-note{font-size:13px;color:var(--gray-muted);margin-top:10px;line-height:1.6;}
+
+  /* WHY CONFUSING — pitfall pills */
+  .pitfall-wrap{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+  .pitfall-item{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;font-size:15px;color:var(--gray-text);}
+  .pitfall-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+  /* AI CAN DO — green star cards */
+  .ai-can-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:560px){.ai-can-grid{grid-template-columns:1fr;}}
+  .ac-card{background:var(--green-pale);border:1.5px solid #86efac;border-radius:16px;padding:18px 16px;display:flex;align-items:flex-start;gap:12px;}
+  .ac-star{font-size:20px;flex-shrink:0;margin-top:1px;}
+  .ac-text{font-size:14px;line-height:1.6;color:var(--gray-text);font-weight:500;}
+
+  /* WARNING CALLOUT */
+  .warn-callout{display:flex;align-items:flex-start;gap:14px;padding:20px 22px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:16px;margin:20px 0;}
+  .warn-icon{font-size:24px;flex-shrink:0;}
+  .warn-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+  .warn-text strong{color:var(--red);}
+
+  /* BEYOND SCHOOL — 4-tile grid */
+  .beyond-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0;}
+  @media(max-width:560px){.beyond-grid{grid-template-columns:1fr;}}
+  .bg-card{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:18px;padding:20px 18px;}
+  .bg-icon{font-size:26px;margin-bottom:10px;}
+  .bg-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .bg-desc{font-size:13.5px;line-height:1.65;color:var(--gray-muted);}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* LEARN NOT CHEAT BANNER */
+  .learn-banner{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:20px;padding:30px 32px;margin:28px 0;color:white;position:relative;overflow:hidden;}
+  .learn-banner::before{content:'📚';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:60px;opacity:0.15;}
+  .learn-banner h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+  .learn-banner p{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.88);margin:0;}
+  .learn-banner strong{color:#C084FC;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Academic Skills</div>
+  <h1>How to Get Accurate Citations Every Time</h1>
+  <p class="hero-sub">Citations show where your information comes from, give credit to original authors, and make your work credible. AI can make this faster — but you still need to verify every one.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- SECTION 1: Why confusing -->
+  <div class="section fade-in">
+    <h2>Why Citations Can Be Confusing</h2>
+    <p>Each citation style has its own specific rules — and even a small mistake like a misplaced comma or the wrong order of elements can make a citation technically incorrect. Here's what trips most students up:</p>
+
+    <div class="pitfall-wrap">
+      <div class="pitfall-item"><div class="pitfall-icon">⚠️</div>Multiple formats (MLA, APA, Chicago) each with completely different rules</div>
+      <div class="pitfall-item"><div class="pitfall-icon">⚠️</div>Tricky punctuation — periods, commas, and colons all placed in exact spots</div>
+      <div class="pitfall-item"><div class="pitfall-icon">⚠️</div>Knowing when to italicize vs. use quotation marks</div>
+      <div class="pitfall-item"><div class="pitfall-icon">⚠️</div>Different rules for books, websites, articles, videos, and interviews</div>
+    </div>
+
+    <p>The good news: AI can simplify this significantly — as long as you use it carefully and always verify the output.</p>
+  </div>
+
+  <!-- INTERACTIVE STYLE SWITCHER -->
+  <div class="section fade-in">
+    <h2>See How Each Style Looks</h2>
+    <p>The same book gets cited differently depending on the style your teacher requires. Click each tab to compare:</p>
+
+    <div class="style-switcher">
+      <div class="ss-tabs">
+        <div class="ss-tab active" onclick="switchStyle('mla',this)">MLA</div>
+        <div class="ss-tab" onclick="switchStyle('apa',this)">APA</div>
+        <div class="ss-tab" onclick="switchStyle('chicago',this)">Chicago</div>
+      </div>
+
+      <div class="ss-panel active" id="style-mla">
+        <div class="ss-label">MLA Format</div>
+        <div class="ss-example">Smith, Jane. <em>The Future of Technology.</em> Penguin Books, 2021.</div>
+        <div class="ss-note">MLA uses the author's last name first, italicizes the title, and puts the publisher before the year. Commonly used in humanities classes.</div>
+      </div>
+      <div class="ss-panel" id="style-apa">
+        <div class="ss-label">APA Format</div>
+        <div class="ss-example">Smith, J. (2021). <em>The future of technology.</em> Penguin Books.</div>
+        <div class="ss-note">APA puts the year right after the author's name in parentheses, only capitalizes the first word of the title, and italicizes it. Common in science and social science classes.</div>
+      </div>
+      <div class="ss-panel" id="style-chicago">
+        <div class="ss-label">Chicago Format</div>
+        <div class="ss-example">Smith, Jane. <em>The Future of Technology.</em> New York: Penguin Books, 2021.</div>
+        <div class="ss-note">Chicago style includes the city of publication and uses full first names. Often used in history and some college courses.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: AI can do -->
+  <div class="section fade-in">
+    <h2>Using AI to Format Citations</h2>
+    <p>AI can handle a lot of the tedious formatting work for you. Here's what it's good at:</p>
+
+    <div class="ai-can-grid">
+      <div class="ac-card"><div class="ac-star">⭐️</div><div class="ac-text">Turn a source into MLA, APA, or Chicago format instantly</div></div>
+      <div class="ac-card"><div class="ac-star">⭐️</div><div class="ac-text">Explain the specific rules for each citation style</div></div>
+      <div class="ac-card"><div class="ac-star">⭐️</div><div class="ac-text">Help you build a complete Works Cited or References page</div></div>
+      <div class="ac-card"><div class="ac-star">⭐️</div><div class="ac-text">Spot and correct formatting mistakes in your citations</div></div>
+    </div>
+
+    <div class="warn-callout">
+      <div class="warn-icon">🚨</div>
+      <div class="warn-text"><strong>Always double-check AI-generated citations.</strong> AI can mix up details, miss publication info, or apply rules incorrectly. Every citation needs a manual review before you submit.</div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>A citation isn't just a formality — it's proof that your work is grounded in real research.</p>
+  </div>
+
+  <!-- SECTION 3: Beyond school -->
+  <div class="section fade-in">
+    <h2>Why Citations Matter Beyond School</h2>
+    <p>Citations aren't just a school requirement. The habits they build follow you into college, careers, and everyday life:</p>
+
+    <div class="beyond-grid">
+      <div class="bg-card">
+        <div class="bg-icon">🎓</div>
+        <div class="bg-title">Academic Honesty</div>
+        <div class="bg-desc">Citations show you can distinguish your own ideas from those of others — a core intellectual skill.</div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">✅</div>
+        <div class="bg-title">Responsibility</div>
+        <div class="bg-desc">Giving credit where it's due shows you take your work seriously and respect the effort of others.</div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">🔍</div>
+        <div class="bg-title">Accuracy</div>
+        <div class="bg-desc">Proper citations require you to double-check facts and details — building a habit of careful thinking.</div>
+      </div>
+      <div class="bg-card">
+        <div class="bg-icon">🤝</div>
+        <div class="bg-title">Respect for Others' Work</div>
+        <div class="bg-desc">Acknowledging authors and researchers is a form of professional respect that carries into any career.</div>
+      </div>
+    </div>
+
+    <p>Understanding and practicing good citation habits builds a foundation for <mark>lifelong information literacy</mark> — the ability to find, evaluate, and use information responsibly.</p>
+  </div>
+
+  <!-- SECTION 4: Use to learn not cheat -->
+  <div class="section fade-in">
+    <h2>Use AI to Learn, Not to Cheat</h2>
+    <div class="learn-banner">
+      <h3>The Right Mindset for AI Tools</h3>
+      <p>It can be tempting to let AI handle everything — formatting, writing, even finding sources. But relying on AI in this way robs you of the chance to think critically and develop your own skills. Instead, use it as a <strong>supportive tool</strong>: let it help you understand citation rules, fix formatting errors, and double-check your work — while you make all the real decisions.</p>
+    </div>
+    <p>By guiding your thinking rather than replacing it, AI becomes a resource that <mark>strengthens your skills</mark> — not a shortcut that undermines your learning or your integrity.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">Why should you always double-check citations that AI generates?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>AI refuses to generate citations for certain types of sources.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">B</div>AI only knows MLA format and struggles with APA or Chicago.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">C</div>AI can make small errors — like mixing up details or applying rules incorrectly — that affect accuracy.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>Teachers can tell when citations were generated by AI and will penalize you.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item"><div class="reflection-num">1</div><div class="reflection-text">Which citation style do you find hardest to use — MLA, APA, or Chicago — and what specifically confuses you about it?</div></div>
+      <div class="reflection-item"><div class="reflection-num">2</div><div class="reflection-text">How can AI help you cite sources more accurately, while still keeping you responsible for verifying the output?</div></div>
+      <div class="reflection-item"><div class="reflection-num">3</div><div class="reflection-text">Why do you think proper citations are important in academic work — beyond just following the rules?</div></div>
+      <div class="reflection-item"><div class="reflection-num">4</div><div class="reflection-text">What steps will you take to avoid submitting fake or inaccurate citations in your future assignments?</div></div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Citations show where your information comes from, give credit to authors, and make your work credible.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">MLA, APA, and Chicago all have different rules — even small differences in punctuation and order matter.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI can format citations, explain rules, and help build a Works Cited page — but always verify the results.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Good citation habits build honesty, accuracy, responsibility, and respect — skills valuable far beyond school.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Use AI to support and strengthen your citation skills — not to skip the learning that makes those skills stick.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  function switchStyle(style, tab) {
+    document.querySelectorAll('.ss-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.ss-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('style-'+style).classList.add('active');
+  }
+
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ?'✅ Exactly right! AI can make small but meaningful errors in citations — wrong punctuation, missing details, or mixed-up formats. A manual review is always the final step.'
+      :'❌ Not quite. AI can generate citations in multiple formats, but it can make subtle mistakes in any of them. Always verify the details of every AI-generated citation before submitting.';
+  }
+</script>
+</body>
+</html>
