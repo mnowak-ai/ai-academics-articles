@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discovering the World in New Ways — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* SCIENCE FIELD TABS — interactive explorer */
+  .field-tabs{margin:24px 0;}
+  .ft-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .ft-btn{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;border:1.5px solid var(--purple-mid);background:var(--white);font-size:13px;font-weight:700;color:var(--gray-muted);cursor:pointer;transition:all 0.2s;}
+  .ft-btn:hover{border-color:var(--purple);color:var(--purple);}
+  .ft-btn.active{background:var(--purple);border-color:var(--purple);color:white;}
+  .ft-panel{display:none;background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;}
+  .ft-panel.active{display:block;}
+  .ft-panel-head{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .ft-panel-icon{font-size:36px;}
+  .ft-panel-title{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--purple-dark);}
+  .ft-panel-body{font-size:15px;line-height:1.75;color:var(--gray-text);}
+  .ft-fact{margin-top:14px;background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--purple-dark);font-style:italic;}
+  .ft-fact::before{content:'💡 ';font-style:normal;}
+
+  /* EVERYDAY AI — 3-column strip */
+  .everyday-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:600px){.everyday-strip{grid-template-columns:1fr;}}
+  .ev-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:18px;padding:20px 16px;text-align:center;}
+  .ev-icon{font-size:30px;margin-bottom:10px;}
+  .ev-title{font-size:14px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .ev-desc{font-size:13px;line-height:1.6;color:var(--gray-muted);}
+
+  /* AI AS PARTNER — 3-row with connector line */
+  .partner-list{display:flex;flex-direction:column;gap:0;margin:24px 0;}
+  .partner-item{display:flex;align-items:flex-start;gap:16px;padding:14px 0;position:relative;}
+  .partner-item:not(:last-child)::after{content:'';position:absolute;left:21px;top:50px;width:2px;height:calc(100% - 16px);background:var(--purple-mid);}
+  .partner-dot{width:28px;height:28px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;z-index:1;}
+  .partner-content{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:16px;padding:16px 18px;flex:1;}
+  .partner-title{font-size:14px;font-weight:700;color:var(--purple-dark);margin-bottom:4px;}
+  .partner-desc{font-size:13.5px;line-height:1.65;color:var(--gray-text);}
+
+  /* WARNING CALLOUT */
+  .callout{display:flex;align-items:flex-start;gap:14px;padding:20px 22px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:16px;margin:20px 0;}
+  .callout-icon{font-size:22px;flex-shrink:0;}
+  .callout-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+  .callout-text strong{color:var(--red);}
+
+  /* ETHICS — accordion */
+  .accordion{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+  .ac-card{border:1.5px solid var(--purple-mid);border-radius:18px;overflow:hidden;cursor:pointer;}
+  .ac-card:hover,.ac-card.open{border-color:var(--purple);}
+  .ac-header{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--white);}
+  .ac-icon{font-size:20px;flex-shrink:0;}
+  .ac-name{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);flex:1;}
+  .ac-toggle{width:26px;height:26px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform 0.3s,background 0.2s;flex-shrink:0;}
+  .ac-card.open .ac-toggle{transform:rotate(45deg);background:var(--purple);color:white;}
+  .ac-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+  .ac-card.open .ac-body{max-height:200px;}
+  .ac-inner{padding:0 22px 20px;font-size:15px;line-height:1.75;color:var(--gray-text);}
+
+  /* CAREERS CALLOUT */
+  .careers-block{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:20px;padding:30px 32px;margin:28px 0;color:white;position:relative;overflow:hidden;}
+  .careers-block::before{content:'🚀';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:64px;opacity:0.15;}
+  .careers-block h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+  .careers-block p{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.88);margin:0;}
+  .careers-block strong{color:#C084FC;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon-box{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Science & AI</div>
+  <h1>Discovering the World in New Ways</h1>
+  <p class="hero-sub">Science is all about curiosity — asking questions, running experiments, making discoveries. Today, one of the most powerful scientific tools ever created is Artificial Intelligence. AI doesn't replace scientists. It supercharges what they're able to find.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- SECTION 1: Field Explorer -->
+  <div class="section fade-in">
+    <h2>How AI Helps Scientists</h2>
+    <p>AI can process enormous amounts of data in seconds — far more than any human team could analyze in a lifetime. Click each science field below to explore how AI is changing it:</p>
+
+    <div class="field-tabs">
+      <div class="ft-nav">
+        <div class="ft-btn active" onclick="switchField('medicine',this)">💊 Medicine</div>
+        <div class="ft-btn" onclick="switchField('climate',this)">🌦️ Climate</div>
+        <div class="ft-btn" onclick="switchField('space',this)">🚀 Space</div>
+        <div class="ft-btn" onclick="switchField('biology',this)">🧬 Biology</div>
+      </div>
+
+      <div class="ft-panel active" id="field-medicine">
+        <div class="ft-panel-head"><div class="ft-panel-icon">💊</div><div class="ft-panel-title">Medicine & Health</div></div>
+        <div class="ft-panel-body">AI scans thousands of medical images — X-rays, MRIs, CT scans — to help doctors detect diseases like cancer earlier than ever before. What might take a radiologist hours, AI can flag in seconds. It's also helping researchers identify which drug compounds might work against specific diseases, dramatically speeding up the process of developing new treatments.</div>
+        <div class="ft-fact">AI-assisted diagnostics can detect certain cancers with accuracy rates comparable to experienced physicians — and it never gets tired.</div>
+      </div>
+
+      <div class="ft-panel" id="field-climate">
+        <div class="ft-panel-head"><div class="ft-panel-icon">🌦️</div><div class="ft-panel-title">Climate Science</div></div>
+        <div class="ft-panel-body">AI analyzes decades of temperature, ocean, and atmospheric data to predict weather patterns and model how climate change is unfolding. It tracks glaciers, sea levels, and carbon emissions in real time — giving scientists a clearer picture of what's happening and what's coming. This helps governments and communities plan and respond more effectively.</div>
+        <div class="ft-fact">AI climate models can now make 10-day weather forecasts that rival what 5-day forecasts could do just a decade ago.</div>
+      </div>
+
+      <div class="ft-panel" id="field-space">
+        <div class="ft-panel-head"><div class="ft-panel-icon">🚀</div><div class="ft-panel-title">Space Exploration</div></div>
+        <div class="ft-panel-body">NASA uses AI to process data from Mars rovers, the James Webb Space Telescope, and deep-space probes. Because signals from spacecraft can take minutes or hours to reach Earth, AI helps rovers make decisions on their own — navigating terrain, identifying interesting rocks, and avoiding hazards. AI also helps astronomers search millions of stars for planets that might support life.</div>
+        <div class="ft-fact">AI helped discover thousands of exoplanet candidates by analyzing patterns in light curves that human researchers would have missed.</div>
+      </div>
+
+      <div class="ft-panel" id="field-biology">
+        <div class="ft-panel-head"><div class="ft-panel-icon">🧬</div><div class="ft-panel-title">Biology & Genetics</div></div>
+        <div class="ft-panel-body">AI helps scientists map DNA sequences, identify genes linked to diseases, and discover new medicines by finding patterns in vast genetic datasets. One of the biggest breakthroughs in recent years was AlphaFold — an AI that predicted the 3D structure of nearly every known protein, solving a problem that had stumped biologists for 50 years and opening entirely new doors in drug development.</div>
+        <div class="ft-fact">AlphaFold's protein structure predictions have already been downloaded by over a million researchers worldwide — accelerating biology at a global scale.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>AI doesn't replace scientists — it lets them ask bigger questions than they ever could before.</p>
+  </div>
+
+  <!-- SECTION 2: Everyday Science -->
+  <div class="section fade-in">
+    <h2>Everyday Science with AI</h2>
+    <p>You don't have to be a professional scientist to see AI-powered science in action. It's already part of your daily life:</p>
+
+    <div class="everyday-strip">
+      <div class="ev-card">
+        <div class="ev-icon">💪</div>
+        <div class="ev-title">Health Apps</div>
+        <div class="ev-desc">AI-powered watches track your heartbeat, sleep patterns, and activity levels — giving you personalized health insights.</div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-icon">🌱</div>
+        <div class="ev-title">Food & Farming</div>
+        <div class="ev-desc">AI monitors soil quality and crop health to help farmers grow food more efficiently while using fewer resources.</div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-icon">🌎</div>
+        <div class="ev-title">Environment</div>
+        <div class="ev-desc">AI tracks pollution levels and monitors endangered species populations to help scientists protect our planet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: AI as Partner -->
+  <div class="section fade-in">
+    <h2>AI as a Scientific Partner</h2>
+    <p>Think of AI as a super-smart lab assistant. Here's what it brings to the table — and where humans still lead:</p>
+
+    <div class="partner-list">
+      <div class="partner-item">
+        <div class="partner-dot">🔍</div>
+        <div class="partner-content">
+          <div class="partner-title">Finding Patterns People Miss</div>
+          <div class="partner-desc">AI can notice subtle connections — like a link between a specific gene and a rare disease — buried deep in data that no human team could realistically comb through.</div>
+        </div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-dot">⚡</div>
+        <div class="partner-content">
+          <div class="partner-title">Testing Thousands of Solutions Fast</div>
+          <div class="partner-desc">While a scientist focuses on the big ideas and hypotheses, AI can run thousands of simulations in parallel — dramatically compressing research timelines.</div>
+        </div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-dot">🎯</div>
+        <div class="partner-content">
+          <div class="partner-title">Making Predictions That Save Lives</div>
+          <div class="partner-desc">AI can forecast where a hurricane will hit, which patients are most at risk, or when a disease outbreak might spread — giving humans crucial time to prepare and respond.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>But AI isn't infallible.</strong> Scientists must always double-check AI's results, question its assumptions, and make the final calls. The human judgment behind the tool is what makes science trustworthy.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Ethics -->
+  <div class="section fade-in">
+    <h2>Ethics in Science & AI</h2>
+    <p>When AI is used in science, it raises important questions that don't have easy answers. Click each one to explore:</p>
+
+    <div class="accordion">
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">💊</div><div class="ac-name">Should AI decide who gets access to medical treatments?</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">AI can help prioritize patients based on data — but what if that data reflects historical inequalities? If AI was trained on data from a system that disadvantaged certain groups, it might reproduce that unfairness at scale. This is why human oversight and diverse data are critical in medical AI systems.</div></div>
+      </div>
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">🌦️</div><div class="ac-name">How do we make sure climate predictions are accurate and fair?</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">Climate AI models depend heavily on the data they're trained on. If that data is incomplete — missing readings from certain regions, for example — predictions could be less accurate for those areas. Fairness in science means making sure all communities, especially vulnerable ones, are included in the data that shapes decisions.</div></div>
+      </div>
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">🧬</div><div class="ac-name">Who owns discoveries made with AI — scientists or AI companies?</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">This is one of the most debated questions in modern science and law. If an AI system identifies a new drug compound, who holds the patent? The researcher who designed the experiment? The company that built the AI? These questions about intellectual property are still being worked out — and they matter enormously for who benefits from scientific progress.</div></div>
+      </div>
+    </div>
+
+    <p>Science + AI isn't just about knowledge — it's also about <mark>responsibility</mark>. These questions remind us that the people who build and use AI tools carry real ethical weight.</p>
+  </div>
+
+  <!-- CAREERS -->
+  <div class="section fade-in">
+    <div class="careers-block">
+      <h3>Why Science + AI Matters for Your Future</h3>
+      <p>AI will be part of almost every scientific field in your lifetime — from medicine to environmental science to space exploration. The students who understand both the science <strong>and</strong> the AI behind it will be the ones shaping the next era of discovery. Learning about AI now isn't just preparation for a career — it's preparation for the future of humanity.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon-box">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">What is AI's biggest advantage when it comes to scientific research?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>AI can design experiments and come up with original scientific hypotheses on its own.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">B</div>AI eliminates the need for human scientists by automating all research tasks.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">C</div>AI can process enormous amounts of data quickly, spotting patterns and making predictions that would take humans years to find.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>AI always produces results that are more accurate than human-led research.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item">
+        <div class="reflection-num">1</div>
+        <div class="reflection-text">Which area of science — medicine, climate, space, or biology — do you think benefits the most from AI? Explain your reasoning.</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">2</div>
+        <div class="reflection-text">Would you trust an AI system to help diagnose a medical condition? What would you need to know about it before you trusted it?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">3</div>
+        <div class="reflection-text">If you could design an AI tool for science, what discovery would you want it to help make — and why does that matter to you?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI helps scientists in medicine, climate science, space exploration, and biology by processing data far faster than humans can.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI-powered science is already part of everyday life through health apps, farming technology, and environmental monitoring.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI acts as a scientific partner — finding patterns, testing solutions quickly, and making predictions — but humans must verify results and make final decisions.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Using AI in science raises real ethical questions about fairness, accuracy, and who owns AI-assisted discoveries.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI will shape every scientific field in your lifetime — understanding it now gives you a real advantage in the future.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  function switchField(id, btn) {
+    document.querySelectorAll('.ft-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ft-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('field-'+id).classList.add('active');
+  }
+
+  function toggleAc(card){
+    const wasOpen=card.classList.contains('open');
+    document.querySelectorAll('.ac-card').forEach(c=>c.classList.remove('open'));
+    if(!wasOpen)card.classList.add('open');
+  }
+
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ?'✅ Exactly right! AI\'s ability to process vast amounts of data at speed — and spot patterns humans would miss — is what makes it such a transformative scientific tool.'
+      :'❌ Not quite. AI doesn\'t replace scientists or always guarantee better results — it\'s a powerful partner that handles data at scale while humans provide the questions, judgment, and ethics.';
+  }
+</script>
+</body>
+</html>
