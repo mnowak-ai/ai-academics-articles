@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding Real Sources (Not Fake Ones) — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* FAKE CITATION DANGER STRIP */
+  .danger-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:620px){.danger-strip{grid-template-columns:1fr 1fr;}}
+  .danger-card{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:16px;padding:20px 16px;text-align:center;}
+  .danger-icon{font-size:28px;margin-bottom:10px;}
+  .danger-label{font-size:13px;font-weight:600;color:var(--red);line-height:1.4;}
+
+  /* DO / DON'T SPLIT */
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+  @media(max-width:580px){.do-dont{grid-template-columns:1fr;}}
+  .do-col{background:var(--green-pale);border:1.5px solid #86efac;border-radius:20px;padding:22px 20px;}
+  .dont-col{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:20px;padding:22px 20px;}
+  .col-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+  .col-badge{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;}
+  .do-badge{background:#bbf7d0;color:var(--green);}
+  .dont-badge{background:#fecaca;color:var(--red);}
+  .col-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.65;color:var(--gray-text);margin-bottom:10px;}
+  .col-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
+  .do-dot{background:var(--green);color:white;}
+  .dont-dot{background:var(--red);color:white;}
+
+  /* SOURCE CATEGORY PROMPT DEMO */
+  .prompt-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pd-prompt{background:var(--purple);border-radius:12px;padding:13px 17px;font-size:14px;color:white;font-style:italic;line-height:1.65;margin-bottom:14px;}
+  .pd-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:5px;font-style:normal;}
+  .pd-items{display:flex;flex-direction:column;gap:8px;}
+  .pd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--white);border:1.5px solid var(--purple-mid);border-radius:10px;font-size:14px;color:var(--gray-text);}
+  .pd-num{width:22px;height:22px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0;}
+
+  /* TRUSTED PLACES GRID */
+  .places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:580px){.places-grid{grid-template-columns:1fr 1fr;}}
+  .place-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:18px 16px;display:flex;align-items:flex-start;gap:12px;}
+  .place-icon{font-size:24px;flex-shrink:0;}
+  .place-text{font-size:14px;font-weight:600;color:var(--purple-dark);line-height:1.4;}
+
+  /* REAL SOURCE CHECKLIST */
+  .checklist-block{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:28px;margin:24px 0;}
+  .cl-title{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;}
+  .cl-items{display:flex;flex-direction:column;gap:10px;}
+  .cl-item{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--white);border:1.5px solid var(--purple-mid);border-radius:12px;font-size:15px;color:var(--gray-text);cursor:pointer;transition:border-color 0.2s,background 0.2s;}
+  .cl-item:hover{border-color:var(--purple);}
+  .cl-item.checked{background:var(--green-pale);border-color:#86efac;}
+  .cl-item.checked .cl-box{background:var(--green);border-color:var(--green);}
+  .cl-item.checked .cl-box::after{content:'✓';color:white;font-size:12px;font-weight:700;}
+  .cl-box{width:22px;height:22px;border:2px solid var(--purple-mid);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s;}
+
+  /* FAKE SOURCE TEST CALLOUT */
+  .test-callout{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:20px;padding:30px 32px;margin:24px 0;color:white;position:relative;overflow:hidden;}
+  .test-callout::before{content:'🚨';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:60px;opacity:0.18;}
+  .test-callout h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+  .test-callout p{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.88);margin:0;}
+  .test-callout strong{color:#C084FC;}
+
+  /* AI RESEARCH SUPERPOWERS */
+  .powers-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0;}
+  @media(max-width:660px){.powers-row{grid-template-columns:1fr 1fr;}}
+  .power-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:18px 14px;text-align:center;}
+  .power-icon{font-size:26px;margin-bottom:10px;}
+  .power-label{font-size:13px;font-weight:600;color:var(--purple-dark);line-height:1.4;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* FADE IN */
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Research Skills</div>
+  <h1>Finding Real Sources<br>(Not Fake Ones)</h1>
+  <p class="hero-sub">AI is powerful — but it can invent citations, make up authors, and hallucinate studies that don't exist. Here's how to stay in control and find sources you can actually trust.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- SECTION 1: The Problem -->
+  <div class="section fade-in">
+    <h2>The Problem with Fake Citations</h2>
+    <p>AI doesn't lie on purpose — but it <mark>guesses based on patterns</mark>. Sometimes that guessing leads to invented books, fake article titles, and non-existent researchers. It's called <mark>hallucination</mark>, and it can happen to anyone who trusts AI output without checking.</p>
+    <p>Here are four types of fake content AI can accidentally generate:</p>
+
+    <div class="danger-strip">
+      <div class="danger-card">
+        <div class="danger-icon">📚</div>
+        <div class="danger-label">Books that don't exist</div>
+      </div>
+      <div class="danger-card">
+        <div class="danger-icon">📑</div>
+        <div class="danger-label">Articles never published</div>
+      </div>
+      <div class="danger-card">
+        <div class="danger-icon">📖</div>
+        <div class="danger-label">Studies with made-up data</div>
+      </div>
+      <div class="danger-card">
+        <div class="danger-icon">⁉️</div>
+        <div class="danger-label">Authors who aren't real people</div>
+      </div>
+    </div>
+
+    <p>In school — and in life — submitting a fake source can seriously hurt your credibility. The good news? You can avoid this entirely by using AI the right way.</p>
+  </div>
+
+  <!-- SECTION 2: Safe vs. Unsafe Use -->
+  <div class="section fade-in">
+    <h2>AI Should Help You Identify Sources, Not Create Them</h2>
+    <p>There's a clear line between what AI is good at and what puts you at risk. Here's the rule:</p>
+
+    <div class="do-dont">
+      <div class="do-col">
+        <div class="col-header">
+          <span class="col-badge do-badge">✅ Safe to Ask AI</span>
+        </div>
+        <div class="col-item"><div class="col-dot do-dot">✓</div>"What types of sources should I look for on this topic?"</div>
+        <div class="col-item"><div class="col-dot do-dot">✓</div>"What source categories are most credible for science research?"</div>
+        <div class="col-item"><div class="col-dot do-dot">✓</div>"Where could I find reliable government data on unemployment?"</div>
+        <div class="col-item"><div class="col-dot do-dot">✓</div>"Help me understand what makes a source trustworthy."</div>
+      </div>
+      <div class="dont-col">
+        <div class="col-header">
+          <span class="col-badge dont-badge">❌ Risky to Ask AI</span>
+        </div>
+        <div class="col-item"><div class="col-dot dont-dot">✗</div>"Give me real articles with working links on this topic."</div>
+        <div class="col-item"><div class="col-dot dont-dot">✗</div>"Find me a study that proves X."</div>
+        <div class="col-item"><div class="col-dot dont-dot">✗</div>"List 5 books I can cite about climate change."</div>
+        <div class="col-item"><div class="col-dot dont-dot">✗</div>"Write a bibliography for my paper."</div>
+      </div>
+    </div>
+
+    <p>The safe approach: ask AI for <mark>source categories and search directions</mark>, then verify everything yourself.</p>
+
+    <div class="prompt-demo">
+      <div class="pd-label">💡 Try This Prompt</div>
+      <div class="pd-prompt">
+        <div class="pd-who">You type:</div>
+        "What types of sources should I look for when researching the effects of social media on teen mental health?"
+      </div>
+      <p style="font-size:13px;color:var(--gray-muted);margin-bottom:10px;">AI might suggest source categories like:</p>
+      <div class="pd-items">
+        <div class="pd-item"><div class="pd-num">1</div>Peer-reviewed psychology journals (e.g., JAMA, The Lancet)</div>
+        <div class="pd-item"><div class="pd-num">2</div>Government health organization reports (CDC, NIH)</div>
+        <div class="pd-item"><div class="pd-num">3</div>Reputable news outlets covering mental health research</div>
+        <div class="pd-item"><div class="pd-num">4</div>University research centers and published white papers</div>
+      </div>
+    </div>
+    <p>Notice the difference: AI is pointing you toward a <em>type</em> of source — not handing you a specific title to copy-paste. Now it's your job to actually find those sources yourself.</p>
+  </div>
+
+  <!-- SECTION 3: Trusted Places -->
+  <div class="section fade-in">
+    <h2>Tools to Find Real Sources</h2>
+    <p>Once you know what category of source you need, head to one of these trusted places to find the real thing:</p>
+
+    <div class="places-grid">
+      <div class="place-card">
+        <div class="place-icon">🎓</div>
+        <div class="place-text">Google Scholar</div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon">📚</div>
+        <div class="place-text">School Library Databases</div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon">🏛️</div>
+        <div class="place-text">Government Websites (.gov)</div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon">🏫</div>
+        <div class="place-text">Museum or University Sites</div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon">📰</div>
+        <div class="place-text">Reputable Newspapers & News Sites</div>
+      </div>
+      <div class="place-card">
+        <div class="place-icon">🔬</div>
+        <div class="place-text">Science Organizations</div>
+      </div>
+    </div>
+
+    <p>You can still use AI here too — just frame the question as guidance, not sourcing: <mark>"Where could I find reliable sources on ______?"</mark> Let it point you to the right neighborhoods, then go explore yourself.</p>
+  </div>
+
+  <!-- SECTION 4: Real vs Fake -->
+  <div class="section fade-in">
+    <h2>Spotting Real vs. Fake Sources</h2>
+    <p>Once you find a source, you need to verify it before using it. A real, trustworthy source will have these six things. Click each one to check it off:</p>
+
+    <div class="checklist-block">
+      <div class="cl-title">✅ The Real Source Checklist</div>
+      <div class="cl-items" id="checklist">
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>An author's name you can look up</div>
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>A publication date</div>
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>A publisher or institution behind it</div>
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>A working link or findable location</div>
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Evidence, data, or citations within it</div>
+        <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>A title you can independently search and confirm</div>
+      </div>
+    </div>
+
+    <div class="test-callout">
+      <h3>The Quick Fake-Source Test</h3>
+      <p>Before using any source — especially one AI mentioned — ask yourself:<br><br><strong>Can I find this source on the internet by searching the title and author name?</strong><br><br>If the answer is no… it's probably fake. Don't use it.</p>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>AI makes research easier — but you are the one who locates the real materials.</p>
+  </div>
+
+  <!-- SECTION 5: AI Research Superpowers -->
+  <div class="section fade-in">
+    <h2>What AI Can Do Once You Find a Source</h2>
+    <p>Here's the good news: once you have a <em>real, verified</em> source in front of you, AI becomes incredibly useful. You can paste in the text and ask it to:</p>
+
+    <div class="powers-row">
+      <div class="power-card">
+        <div class="power-icon">📝</div>
+        <div class="power-label">Summarize it</div>
+      </div>
+      <div class="power-card">
+        <div class="power-icon">🔍</div>
+        <div class="power-label">Explain confusing sections</div>
+      </div>
+      <div class="power-card">
+        <div class="power-icon">🎯</div>
+        <div class="power-label">Clarify its purpose</div>
+      </div>
+      <div class="power-card">
+        <div class="power-icon">⚖️</div>
+        <div class="power-label">Analyze its credibility</div>
+      </div>
+      <div class="power-card">
+        <div class="power-icon">🔗</div>
+        <div class="power-label">Compare it to other sources</div>
+      </div>
+    </div>
+
+    <p>Think of it this way: <mark>you bring the real sources, AI brings the analysis</mark>. Together you make a research team that's fast, thorough, and trustworthy.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">Why can AI sometimes generate fake citations or sources?</div>
+    <div class="quiz-options" id="quizOpts">
+      <div class="quiz-opt" onclick="answerQuiz(this, false)"><div class="quiz-opt-letter">A</div>AI is programmed to mislead students on purpose.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this, true)"><div class="quiz-opt-letter">B</div>AI guesses based on patterns and sometimes invents plausible-sounding details.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this, false)"><div class="quiz-opt-letter">C</div>AI only generates fake sources when asked to write essays.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this, false)"><div class="quiz-opt-letter">D</div>AI always produces reliable citations as long as you use the right prompt.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item">
+        <div class="reflection-num">1</div>
+        <div class="reflection-text">Have you ever seen a fake citation or source — whether from AI or somewhere else online? What happened?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">2</div>
+        <div class="reflection-text">Why do you think AI sometimes invents sources instead of just admitting it doesn't know?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">3</div>
+        <div class="reflection-text">How could you use AI to help you <em>locate</em> real sources safely, without trusting it to generate them?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">4</div>
+        <div class="reflection-text">What concrete steps will you take to verify sources before using them in future assignments?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">AI can hallucinate fake citations, authors, and studies — it guesses based on patterns, not truth.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Ask AI for source <em>categories</em> and search directions — never ask it to hand you specific links or citations.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Find real sources in trusted places: Google Scholar, library databases, .gov sites, and reputable news outlets.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">A real source has an author, date, publisher, working link, evidence, and a title you can independently verify.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Once you've found a real source, AI is a powerful tool for summarizing, analyzing, and comparing it.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll',()=>{
+    const el=document.documentElement;
+    const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;
+    document.getElementById('progressBar').style.width=pct+'%';
+  });
+
+  // Fade-in on scroll
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  // Interactive checklist
+  function toggleCheck(el){
+    el.classList.toggle('checked');
+  }
+
+  // Quiz
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong')) return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ? '✅ Exactly right! AI generates text by predicting patterns — and sometimes that leads to plausible-sounding but completely invented details. This is why verifying sources yourself is non-negotiable.'
+      : '❌ Not quite. AI doesn\'t intend to mislead — it simply predicts text based on patterns, which can produce believable but fake citations. Always verify before you cite.';
+  }
+</script>
+</body>
+</html>
