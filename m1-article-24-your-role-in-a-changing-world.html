@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Role in a Changing World — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* TIMELINE — future horizons */
+  .timeline{position:relative;margin:28px 0;padding-left:32px;}
+  .timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--purple-mid);}
+  .tl-item{position:relative;margin-bottom:20px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-dot{position:absolute;left:-26px;top:14px;width:18px;height:18px;background:var(--purple);border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px var(--purple);}
+  .tl-card{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:18px;padding:18px 20px;cursor:pointer;transition:all 0.2s;}
+  .tl-card:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .tl-header{display:flex;align-items:center;gap:12px;}
+  .tl-icon{font-size:22px;flex-shrink:0;}
+  .tl-era{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);margin-bottom:2px;}
+  .tl-title{font-size:15px;font-weight:700;color:var(--purple-dark);}
+  .tl-body{font-size:14px;line-height:1.7;color:var(--gray-text);margin-top:10px;display:none;}
+  .tl-card.open .tl-body{display:block;}
+  .tl-toggle{margin-left:auto;font-size:18px;color:var(--purple);transition:transform 0.3s;flex-shrink:0;}
+  .tl-card.open .tl-toggle{transform:rotate(45deg);}
+
+  /* CHALLENGES — 2x2 grid with color-coded corners */
+  .challenges-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:560px){.challenges-grid{grid-template-columns:1fr;}}
+  .ch-card{border-radius:20px;padding:22px 20px;}
+  .ch-1{background:#FFF7ED;border:1.5px solid #FCD34D;}
+  .ch-2{background:#FFF1F1;border:1.5px solid #FCA5A5;}
+  .ch-3{background:var(--purple-pale);border:1.5px solid var(--purple-mid);}
+  .ch-4{background:var(--green-pale);border:1.5px solid #86efac;}
+  .ch-icon{font-size:26px;margin-bottom:10px;}
+  .ch-title{font-size:14px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .ch-desc{font-size:13px;line-height:1.6;color:var(--gray-text);}
+
+  /* HUMAN SKILLS — 3 bold cards */
+  .skills-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0;}
+  @media(max-width:580px){.skills-row{grid-template-columns:1fr;}}
+  .skill-card{background:linear-gradient(160deg,var(--purple-pale) 0%,var(--white) 100%);border:2px solid var(--purple-mid);border-radius:20px;padding:24px 20px;text-align:center;transition:all 0.2s;}
+  .skill-card:hover{border-color:var(--purple);transform:translateY(-4px);box-shadow:0 10px 28px rgba(123,47,190,0.12);}
+  .skill-icon{font-size:34px;margin-bottom:12px;}
+  .skill-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--purple-dark);margin-bottom:6px;}
+  .skill-desc{font-size:13px;line-height:1.6;color:var(--gray-muted);}
+
+  /* ROLES STRIP — what you are now & will become */
+  .roles-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0;}
+  @media(max-width:600px){.roles-strip{grid-template-columns:1fr 1fr;}}
+  .role-card{background:var(--purple);border-radius:16px;padding:18px 14px;text-align:center;}
+  .role-icon{font-size:26px;margin-bottom:8px;}
+  .role-now{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:2px;}
+  .role-label{font-size:13px;font-weight:700;color:white;line-height:1.4;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* CLOSING CTA */
+  .cta-block{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:24px;padding:36px 32px;margin:28px 0;color:white;text-align:center;position:relative;overflow:hidden;}
+  .cta-block::before{content:'🌍';position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:80px;opacity:0.1;}
+  .cta-block::after{content:'✨';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:80px;opacity:0.1;}
+  .cta-block h3{font-family:'Fraunces',serif;font-size:24px;font-weight:900;margin-bottom:14px;}
+  .cta-block p{font-size:16px;line-height:1.7;color:rgba(255,255,255,0.88);max-width:560px;margin:0 auto;}
+  .cta-block strong{color:#C084FC;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon-box{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · The Future of AI</div>
+  <h1>Your Role in a Changing World</h1>
+  <p class="hero-sub">No one knows exactly what AI will look like in 50 years. But one thing is certain: your generation is the first to truly live in the AI era — and the choices you make will help shape what that era becomes.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- FUTURE TIMELINE -->
+  <div class="section fade-in">
+    <h2>How AI Could Shape the Future</h2>
+    <p>AI is already changing schoolwork, medicine, and climate science. But in the coming decades, its impact could be even more transformative. Click each era to explore what might be coming:</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card" onclick="toggleTl(this)">
+          <div class="tl-header">
+            <div class="tl-icon">🏥</div>
+            <div><div class="tl-era">Healthcare</div><div class="tl-title">Personalized treatments and faster cures</div></div>
+            <div class="tl-toggle">+</div>
+          </div>
+          <div class="tl-body">AI could analyze your unique biology to design treatments tailored to you — not just the average patient. Diseases that currently take decades to cure might be tackled in years. AI-driven drug discovery is already compressing timelines that once spanned a generation.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card" onclick="toggleTl(this)">
+          <div class="tl-header">
+            <div class="tl-icon">🚎</div>
+            <div><div class="tl-era">Transportation</div><div class="tl-title">Safer self-driving vehicles everywhere</div></div>
+            <div class="tl-toggle">+</div>
+          </div>
+          <div class="tl-body">Self-driving cars, buses, and planes powered by AI could dramatically reduce accidents caused by human error — which accounts for over 90% of crashes today. AI-managed traffic systems could also reduce congestion and cut commute times significantly.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card" onclick="toggleTl(this)">
+          <div class="tl-header">
+            <div class="tl-icon">💼</div>
+            <div><div class="tl-era">Work & Careers</div><div class="tl-title">Entirely new industries and job types</div></div>
+            <div class="tl-toggle">+</div>
+          </div>
+          <div class="tl-body">Many of the jobs you'll hold in the future don't exist yet. Just like the internet created roles nobody predicted — social media manager, UX designer, data scientist — AI will create entirely new fields. The challenge and the opportunity is being ready to adapt and lead in them.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card" onclick="toggleTl(this)">
+          <div class="tl-header">
+            <div class="tl-icon">🌎</div>
+            <div><div class="tl-era">Environment</div><div class="tl-title">AI-powered climate solutions</div></div>
+            <div class="tl-toggle">+</div>
+          </div>
+          <div class="tl-body">AI could optimize global energy grids to reduce waste, model more accurate climate futures, and help protect endangered ecosystems by tracking species in real time. Some researchers believe AI-powered tools could be among the most powerful weapons against climate change ever developed.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card" onclick="toggleTl(this)">
+          <div class="tl-header">
+            <div class="tl-icon">🏡</div>
+            <div><div class="tl-era">Everyday Life</div><div class="tl-title">Smart homes, AI assistants, and virtual reality</div></div>
+            <div class="tl-toggle">+</div>
+          </div>
+          <div class="tl-body">The home you grow up in your adult life may be fundamentally different — AI systems that manage energy, security, and health; assistants that know your preferences and anticipate your needs; and immersive virtual environments that change how we learn, work, and connect with others.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>The question isn't "Will AI take over?" — it's "How will we use AI to make the world better?"</p>
+  </div>
+
+  <!-- CHALLENGES -->
+  <div class="section fade-in">
+    <h2>Challenges We'll Face</h2>
+    <p>The future of AI isn't just exciting — it also raises tough questions that your generation will need to grapple with. Understanding them now is the first step to helping solve them:</p>
+
+    <div class="challenges-grid">
+      <div class="ch-card ch-1">
+        <div class="ch-icon">⚙️</div>
+        <div class="ch-title">Job Shifts</div>
+        <div class="ch-desc">Some jobs may disappear as AI automates certain tasks. How will workers adapt, retrain, and find new roles in a transformed economy?</div>
+      </div>
+      <div class="ch-card ch-2">
+        <div class="ch-icon">⚖️</div>
+        <div class="ch-title">Fairness</div>
+        <div class="ch-desc">Will AI be used equally across all communities — or will some groups be left behind or harmed by systems that weren't designed with them in mind?</div>
+      </div>
+      <div class="ch-card ch-3">
+        <div class="ch-icon">🏛️</div>
+        <div class="ch-title">Control</div>
+        <div class="ch-desc">Who should make the rules about how AI is developed and used? Governments? Companies? The people? Getting governance right is one of the defining challenges of this era.</div>
+      </div>
+      <div class="ch-card ch-4">
+        <div class="ch-icon">🔒</div>
+        <div class="ch-title">Trust</div>
+        <div class="ch-desc">How do we ensure that AI tools are accurate, safe, and honest — especially when the stakes are high, like in healthcare or the justice system?</div>
+      </div>
+    </div>
+
+    <p>These questions show why learning about AI <em>now</em> matters. The more you understand it, the more power you'll have to <mark>help shape how it's used</mark>.</p>
+  </div>
+
+  <!-- HUMAN SKILLS -->
+  <div class="section fade-in">
+    <h2>What This Means for You</h2>
+    <p>AI doesn't mean humans become less important. It means the opposite. The future especially needs people who can do things AI can't:</p>
+
+    <div class="skills-row">
+      <div class="skill-card">
+        <div class="skill-icon">💡</div>
+        <div class="skill-title">Think Creatively</div>
+        <div class="skill-desc">AI can generate — but it can't truly invent. Original stories, breakthrough ideas, and artistic vision still come from human imagination.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">✅</div>
+        <div class="skill-title">Solve Real Problems</div>
+        <div class="skill-desc">Humans decide how to apply AI to real-world challenges — choosing what to build, what to fix, and who to help first.</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">😇</div>
+        <div class="skill-title">Lead with Ethics</div>
+        <div class="skill-desc">We need leaders who ensure AI is built and used fairly, responsibly, and with the wellbeing of everyone in mind.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR ROLES -->
+  <div class="section fade-in">
+    <h2>Your Role in the AI Future</h2>
+    <p>Right now, you're a student. But you're also becoming something much more. The choices your generation makes will shape how AI affects the world for everyone who comes after you:</p>
+
+    <div class="roles-strip">
+      <div class="role-card">
+        <div class="role-icon">🗳️</div>
+        <div class="role-now">Future</div>
+        <div class="role-label">Voter</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💼</div>
+        <div class="role-now">Future</div>
+        <div class="role-label">Worker</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🎨</div>
+        <div class="role-now">Future</div>
+        <div class="role-label">Creator</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🏛️</div>
+        <div class="role-now">Future</div>
+        <div class="role-label">Decision-Maker</div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h3>You're Not Just Preparing for the Future — You're Building It</h3>
+      <p>Learning about AI isn't just about passing classes. It's about being ready to vote, lead, create, and decide in a world shaped by technology. The future belongs to the people who understand the tools that build it — and choose to use them <strong>responsibly</strong>.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon-box">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">Why does your generation understanding AI matter so much right now?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>Because AI will eventually run everything on its own, and people just need to know how to use it.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">B</div>So that students can build AI apps and get jobs at tech companies right after high school.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">C</div>Because the decisions your generation makes as voters, workers, creators, and leaders will shape how AI affects everyone.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>Because AI is only useful if young people are the ones designing and programming it.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item">
+        <div class="reflection-num">1</div>
+        <div class="reflection-text">What part of the future with AI excites you the most — and why does that particular possibility feel meaningful to you?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">2</div>
+        <div class="reflection-text">What part of the future with AI worries you most — and what would need to happen to make that concern less serious?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">3</div>
+        <div class="reflection-text">If you could make one rule for how AI is used in the future — in any area of life — what would it be, and why?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI could transform healthcare, transportation, work, the environment, and daily life in the decades ahead.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Major challenges — job shifts, fairness, control, and trust — will need to be solved by informed, engaged citizens.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI makes humans more important — not less. Creative thinking, problem-solving, and ethical leadership are irreplaceable.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">You're a future voter, worker, creator, and decision-maker — your choices will shape how AI affects the world.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Learning about AI isn't just for class — it's preparation for the future you'll help build.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  function toggleTl(card){
+    const wasOpen=card.classList.contains('open');
+    document.querySelectorAll('.tl-card').forEach(c=>c.classList.remove('open'));
+    if(!wasOpen)card.classList.add('open');
+  }
+
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ?'✅ Exactly right! Understanding AI prepares you to participate in the decisions — as a voter, worker, creator, and leader — that will determine how AI shapes everyone\'s lives.'
+      :'❌ Not quite. Understanding AI is about much more than building apps or getting tech jobs. It\'s about being ready to make informed decisions that affect your community, your country, and the future.';
+  }
+</script>
+</body>
+</html>
