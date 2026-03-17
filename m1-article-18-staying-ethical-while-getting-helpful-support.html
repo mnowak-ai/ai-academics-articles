@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staying Ethical While Getting Helpful Support — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* WRITING CHALLENGES — accordion */
+  .accordion{display:flex;flex-direction:column;gap:12px;margin:24px 0;}
+  .ac-card{border:1.5px solid var(--purple-mid);border-radius:18px;overflow:hidden;cursor:pointer;}
+  .ac-card:hover{border-color:var(--purple);}
+  .ac-card.open{border-color:var(--purple);}
+  .ac-header{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--white);}
+  .ac-icon{font-size:22px;flex-shrink:0;}
+  .ac-name{font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);flex:1;}
+  .ac-toggle{width:26px;height:26px;background:var(--purple-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform 0.3s,background 0.2s;flex-shrink:0;}
+  .ac-card.open .ac-toggle{transform:rotate(45deg);background:var(--purple);color:white;}
+  .ac-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+  .ac-card.open .ac-body{max-height:200px;}
+  .ac-inner{padding:0 22px 20px;font-size:15px;line-height:1.75;color:var(--gray-text);}
+
+  /* AI AS COACH — do/don't */
+  .coach-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+  @media(max-width:580px){.coach-split{grid-template-columns:1fr;}}
+  .coach-do{background:var(--green-pale);border:1.5px solid #86efac;border-radius:20px;padding:22px 20px;}
+  .coach-dont{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:20px;padding:22px 20px;}
+  .coach-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:14px;}
+  .do-badge{background:#bbf7d0;color:var(--green);}
+  .dont-badge{background:#fecaca;color:var(--red);}
+  .coach-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.65;color:var(--gray-text);margin-bottom:10px;}
+  .coach-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
+  .dot-green{background:var(--green);color:white;}
+  .dot-red{background:var(--red);color:white;}
+
+  /* PROMPT DEMO */
+  .prompt-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pd-prompts{display:flex;flex-direction:column;gap:10px;}
+  .pd-prompt{background:var(--purple);border-radius:12px;padding:13px 17px;font-size:14px;color:white;font-style:italic;line-height:1.65;}
+  .pd-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:4px;font-style:normal;}
+
+  /* YOUR VOICE — 3 green cards */
+  .voice-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:560px){.voice-strip{grid-template-columns:1fr;}}
+  .vc-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:20px 16px;text-align:center;}
+  .vc-icon{font-size:26px;margin-bottom:10px;}
+  .vc-label{font-size:13px;font-weight:600;color:var(--purple-dark);line-height:1.4;}
+
+  /* CHEAT WARNING */
+  .cheat-block{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:20px;padding:30px 32px;margin:28px 0;color:white;position:relative;overflow:hidden;}
+  .cheat-block::before{content:'🚨';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:56px;opacity:0.15;}
+  .cheat-block h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+  .cheat-block p{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.88);margin:0;}
+  .cheat-block strong{color:#C084FC;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Academic Integrity</div>
+  <h1>Staying Ethical While Getting Helpful Support</h1>
+  <p class="hero-sub">Turning research notes into original, well-written work is one of the hardest parts of any assignment. AI can support this process — but only if you use it the right way, and keep your own thinking at the center.</p>
+  <div class="hero-divider"></div>
+</div>
+<div class="content">
+
+  <div class="section fade-in">
+    <h2>Writing Is Hard for Good Reasons</h2>
+    <p>Many students find writing challenging — not because they lack ideas, but because the process itself feels intimidating. Each of these challenges is completely normal. Click to explore them:</p>
+    <div class="accordion" id="accordion">
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">😰</div><div class="ac-name">Getting Started</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">Staring at a blank page with high expectations is genuinely hard. The pressure to begin perfectly often stops you from beginning at all. AI can help you break through this by suggesting an opening structure or first paragraph idea to react to.</div></div>
+      </div>
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">🗂️</div><div class="ac-name">Organizing Ideas</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">Figuring out what goes where — which points matter most, how everything should flow — is genuinely complex. AI can suggest a logical order for your arguments and help you see which ideas connect to each other.</div></div>
+      </div>
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">📎</div><div class="ac-name">Connecting Sources Smoothly</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">Integrating evidence without it feeling forced takes practice. AI can show you example sentence structures for introducing quotes or paraphrasing evidence in a way that flows naturally with your own writing.</div></div>
+      </div>
+      <div class="ac-card" onclick="toggleAc(this)">
+        <div class="ac-header"><div class="ac-icon">🎓</div><div class="ac-name">Academic Language</div><div class="ac-toggle">+</div></div>
+        <div class="ac-body"><div class="ac-inner">Switching from everyday communication to a formal academic tone can make your writing feel stiff or unnatural. AI can help you adjust tone and word choice so your writing sounds polished without losing your personality.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>AI as a Writing Coach — Not a Ghostwriter</h2>
+    <p>There's a big difference between AI helping you <em>write better</em> and AI writing <em>for you</em>. Here's the line:</p>
+    <div class="coach-split">
+      <div class="coach-do">
+        <div class="coach-badge do-badge">✅ AI Should Do This</div>
+        <div class="coach-item"><div class="coach-dot dot-green">✓</div>Suggest a structure for your paper</div>
+        <div class="coach-item"><div class="coach-dot dot-green">✓</div>Explain how paragraph flow works</div>
+        <div class="coach-item"><div class="coach-dot dot-green">✓</div>Help you rephrase a confusing sentence</div>
+        <div class="coach-item"><div class="coach-dot dot-green">✓</div>Show sample paragraph formats</div>
+        <div class="coach-item"><div class="coach-dot dot-green">✓</div>Help connect ideas across sections</div>
+      </div>
+      <div class="coach-dont">
+        <div class="coach-badge dont-badge">❌ You Should Always Do This</div>
+        <div class="coach-item"><div class="coach-dot dot-red">!</div>Write the actual content</div>
+        <div class="coach-item"><div class="coach-dot dot-red">!</div>Choose which arguments to make</div>
+        <div class="coach-item"><div class="coach-dot dot-red">!</div>Decide which evidence matters</div>
+        <div class="coach-item"><div class="coach-dot dot-red">!</div>Express your own interpretation</div>
+        <div class="coach-item"><div class="coach-dot dot-red">!</div>Put everything in your own words</div>
+      </div>
+    </div>
+    <div class="prompt-demo">
+      <div class="pd-label">💡 Prompts That Strengthen Your Writing</div>
+      <div class="pd-prompts">
+        <div class="pd-prompt"><div class="pd-who">Try this:</div>"Help me turn this outline into paragraph ideas — not full sentences, just directions."</div>
+        <div class="pd-prompt"><div class="pd-who">Or this:</div>"How do I introduce this piece of evidence clearly without it sounding forced?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote fade-in">
+    <p>Your teacher wants to hear your thinking — AI is just a coach helping you express it more clearly.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Keeping Your Voice in the Writing</h2>
+    <p>Teachers want your thinking, your perspective, and your interpretation. What they don't want is writing that sounds generic, robotic, or like it could belong to anyone. <mark>Your voice is part of what makes your work meaningful.</mark></p>
+    <p>AI can support you in strengthening that voice by helping you:</p>
+    <div class="voice-strip">
+      <div class="vc-card"><div class="vc-icon">🙌</div><div class="vc-label">Clarify meaning so your ideas come across the way you intend</div></div>
+      <div class="vc-card"><div class="vc-icon">👏</div><div class="vc-label">Check grammar so small errors don't distract from your message</div></div>
+      <div class="vc-card"><div class="vc-icon">😎</div><div class="vc-label">Smooth transitions so your writing flows more naturally</div></div>
+    </div>
+    <p>But the core ideas and wording should always come from you. AI is there to <mark>refine your writing</mark> — not replace your originality or thinking.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Use AI to Learn, Not to Cheat</h2>
+    <div class="cheat-block">
+      <h3>Why Copying AI Output Is a Bad Idea</h3>
+      <p>It can be tempting to paste your assignment prompt and ask AI to "write it for you" — but this approach isn't learning. It's also <strong>easy for teachers to spot</strong>. More importantly, it robs you of the chance to think critically, understand the material, and develop your own voice.</p>
+    </div>
+    <p>Instead, use AI as a supportive tool. Let it help you understand difficult concepts, improve your writing, or organize your ideas. By guiding your thinking rather than replacing it, AI becomes a resource that <mark>strengthens your skills</mark> — not a shortcut that undermines your learning.</p>
+  </div>
+
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">Which of these is the most ethical and effective way to use AI for writing?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>Paste your full assignment into AI and submit what it produces.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">B</div>Ask AI to suggest a structure or help rephrase a confusing sentence, then write the content yourself.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">C</div>Use AI to write your first draft, then change a few words so it sounds like you.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>Never use AI for writing — it's always a form of cheating.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item"><div class="reflection-num">1</div><div class="reflection-text">What part of writing is the hardest for you — starting, organizing, or editing? How could AI help with that specific challenge?</div></div>
+      <div class="reflection-item"><div class="reflection-num">2</div><div class="reflection-text">How could AI help you improve your writing without doing the work for you? Give a specific example.</div></div>
+      <div class="reflection-item"><div class="reflection-num">3</div><div class="reflection-text">Why is your own voice important in your writing — especially in school assignments?</div></div>
+      <div class="reflection-item"><div class="reflection-num">4</div><div class="reflection-text">What strategies can help you avoid plagiarism when using AI as part of your writing process?</div></div>
+    </div>
+  </div>
+
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Writing is challenging for natural reasons — getting started, organizing ideas, and using academic language all take real practice.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI acts as a writing coach — it can suggest structure, explain flow, and help with phrasing. But you always write the content.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Your voice — your thinking and interpretation — is what makes your work meaningful and original.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Submitting AI-generated work as your own is academic dishonesty — and easy for teachers to detect.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Used ethically, AI strengthens your skills rather than replacing them — making you a better writer over time.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function toggleAc(card){const wasOpen=card.classList.contains('open');document.querySelectorAll('.ac-card').forEach(c=>c.classList.remove('open'));if(!wasOpen)card.classList.add('open');}
+  function answerQuiz(el,correct){if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;el.classList.add(correct?'correct':'wrong');const fb=document.getElementById('quizFeedback');fb.className='quiz-feedback '+(correct?'correct':'wrong');fb.textContent=correct?'✅ Exactly right! Using AI for structure and coaching while writing the content yourself is the ethical and effective approach — and the one that actually builds your skills.':'❌ Not quite. Either copying AI output or avoiding AI entirely misses the sweet spot. The goal is to use AI as a coach: let it guide your process while you do the actual writing and thinking.';}
+</script>
+</body>
+</html>

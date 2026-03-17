@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Assisted Project Planning — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+  .chaos-list{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+  .chaos-item{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;font-size:15px;color:var(--gray-text);}
+  .chaos-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+  .transform-visual{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin:28px 0;}
+  @media(max-width:560px){.transform-visual{grid-template-columns:1fr;}}
+  .tv-box{border-radius:20px;padding:22px 20px;}
+  .tv-chaos{background:var(--red-pale);border:1.5px solid #FCA5A5;}
+  .tv-clarity{background:var(--green-pale);border:1.5px solid #86efac;}
+  .tv-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;}
+  .tv-chaos .tv-label{color:var(--red);}
+  .tv-clarity .tv-label{color:var(--green);}
+  .tv-item{font-size:13.5px;line-height:1.5;color:var(--gray-text);margin-bottom:6px;}
+  .tv-arrow{font-size:28px;color:var(--purple);text-align:center;}
+  .org-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:580px){.org-grid{grid-template-columns:1fr 1fr;}}
+  .org-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:20px 16px;text-align:center;cursor:pointer;transition:all 0.2s;}
+  .org-card:hover,.org-card.active{background:var(--purple);border-color:var(--purple);}
+  .org-card:hover .org-label,.org-card.active .org-label{color:white;}
+  .org-icon{font-size:28px;margin-bottom:10px;}
+  .org-label{font-size:13px;font-weight:600;color:var(--purple-dark);line-height:1.4;transition:color 0.2s;}
+  .prompt-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pd-prompt{background:var(--purple);border-radius:12px;padding:13px 17px;font-size:14px;color:white;font-style:italic;line-height:1.65;margin-bottom:12px;}
+  .pd-who{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:5px;font-style:normal;}
+  .pd-result{background:var(--white);border:1.5px solid var(--purple-mid);border-radius:12px;padding:14px 17px;}
+  .pd-result-label{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+  .pd-result-item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--gray-text);margin-bottom:7px;}
+  .pd-dot{width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;}
+  .connect-strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;}
+  @media(max-width:560px){.connect-strip{grid-template-columns:1fr;}}
+  .cs-card{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:16px;padding:18px 16px;display:flex;align-items:flex-start;gap:12px;}
+  .cs-icon{font-size:24px;flex-shrink:0;}
+  .cs-title{font-size:14px;font-weight:700;color:var(--purple-dark);margin-bottom:4px;}
+  .cs-desc{font-size:13px;line-height:1.6;color:var(--gray-muted);}
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Research & Organization</div>
+  <h1>AI-Assisted Project Planning</h1>
+  <p class="hero-sub">Finding sources is just step one. Without structure, your notes become a jumble of disconnected facts. AI can turn that chaos into clarity — categorizing information, surfacing connections, and building you a roadmap to follow.</p>
+  <div class="hero-divider"></div>
+</div>
+<div class="content">
+  <div class="section fade-in">
+    <h2>Why Organizing Research Is Hard</h2>
+    <p>The problem isn't always the difficulty of the material — it's often how scattered it is. When facts, ideas, and resources are spread across tabs, documents, and screenshots, it's nearly impossible to see the bigger picture. Common challenges include:</p>
+    <div class="chaos-list">
+      <div class="chaos-item"><div class="chaos-icon">⚠️</div>Too much information to process at once</div>
+      <div class="chaos-item"><div class="chaos-icon">⚠️</div>Notes scattered across tabs, documents, and screenshots</div>
+      <div class="chaos-item"><div class="chaos-icon">⚠️</div>Ideas blending together, making it hard to separate concepts</div>
+      <div class="chaos-item"><div class="chaos-icon">⚠️</div>Unclear connections — difficult to understand how pieces fit together</div>
+    </div>
+    <p>Effective organization transforms this raw, chaotic information into something usable. It helps you spot patterns, prioritize what matters, and break large tasks into manageable steps.</p>
+    <div class="transform-visual">
+      <div class="tv-box tv-chaos">
+        <div class="tv-label">Without Organization</div>
+        <div class="tv-item">🗂️ Scattered notes everywhere</div>
+        <div class="tv-item">🤯 Overwhelmed and stuck</div>
+        <div class="tv-item">❓ Unclear next steps</div>
+        <div class="tv-item">🔁 Repeating the same research</div>
+      </div>
+      <div class="tv-arrow">→</div>
+      <div class="tv-box tv-clarity">
+        <div class="tv-label">With Organization</div>
+        <div class="tv-item">📋 Clear structure and categories</div>
+        <div class="tv-item">🎯 Focused on what matters</div>
+        <div class="tv-item">✅ Obvious next steps</div>
+        <div class="tv-item">🔍 Gaps are easy to spot</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Using AI to Build Research Organizers</h2>
+    <p>AI can help you create different types of organizers depending on your project. Click any card below to explore what each one does:</p>
+    <div class="org-grid">
+      <div class="org-card" onclick="selectOrg(this,'Outline Templates','A structured skeleton for your paper or presentation — sections, subsections, and logical flow all mapped out before you write a single word.')">
+        <div class="org-icon">📄</div>
+        <div class="org-label">Outline Templates</div>
+      </div>
+      <div class="org-card" onclick="selectOrg(this,'Evidence Tables','A table matching each claim or argument to the sources that support it — so nothing gets lost and everything is backed up.')">
+        <div class="org-icon">📊</div>
+        <div class="org-label">Evidence Tables</div>
+      </div>
+      <div class="org-card" onclick="selectOrg(this,'Compare/Contrast Charts','A side-by-side visual comparing two or more ideas, sources, or positions — great for spotting differences and similarities at a glance.')">
+        <div class="org-icon">⚖️</div>
+        <div class="org-label">Compare/Contrast Charts</div>
+      </div>
+      <div class="org-card" onclick="selectOrg(this,'Claim + Evidence Maps','A visual diagram showing how each piece of evidence connects to a specific claim in your argument — so your logic is airtight.')">
+        <div class="org-icon">🗺️</div>
+        <div class="org-label">Claim + Evidence Maps</div>
+      </div>
+      <div class="org-card" onclick="selectOrg(this,'Subtopic Categories','A breakdown of your main topic into smaller, manageable sections — so you know exactly what each part of your project covers.')">
+        <div class="org-icon">🗂️</div>
+        <div class="org-label">Subtopic Categories</div>
+      </div>
+    </div>
+    <div id="orgDetail" style="display:none;background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:20px 22px;margin-top:4px;">
+      <div id="orgDetailTitle" style="font-family:'Fraunces',serif;font-size:17px;font-weight:700;color:var(--purple-dark);margin-bottom:8px;"></div>
+      <div id="orgDetailDesc" style="font-size:15px;line-height:1.7;color:var(--gray-text);"></div>
+    </div>
+    <div class="prompt-demo" style="margin-top:20px;">
+      <div class="pd-label">💡 Try This Prompt</div>
+      <div class="pd-prompt">
+        <div class="pd-who">You type:</div>
+        "Help me organize my research on renewable energy into three major categories."
+      </div>
+      <div class="pd-result">
+        <div class="pd-result-label">AI might return:</div>
+        <div class="pd-result-item"><div class="pd-dot"></div>Category 1: Types of Renewable Energy (solar, wind, hydro)</div>
+        <div class="pd-result-item"><div class="pd-dot"></div>Category 2: Environmental Impact &amp; Benefits</div>
+        <div class="pd-result-item"><div class="pd-dot"></div>Category 3: Challenges &amp; Barriers to Adoption</div>
+      </div>
+    </div>
+    <p>You instantly have a structure to build on — no staring at a blank page required.</p>
+  </div>
+
+  <div class="pull-quote fade-in">
+    <p>AI doesn't replace your critical thinking — it gives it a framework to work within.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Creating an AI-Assisted Outline</h2>
+    <p>AI can take your scattered ideas and arrange them into a clear, logical order. This doesn't just save time — it helps you see how concepts connect, identify gaps in your research, and create a roadmap for writing or presenting your work.</p>
+    <p>With a structured outline in hand, your next steps — drafting, studying, or analyzing — become much smoother and more focused. You spend less energy figuring out <em>what</em> to do next, and more energy actually doing it.</p>
+  </div>
+
+  <div class="section fade-in">
+    <h2>Connecting Your Sources to Your Assignment</h2>
+    <p>Research isn't just about collecting facts — it's about understanding, connecting, and using them effectively. AI can help you make those connections:</p>
+    <div class="connect-strip">
+      <div class="cs-card"><div class="cs-icon">⭐️</div><div><div class="cs-title">Matching Evidence to Claims</div><div class="cs-desc">Support your arguments accurately and never leave a claim without proof.</div></div></div>
+      <div class="cs-card"><div class="cs-icon">🔍</div><div><div class="cs-title">Identifying Missing Information</div><div class="cs-desc">Highlighting gaps so you know exactly what still needs to be found.</div></div></div>
+      <div class="cs-card"><div class="cs-icon">🗂️</div><div><div class="cs-title">Suggesting Subtopics</div><div class="cs-desc">Breaking your main topic into clear, manageable sections to tackle one at a time.</div></div></div>
+      <div class="cs-card"><div class="cs-icon">🔗</div><div><div class="cs-title">Showing Relationships Between Ideas</div><div class="cs-desc">Revealing patterns and connections you might not have spotted on your own.</div></div></div>
+    </div>
+    <p>The result: work that's not only more organized, but also more <mark>persuasive and complete</mark>.</p>
+  </div>
+
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">What is the primary benefit of using AI to organize your research?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>AI can write your entire paper once it has organized your notes.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">B</div>You no longer need to find sources — AI handles the research for you.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">C</div>AI turns scattered notes into structured frameworks, making it easier to spot patterns and next steps.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>AI automatically connects your sources to your assignment without any input from you.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item"><div class="reflection-num">1</div><div class="reflection-text">What makes organizing research difficult for you personally — is it too much information, unclear connections, or something else?</div></div>
+      <div class="reflection-item"><div class="reflection-num">2</div><div class="reflection-text">Which AI-generated organizer (outline, evidence table, compare/contrast chart, etc.) do you think would help you most?</div></div>
+      <div class="reflection-item"><div class="reflection-num">3</div><div class="reflection-text">How does having a clear structure improve the quality of your final work — whether it's a paper, project, or presentation?</div></div>
+      <div class="reflection-item"><div class="reflection-num">4</div><div class="reflection-text">Think of a current or upcoming assignment. What type of organizer would you want AI to help you build for it?</div></div>
+    </div>
+  </div>
+
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Disorganized research makes it nearly impossible to see the big picture or make real progress.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI can build outlines, evidence tables, compare/contrast charts, claim maps, and subtopic categories from your raw notes.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">A structured outline helps you see connections, spot gaps, and build a clear roadmap before you start writing.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI can match evidence to claims, surface missing information, and reveal relationships between ideas.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Using AI to organize enhances your critical thinking — it gives your ideas a structure, not a substitute.</div></div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function selectOrg(el,title,desc){document.querySelectorAll('.org-card').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('orgDetail').style.display='block';document.getElementById('orgDetailTitle').textContent=title;document.getElementById('orgDetailDesc').textContent=desc;}
+  function answerQuiz(el,correct){if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;el.classList.add(correct?'correct':'wrong');const fb=document.getElementById('quizFeedback');fb.className='quiz-feedback '+(correct?'correct':'wrong');fb.textContent=correct?'✅ Exactly right! AI turns a mess of ideas into a clear structure — helping you see patterns, gaps, and next steps you could not spot before.':'❌ Not quite. AI is a planning and organizing tool — it helps you structure your research so your own thinking becomes clearer and more effective.';}
+</script>
+</body>
+</html>
