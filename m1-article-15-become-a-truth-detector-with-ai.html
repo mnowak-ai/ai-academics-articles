@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Become a Truth Detector with AI — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* WHY IT MATTERS — warning pills */
+  .warning-pills{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+  .wpill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:100px;font-size:14px;font-weight:600;color:var(--red);}
+  .wpill-icon{font-size:16px;}
+
+  /* AI PROMPT EXAMPLES */
+  .prompts-block{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:20px;padding:26px;margin:24px 0;}
+  .pb-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .pb-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .pb-items{display:flex;flex-direction:column;gap:10px;}
+  .pb-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;background:var(--purple);border-radius:12px;font-size:14px;color:white;font-style:italic;line-height:1.6;}
+  .pb-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+  /* CALLOUT BOX */
+  .callout{display:flex;align-items:flex-start;gap:14px;padding:20px 22px;background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;margin:20px 0;}
+  .callout-icon{font-size:24px;flex-shrink:0;}
+  .callout-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+  .callout-text strong{color:var(--purple-dark);}
+
+  /* RED FLAGS — interactive flip cards */
+  .flags-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:600px){.flags-grid{grid-template-columns:1fr 1fr;}}
+  .flag-card{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:16px;padding:18px 16px;display:flex;align-items:flex-start;gap:10px;cursor:default;}
+  .flag-emoji{font-size:20px;flex-shrink:0;margin-top:1px;}
+  .flag-text{font-size:14px;line-height:1.5;color:var(--gray-text);font-weight:500;}
+
+  /* COMPARE SOURCES — 2 column */
+  .compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+  @media(max-width:580px){.compare-wrap{grid-template-columns:1fr;}}
+  .compare-col{border:1.5px solid var(--purple-mid);border-radius:20px;overflow:hidden;}
+  .compare-head{background:var(--purple);color:white;padding:14px 18px;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+  .compare-items{padding:14px 18px;display:flex;flex-direction:column;gap:10px;}
+  .compare-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray-text);}
+  .compare-dot{width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;}
+
+  /* AI CAN */
+  .ai-can-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;}
+  @media(max-width:560px){.ai-can-row{grid-template-columns:1fr;}}
+  .ac-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:16px;padding:18px 16px;text-align:center;}
+  .ac-icon{font-size:26px;margin-bottom:10px;}
+  .ac-label{font-size:14px;font-weight:600;color:var(--purple-dark);line-height:1.4;}
+
+  /* BIAS SECTION */
+  .bias-list{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+  .bias-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--green-pale);border:1.5px solid #86efac;border-radius:14px;font-size:15px;color:var(--gray-text);}
+  .bias-check{width:24px;height:24px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:white;font-weight:700;flex-shrink:0;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Critical Thinking</div>
+  <h1>Become a Truth Detector with AI</h1>
+  <p class="hero-sub">Clickbait headlines, viral rumors, misleading posts — they're everywhere. One of the most powerful skills you can develop is knowing how to fact-check. AI can be your partner in that — if you know how to use it right.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- SECTION 1: Why It Matters -->
+  <div class="section fade-in">
+    <h2>Why Fact-Checking Matters</h2>
+    <p>Just because something sounds confident doesn't make it true. <mark>Even AI can be confidently wrong.</mark> Strong fact-checkers don't fall for everything they read — they think for themselves. Fact-checking protects you from:</p>
+
+    <div class="warning-pills">
+      <div class="wpill"><span class="wpill-icon">⚠️</span>Misinformation</div>
+      <div class="wpill"><span class="wpill-icon">⚠️</span>Biased claims</div>
+      <div class="wpill"><span class="wpill-icon">⚠️</span>Outdated data</div>
+      <div class="wpill"><span class="wpill-icon">⚠️</span>Manipulated content</div>
+      <div class="wpill"><span class="wpill-icon">⚠️</span>False statistics</div>
+    </div>
+
+    <p>In a world where information moves fast, the ability to pause and verify is a superpower. It protects your reputation, your grades, and your judgment.</p>
+  </div>
+
+  <!-- SECTION 2: Cross-Check Claims -->
+  <div class="section fade-in">
+    <h2>Using AI to Cross-Check Claims</h2>
+    <p>AI should <em>never</em> be your only source of truth — but it's a powerful starting point for understanding whether something seems credible. Use it to spot red flags, gain clarity, and get leads for deeper research.</p>
+
+    <div class="prompts-block">
+      <div class="pb-label">🔍 Prompts That Help You Verify</div>
+      <div class="pb-items">
+        <div class="pb-item"><div class="pb-icon">🚨</div>"Is this claim supported by reliable evidence?"</div>
+        <div class="pb-item"><div class="pb-icon">🚨</div>"What are reputable sources that discuss this topic?"</div>
+        <div class="pb-item"><div class="pb-icon">🚨</div>"Has this statistic been confirmed elsewhere?"</div>
+      </div>
+    </div>
+
+    <p>AI can point you toward better questions and stronger sources — but your final confirmation should always come from real, verifiable materials: articles, research studies, expert analysis, and primary sources.</p>
+
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>Remember the rule:</strong> Use AI as a guide, not a final authority. It helps you ask better questions — you find the real answers.</div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>Being a strong fact-checker means you think for yourself — AI is just a sharper lens.</p>
+  </div>
+
+  <!-- SECTION 3: Red Flags -->
+  <div class="section fade-in">
+    <h2>Watch Out for Red Flags 🚩</h2>
+    <p>Some sources are designed to look credible while spreading misleading information. Here are six warning signs that a source may not be trustworthy:</p>
+
+    <div class="flags-grid">
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">No author listed</div></div>
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">Strong emotional or alarming language</div></div>
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">Claims made without evidence</div></div>
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">Extreme or dramatic wording</div></div>
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">No supporting links or citations</div></div>
+      <div class="flag-card"><div class="flag-emoji">🚩</div><div class="flag-text">Appears on an unfamiliar website</div></div>
+    </div>
+
+    <p>AI can help you explain <em>why</em> a source might be unreliable and suggest what to look for instead. Try: <mark>"What makes this source potentially unreliable?"</mark></p>
+  </div>
+
+  <!-- SECTION 4: Compare Sources -->
+  <div class="section fade-in">
+    <h2>Compare Multiple Sources</h2>
+    <p>When you're researching, don't rely on a single source. Strong researchers triangulate — they look at multiple perspectives to build a complete picture.</p>
+
+    <div class="compare-wrap">
+      <div class="compare-col">
+        <div class="compare-head">☑️ What to Compare</div>
+        <div class="compare-items">
+          <div class="compare-item"><div class="compare-dot"></div>Different news outlets</div>
+          <div class="compare-item"><div class="compare-dot"></div>Scientific organizations</div>
+          <div class="compare-item"><div class="compare-dot"></div>Government data</div>
+          <div class="compare-item"><div class="compare-dot"></div>Academic studies</div>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-head">⭐️ How AI Can Help</div>
+        <div class="compare-items">
+          <div class="compare-item"><div class="compare-dot"></div>List key differences between sources</div>
+          <div class="compare-item"><div class="compare-dot"></div>Summarize each viewpoint clearly</div>
+          <div class="compare-item"><div class="compare-dot"></div>Show where sources agree or disagree</div>
+          <div class="compare-item"><div class="compare-dot"></div>Identify what's missing from each one</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Comparing sources builds a <mark>fuller, more accurate understanding</mark> of any topic — and makes your conclusions much stronger.</p>
+  </div>
+
+  <!-- SECTION 5: Bias -->
+  <div class="section fade-in">
+    <h2>Bias Exists Everywhere… Even in AI</h2>
+    <p>Bias doesn't mean a source is wrong — it means it <em>leans a certain way</em>. Every writer, organization, and algorithm has a perspective. The goal isn't to find bias-free sources (they don't exist) — it's to <mark>recognize bias when you see it</mark>.</p>
+    <p>AI can help you identify bias by:</p>
+
+    <div class="bias-list">
+      <div class="bias-item"><div class="bias-check">✓</div>Analyzing the language and word choice used in a piece</div>
+      <div class="bias-item"><div class="bias-check">✓</div>Explaining the author's likely perspective or agenda</div>
+      <div class="bias-item"><div class="bias-check">✓</div>Identifying viewpoints or voices that are missing</div>
+    </div>
+
+    <p>Being aware of bias helps you judge information more fairly — and think more independently.</p>
+
+    <div class="callout">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>Important:</strong> AI itself can be biased too. It was trained on internet data, which reflects human opinions and patterns. Always think critically about AI responses — not just other sources.</div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">What is the safest way to use AI for fact-checking?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>Ask AI if a claim is true and accept its answer as final.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">B</div>Only use AI for topics that aren't controversial.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">C</div>Use AI to generate better questions and leads, then verify with real sources.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>Trust AI more than news sites because it has no bias.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item">
+        <div class="reflection-num">1</div>
+        <div class="reflection-text">Why is fact-checking more important today than ever before?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">2</div>
+        <div class="reflection-text">What clues help you identify unreliable information?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">3</div>
+        <div class="reflection-text">How can AI help you compare two sources on the same topic?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">4</div>
+        <div class="reflection-text">How will learning to fact-check help you in everyday life — not just in school?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Fact-checking protects you from misinformation, bias, outdated data, and false statistics.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">AI is a helpful starting point for verification — but never the final word. Always confirm with real sources.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Red flags like missing authors, emotional language, and no citations signal a suspicious source.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Comparing multiple sources — with AI's help — gives you a fuller, more accurate picture.</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="summary-text">Bias exists everywhere — including in AI. Recognize it, account for it, and think independently.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{
+    const el=document.documentElement;
+    document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';
+  });
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ?'✅ Exactly right! AI is great for generating better questions and pointing you in the right direction — but the real verification work must come from credible, primary sources.'
+      :'❌ Not quite. AI can be biased and confidently wrong. The safest approach is always to use AI as a guide and confirm facts with verified, real-world sources.';
+  }
+</script>
+</body>
+</html>
