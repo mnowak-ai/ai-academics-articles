@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assisted Problem-Solving — AI in Business Certification</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--purple:#7B2FBE;--purple-pale:#F3EAFF;--purple-mid:#E8D5FF;--purple-dark:#4A1580;--white:#FFFFFF;--gray-soft:#F8F7FA;--gray-text:#3D3547;--gray-muted:#8B7FA0;--accent:#C084FC;--red:#E53E3E;--red-pale:#FFF1F1;--green:#276749;--green-pale:#F0FFF4;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-text);overflow-x:hidden;}
+  .progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;z-index:100;transition:width 0.1s ease;}
+  .hero{padding:80px 40px 0;max-width:860px;margin:0 auto;}
+  .lesson-tag{display:inline-flex;align-items:center;gap:8px;background:var(--purple-pale);color:var(--purple);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:8px 16px;border-radius:100px;margin-bottom:32px;border:1.5px solid var(--purple-mid);}
+  .lesson-tag::before{content:'';width:6px;height:6px;background:var(--purple);border-radius:50%;display:inline-block;}
+  h1{font-family:'Fraunces',serif;font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;color:var(--purple-dark);margin-bottom:24px;letter-spacing:-0.02em;}
+  .hero-sub{font-size:18px;line-height:1.7;color:var(--gray-muted);max-width:620px;}
+  .hero-divider{width:60px;height:4px;background:var(--purple);border-radius:2px;margin:32px 0;}
+  .content{max-width:860px;margin:0 auto;padding:0 40px 60px;}
+  .section{padding:32px 0 0;}
+  h2{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--purple-dark);margin-bottom:18px;letter-spacing:-0.01em;line-height:1.2;}
+  p{font-size:17px;line-height:1.8;color:var(--gray-text);margin-bottom:16px;}
+  mark{background:var(--purple-mid);color:var(--purple-dark);border-radius:3px;padding:1px 4px;font-weight:500;}
+
+  /* STEP-BY-STEP DEMO */
+  .step-demo{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:22px;padding:28px;margin:24px 0;}
+  .sd-label{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .sd-label::after{content:'';flex:1;height:1px;background:var(--purple-mid);}
+  .sd-problem{background:var(--purple);border-radius:14px;padding:14px 18px;font-size:15px;color:white;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .sd-steps{display:flex;flex-direction:column;gap:0;}
+  .sd-step{display:flex;align-items:flex-start;gap:14px;padding:12px 16px;position:relative;}
+  .sd-step:not(:last-child)::after{content:'';position:absolute;left:21px;top:44px;width:2px;height:calc(100% - 20px);background:var(--purple-mid);}
+  .sd-num{width:28px;height:28px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;z-index:1;}
+  .sd-content{font-size:14px;line-height:1.65;color:var(--gray-text);padding-top:4px;}
+  .sd-content strong{color:var(--purple-dark);}
+
+  /* HOW AI HELPS — 4 feature cards */
+  .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+  @media(max-width:560px){.feature-grid{grid-template-columns:1fr;}}
+  .feat-card{background:var(--purple-pale);border:1.5px solid var(--purple-mid);border-radius:18px;padding:20px 18px;display:flex;align-items:flex-start;gap:14px;}
+  .feat-icon{font-size:26px;flex-shrink:0;}
+  .feat-title{font-size:14px;font-weight:700;color:var(--purple-dark);margin-bottom:4px;}
+  .feat-desc{font-size:13px;line-height:1.65;color:var(--gray-muted);}
+
+  /* REAL-WORLD — horizontal scroll cards */
+  .real-world{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0;}
+  @media(max-width:640px){.real-world{grid-template-columns:1fr 1fr;}}
+  .rw-card{background:var(--gray-soft);border:1.5px solid var(--purple-mid);border-radius:18px;padding:20px 16px;text-align:center;transition:all 0.2s;cursor:default;}
+  .rw-card:hover{background:var(--purple-pale);border-color:var(--purple);transform:translateY(-3px);}
+  .rw-icon{font-size:30px;margin-bottom:10px;}
+  .rw-title{font-size:13px;font-weight:700;color:var(--purple-dark);margin-bottom:5px;}
+  .rw-desc{font-size:12px;line-height:1.55;color:var(--gray-muted);}
+
+  /* GOOD VS BAD USE */
+  .use-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+  @media(max-width:560px){.use-split{grid-template-columns:1fr;}}
+  .use-good{background:var(--green-pale);border:1.5px solid #86efac;border-radius:20px;padding:22px 20px;}
+  .use-bad{background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:20px;padding:22px 20px;}
+  .use-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:14px;}
+  .badge-good{background:#bbf7d0;color:var(--green);}
+  .badge-bad{background:#fecaca;color:var(--red);}
+  .use-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.65;color:var(--gray-text);margin-bottom:10px;}
+  .use-dot{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
+  .dot-g{background:var(--green);color:white;}
+  .dot-r{background:var(--red);color:white;}
+
+  /* CAUTIONS */
+  .caution-list{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+  .caution-item{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--red-pale);border:1.5px solid #FCA5A5;border-radius:14px;font-size:15px;color:var(--gray-text);}
+  .caution-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+  /* FUTURE CALLOUT */
+  .future-block{background:linear-gradient(135deg,var(--purple-dark) 0%,var(--purple) 100%);border-radius:20px;padding:30px 32px;margin:28px 0;color:white;position:relative;overflow:hidden;}
+  .future-block::before{content:'🔢';position:absolute;right:24px;top:50%;transform:translateY(-50%);font-size:64px;opacity:0.15;}
+  .future-block h3{font-family:'Fraunces',serif;font-size:20px;font-weight:700;margin-bottom:12px;}
+  .future-block p{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.88);margin:0;}
+  .future-block strong{color:#C084FC;}
+
+  /* PULL QUOTE */
+  .pull-quote{margin:20px 0;padding:28px 36px;background:var(--purple-pale);border-left:5px solid var(--purple);border-radius:0 16px 16px 0;position:relative;overflow:hidden;}
+  .pull-quote::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:100px;color:var(--purple-mid);line-height:1;pointer-events:none;}
+  .pull-quote p{font-family:'Fraunces',serif;font-size:21px;font-style:italic;font-weight:300;color:var(--purple-dark);margin:0;position:relative;z-index:1;line-height:1.55;}
+
+  /* QUIZ */
+  .quiz-block{background:var(--gray-soft);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:40px 0;}
+  .quiz-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .quiz-icon{width:44px;height:44px;background:var(--purple);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .quiz-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);}
+  .quiz-q{font-size:16px;font-weight:600;color:var(--gray-text);margin-bottom:14px;line-height:1.5;}
+  .quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+  .quiz-opt{display:flex;align-items:center;gap:13px;padding:14px 18px;background:var(--white);border:2px solid var(--purple-mid);border-radius:14px;cursor:pointer;font-size:15px;color:var(--gray-text);transition:all 0.2s;}
+  .quiz-opt:hover{border-color:var(--purple);background:var(--purple-pale);}
+  .quiz-opt.correct{border-color:var(--green);background:var(--green-pale);color:var(--green);}
+  .quiz-opt.wrong{border-color:var(--red);background:var(--red-pale);color:var(--red);}
+  .quiz-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--purple-pale);border:1.5px solid var(--purple-mid);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--purple);flex-shrink:0;}
+  .quiz-feedback{padding:14px 18px;border-radius:14px;font-size:15px;font-weight:500;display:none;line-height:1.6;}
+  .quiz-feedback.correct{background:var(--green-pale);color:var(--green);border:1.5px solid #86efac;display:block;}
+  .quiz-feedback.wrong{background:var(--red-pale);color:var(--red);border:1.5px solid #FCA5A5;display:block;}
+
+  /* REFLECTION */
+  .reflection-block{background:var(--purple-pale);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .reflection-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+  .reflection-title::before{content:'✍️';font-size:24px;}
+  .reflection-items{display:flex;flex-direction:column;gap:14px;}
+  .reflection-item{display:flex;align-items:flex-start;gap:16px;background:var(--white);border-radius:16px;padding:18px 20px;border:1.5px solid var(--purple-mid);}
+  .reflection-num{min-width:32px;height:32px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:white;flex-shrink:0;}
+  .reflection-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  /* SUMMARY */
+  .summary-block{background:linear-gradient(135deg,var(--purple-pale) 0%,var(--purple-mid) 100%);border:2px solid var(--purple-mid);border-radius:24px;padding:32px;margin:32px 0;}
+  .summary-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--purple-dark);margin-bottom:20px;}
+  .summary-items{display:flex;flex-direction:column;gap:12px;}
+  .summary-item{display:flex;align-items:flex-start;gap:14px;background:rgba(255,255,255,0.7);border-radius:14px;padding:14px 18px;}
+  .summary-check{width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .summary-check svg{width:11px;height:11px;}
+  .summary-text{font-size:15px;line-height:1.7;color:var(--gray-text);}
+
+  .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.55s ease,transform 0.55s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="hero">
+  <div class="lesson-tag">Module 1 · Math & Problem-Solving</div>
+  <h1>Assisted Problem-Solving</h1>
+  <p class="hero-sub">Math can feel like one of the toughest subjects in school. But AI is becoming a powerful helper — not to hand you answers, but to make learning clearer, more personal, and a lot less frustrating.</p>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="content">
+
+  <!-- STEP-BY-STEP DEMO -->
+  <div class="section fade-in">
+    <h2>See AI Thinking in Action</h2>
+    <p>One of AI's most powerful features is showing <mark>every step</mark> of a solution — not just the final answer. Here's what that looks like for a simple word problem:</p>
+
+    <div class="step-demo">
+      <div class="sd-label">🔢 AI Step-by-Step Walkthrough</div>
+      <div class="sd-problem">📝 Problem: "Maya has 3 times as many stickers as Jess. Together they have 48. How many does each have?"</div>
+      <div class="sd-steps">
+        <div class="sd-step">
+          <div class="sd-num">1</div>
+          <div class="sd-content"><strong>Set up a variable.</strong> Let Jess's stickers = x. Then Maya's stickers = 3x.</div>
+        </div>
+        <div class="sd-step">
+          <div class="sd-num">2</div>
+          <div class="sd-content"><strong>Write the equation.</strong> x + 3x = 48</div>
+        </div>
+        <div class="sd-step">
+          <div class="sd-num">3</div>
+          <div class="sd-content"><strong>Combine like terms.</strong> 4x = 48</div>
+        </div>
+        <div class="sd-step">
+          <div class="sd-num">4</div>
+          <div class="sd-content"><strong>Solve for x.</strong> x = 48 ÷ 4 = <strong>12</strong></div>
+        </div>
+        <div class="sd-step">
+          <div class="sd-num">5</div>
+          <div class="sd-content"><strong>Find both answers.</strong> Jess has <strong>12 stickers</strong>, Maya has <strong>36 stickers</strong>. ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <p>Notice how each step is explained — not just done. That's the difference between AI helping you <em>learn</em> versus just handing you an answer to copy.</p>
+  </div>
+
+  <!-- HOW AI HELPS -->
+  <div class="section fade-in">
+    <h2>How AI Helps with Math</h2>
+    <p>AI math tools like Photomath, Khan Academy's AI tutor, and Symbolab do much more than produce answers:</p>
+
+    <div class="feature-grid">
+      <div class="feat-card">
+        <div class="feat-icon">💭</div>
+        <div>
+          <div class="feat-title">Step-by-Step Explanations</div>
+          <div class="feat-desc">Every solution is broken into stages so you can see exactly where the logic comes from — not just what the answer is.</div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🙌</div>
+        <div>
+          <div class="feat-title">Personalized Practice</div>
+          <div class="feat-desc">Struggling with fractions? AI keeps giving you fraction problems until you master them — then moves you forward.</div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">🗣️</div>
+        <div>
+          <div class="feat-title">Instant Feedback</div>
+          <div class="feat-desc">You know right away where you went wrong — no waiting for a graded paper to come back days later.</div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon">📊</div>
+        <div>
+          <div class="feat-title">Visualization</div>
+          <div class="feat-desc">Some AI tools create graphs, charts, or diagrams so you can see the problem in a different way — not just work through it on paper.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote fade-in">
+    <p>Math isn't just about getting the right answer. It's about building problem-solving skills you'll use everywhere.</p>
+  </div>
+
+  <!-- REAL WORLD -->
+  <div class="section fade-in">
+    <h2>Beyond Homework Help</h2>
+    <p>AI isn't just for textbook problems. Math + AI is already powering the real world around you every day:</p>
+
+    <div class="real-world">
+      <div class="rw-card">
+        <div class="rw-icon">💰</div>
+        <div class="rw-title">Finance</div>
+        <div class="rw-desc">AI helps banks detect fraud and predict stock market trends in real time.</div>
+      </div>
+      <div class="rw-card">
+        <div class="rw-icon">🏅</div>
+        <div class="rw-title">Sports</div>
+        <div class="rw-desc">Coaches use AI to analyze player statistics and design smarter game strategies.</div>
+      </div>
+      <div class="rw-card">
+        <div class="rw-icon">💊</div>
+        <div class="rw-title">Medicine</div>
+        <div class="rw-desc">AI calculates complex biological data to help scientists develop and test new treatments.</div>
+      </div>
+      <div class="rw-card">
+        <div class="rw-icon">🌦️</div>
+        <div class="rw-title">Everyday Life</div>
+        <div class="rw-desc">Your maps, weather apps, and phone calculator all run on AI-powered mathematical models.</div>
+      </div>
+    </div>
+
+    <p>When you practice math, you're building the foundation for understanding — and eventually creating — the technology that runs the modern world.</p>
+  </div>
+
+  <!-- GOOD VS BAD USE -->
+  <div class="section fade-in">
+    <h2>The Right Way to Use AI in Math</h2>
+    <p>There's a real difference between using AI to <em>learn</em> math and using it to <em>avoid</em> math. Here's how to stay on the right side of that line:</p>
+
+    <div class="use-split">
+      <div class="use-good">
+        <div class="use-badge badge-good">✅ Learning with AI</div>
+        <div class="use-item"><div class="use-dot dot-g">✓</div>Asking AI to explain how to solve quadratic equations so you understand the method — not just the answer.</div>
+        <div class="use-item"><div class="use-dot dot-g">✓</div>Using AI feedback to find where your logic broke down, then reworking the problem yourself.</div>
+        <div class="use-item"><div class="use-dot dot-g">✓</div>Asking AI for a similar practice problem so you can try again independently.</div>
+      </div>
+      <div class="use-bad">
+        <div class="use-badge badge-bad">❌ Avoiding with AI</div>
+        <div class="use-item"><div class="use-dot dot-r">✗</div>Copying an AI-generated solution directly onto your homework without trying to understand it.</div>
+        <div class="use-item"><div class="use-dot dot-r">✗</div>Snapping a photo of every problem and submitting whatever AI returns without reading it.</div>
+        <div class="use-item"><div class="use-dot dot-r">✗</div>Skipping the practice entirely because AI can "just do it."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAUTIONS -->
+  <div class="section fade-in">
+    <h2>Challenges and Cautions</h2>
+    <p>AI math tools aren't perfect — and knowing their limits helps you use them smarter:</p>
+
+    <div class="caution-list">
+      <div class="caution-item"><div class="caution-icon">⚠️</div>AI can misinterpret a problem if you type it in incorrectly — garbage in, garbage out.</div>
+      <div class="caution-item"><div class="caution-icon">⚠️</div>It might show one method when multiple valid approaches exist — you could be missing a simpler path.</div>
+      <div class="caution-item"><div class="caution-icon">⚠️</div>Over-relying on AI can quietly erode your confidence in solving problems independently.</div>
+    </div>
+
+    <p>That's why it's important to use AI as a <mark>coach, not a crutch</mark> — push yourself to solve first, then use AI to check, explain, or go deeper.</p>
+  </div>
+
+  <!-- FUTURE -->
+  <div class="section fade-in">
+    <div class="future-block">
+      <h3>Why Math + AI Matters for Your Future</h3>
+      <p>Here's a mind-bending fact: <strong>AI itself runs on math.</strong> Algorithms, statistics, probability, and linear algebra all power the tools you use every single day. The more comfortable you get with math, the better you'll understand AI — and the better positioned you'll be to build, improve, or work alongside the next generation of it.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-block fade-in">
+    <div class="quiz-header">
+      <div class="quiz-icon">🧠</div>
+      <div class="quiz-title">Check Your Understanding</div>
+    </div>
+    <div class="quiz-q">What makes step-by-step AI explanations more valuable than just getting the final answer?</div>
+    <div class="quiz-options">
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">A</div>They save time because you don't have to do any work yourself.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,true)"><div class="quiz-opt-letter">B</div>They show the reasoning behind each move, so you can understand and replicate the method on your own.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">C</div>They're always more accurate than what a human teacher would show you.</div>
+      <div class="quiz-opt" onclick="answerQuiz(this,false)"><div class="quiz-opt-letter">D</div>They let you skip practicing and go straight to harder problems.</div>
+    </div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="reflection-block fade-in">
+    <div class="reflection-title">Reflection Questions</div>
+    <div class="reflection-items">
+      <div class="reflection-item">
+        <div class="reflection-num">1</div>
+        <div class="reflection-text">Have you ever used an AI math app like Photomath or Symbolab? Did it help you <em>learn</em> the problem, or did it mostly just give you the answer?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">2</div>
+        <div class="reflection-text">How could AI make practicing math less frustrating — without letting you skip the actual learning?</div>
+      </div>
+      <div class="reflection-item">
+        <div class="reflection-num">3</div>
+        <div class="reflection-text">If you were designing an AI math tutor from scratch, what one feature would you add to make it genuinely more helpful for students like you?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-block fade-in">
+    <div class="summary-title">📌 What You Learned</div>
+    <div class="summary-items">
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI math tools offer step-by-step explanations, personalized practice, instant feedback, and visual representations of problems.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI math is already used in real-world finance, sports, medicine, and everyday technology like maps and weather apps.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">Good AI use means asking for explanations and practicing yourself. Bad AI use means copying answers without understanding them.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI math tools have limits — they can misread problems, miss alternative methods, and reduce your independent confidence if overused.</div></div>
+      <div class="summary-item"><div class="summary-check"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="summary-text">AI runs on math — getting comfortable with math gives you a real advantage in the AI-powered future.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  window.addEventListener('scroll',()=>{const el=document.documentElement;document.getElementById('progressBar').style.width=((el.scrollTop/(el.scrollHeight-el.clientHeight))*100)+'%';});
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function answerQuiz(el,correct){
+    if(document.querySelector('.quiz-opt.correct,.quiz-opt.wrong'))return;
+    el.classList.add(correct?'correct':'wrong');
+    const fb=document.getElementById('quizFeedback');
+    fb.className='quiz-feedback '+(correct?'correct':'wrong');
+    fb.textContent=correct
+      ?'✅ Exactly right! Seeing the reasoning behind each step is what builds real understanding — so you can solve similar problems on your own, not just recognize the answer when you see it.'
+      :'❌ Not quite. The value of step-by-step AI explanations is that they teach you the method — not save you from the work. The goal is always to be able to solve it yourself next time.';
+  }
+</script>
+</body>
+</html>
