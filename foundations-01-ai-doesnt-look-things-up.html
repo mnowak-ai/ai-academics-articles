@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Doesn't Look Anything Up</title>
+<style>
+ :root{--ink:#1a1726;--body:#3d3752;--muted:#6b6580;--line:#e6e3ec;--wash:#f7f6f9;
+   --brand:#4a3f8f;--tint:#efecfa;--warn:#8a4b00;--warnbg:#fcf3e7;--warnln:#e6cfae;
+   --good:#1b6340;--goodbg:#eaf4ee;--goodln:#c3e0d1}
+ *{box-sizing:border-box}
+ body{margin:0;padding:26px 18px 60px;background:#fff;color:var(--body);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.62}
+ .wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+ .eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--brand)}
+ h1{font-size:29px;line-height:1.14;margin:6px 0 0;color:var(--ink);letter-spacing:-.015em}
+ h2{font-size:19px;margin:0;color:var(--ink)}
+ p{margin:0}
+ .lede{font-size:17px}
+ section{display:flex;flex-direction:column;gap:13px}
+ .flip{border:1px solid var(--line);border-radius:11px;padding:0;overflow:hidden;background:#fff;cursor:pointer;text-align:left;font:inherit;width:100%}
+ .flip:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+ .flip .top{padding:15px 17px;background:var(--warnbg);border-bottom:1px solid var(--warnln)}
+ .flip .lab{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--warn)}
+ .flip .txt{margin-top:5px;font-size:15px;color:var(--ink)}
+ .flip .btm{padding:0 17px;max-height:0;overflow:hidden;transition:max-height .32s ease,padding .32s ease;background:var(--goodbg)}
+ .flip.open .btm{max-height:220px;padding:15px 17px}
+ .flip .lab2{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--good)}
+ .hint{font-size:12px;color:var(--muted);margin-top:6px}
+ .big{background:var(--tint);border:1px solid #d8d1f1;border-radius:11px;padding:18px;font-size:17px;color:var(--ink);line-height:1.5}
+ .big b{color:var(--brand)}
+ ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:11px}
+ ol b{color:var(--ink)}
+ /* sorter */
+ .sortbox{background:var(--wash);border:1px solid var(--line);border-radius:11px;padding:17px}
+ .chip{display:block;width:100%;text-align:left;margin-top:9px;padding:12px 14px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:14.5px;color:var(--body);cursor:pointer;transition:.15s}
+ .chip:hover:not(:disabled){border-color:var(--brand)}
+ .chip:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+ .chip:disabled{cursor:default}
+ .chip.lookup{background:var(--warnbg);border-color:var(--warnln)}
+ .chip.pattern{background:var(--goodbg);border-color:var(--goodln)}
+ .chip .verdict{display:block;font-size:12.5px;margin-top:5px;line-height:1.45}
+ .chip.lookup .verdict{color:var(--warn)}
+ .chip.pattern .verdict{color:var(--good)}
+ .btns{display:flex;gap:8px;margin-top:10px}
+ .btns button{flex:1;padding:9px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;cursor:pointer}
+ /* exam drill */
+ .drill{border:2px solid var(--brand);border-radius:12px;overflow:hidden}
+ .drill .hd{background:var(--brand);color:#fff;padding:9px 15px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+ .drill .bd{padding:16px 17px}
+ .q{font-size:15.5px;color:var(--ink);font-weight:600;line-height:1.45}
+ .opt{display:block;width:100%;text-align:left;margin-top:9px;padding:12px 14px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:14.5px;color:var(--body);cursor:pointer}
+ .opt:hover:not(:disabled){border-color:var(--brand)}
+ .opt:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+ .opt:disabled{cursor:default}
+ .opt.ok{background:var(--goodbg);border-color:var(--good);color:var(--good);font-weight:600}
+ .opt.no{background:var(--warnbg);border-color:#d9a05b;color:var(--warn)}
+ .opt .why{display:block;font-size:12.5px;font-weight:400;margin-top:5px;line-height:1.45}
+ .retry{margin-top:11px;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;cursor:pointer}
+ /* recap */
+ .recap{border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+ .recap .hd{background:var(--ink);color:#fff;padding:12px 16px}
+ .recap .hd b{font-size:15px}
+ .recap .hd span{display:block;font-size:12px;opacity:.75;margin-top:2px}
+ .row{padding:14px 16px;border-top:1px solid var(--line)}
+ .row:first-of-type{border-top:none}
+ .row .qq{font-size:13px;color:var(--muted);line-height:1.45}
+ .row .aa{font-size:14.5px;color:var(--good);font-weight:600;margin-top:6px;line-height:1.45}
+ .row .ww{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+ .keep{border-top:2px solid var(--ink);padding-top:15px}
+ .keep b{color:var(--ink)}
+</style></head><body>
+<div class="wrap">
+
+ <header>
+  <div class="eyebrow">AI Foundations · What is AI?</div>
+  <h1>AI Doesn't Look Anything Up</h1>
+ </header>
+
+ <p class="lede">Most people picture AI as a search engine with a really good memory. That picture is
+ wrong — and once you swap it out, almost every strange thing AI does starts making sense.</p>
+
+ <section>
+  <h2>Tap to flip</h2>
+  <button class="flip" onclick="this.classList.toggle('open')">
+   <div class="top"><div class="lab">What people think</div>
+    <div class="txt">It saved everything it read. When you ask a question, it goes and finds the answer —
+    like looking up a page in a huge library.</div></div>
+   <div class="btm"><div class="lab2">What actually happened</div>
+    <div class="txt">It read enormous amounts of text and learned <b>patterns</b> — which words and ideas
+    tend to go together. It kept the patterns. It threw away the pages.</div></div>
+  </button>
+  <p class="hint">↑ tap the card</p>
+  <p>There is no shelf to go back to. Nothing was filed. That one difference explains everything below.</p>
+ </section>
+
+ <section>
+  <h2>Sort these: is it looking up, or spotting a pattern?</h2>
+  <div class="sortbox" id="sorter">
+   <p style="font-size:13.5px;color:var(--muted);margin-bottom:2px">Tap each one to find out.</p>
+   <button class="chip" data-p="0" data-v="No — it can't browse and has nothing stored to search.">“It searched the web and found the answer.”</button>
+   <button class="chip" data-p="1" data-v="Yes — faces, places and dates are patterns it can recognise.">“It noticed the same faces and location across those photos.”</button>
+   <button class="chip" data-p="0" data-v="No — there is no saved copy of anything it read.">“It pulled the fact from a file it saved.”</button>
+   <button class="chip" data-p="1" data-v="Yes — this is exactly what it learned to do: continue text plausibly.">“It produced the words most likely to come next.”</button>
+   <button class="chip" data-p="0" data-v="No — it has no access to your messages, calendar or accounts.">“It checked your calendar and messages.”</button>
+   <div class="btns"><button onclick="resetSort()">Try again</button></div>
+  </div>
+ </section>
+
+ <section>
+  <h2>Three things that follow</h2>
+  <ol>
+   <li><b>It has a cut-off date.</b> Training stopped at some point. Anything after that, it never saw —
+   and it has no way to go and check.</li>
+   <li><b>It doesn't stop when it doesn't know.</b> It produces the most likely-sounding answer instead:
+   real-looking names, a plausible score, total confidence. That's a <b>hallucination</b>.</li>
+   <li><b>The same skill does useful things.</b> Your photo app builds a “Trip to Chicago” album because
+   it recognised faces, places and dates — not because it read your texts.</li>
+  </ol>
+ </section>
+
+ <div class="big">Confidence is not a signal. AI sounds exactly as sure when it learned something as when
+ it <b>filled a gap with something that sounds right</b>.</div>
+
+ <section>
+  <h2>You will see these again</h2>
+  <p style="font-size:14px;color:var(--muted)">Two questions from your end-of-course check. Get them right
+  here and they'll be easy later.</p>
+
+  <div class="drill" data-drill>
+   <div class="hd"><span>Question 1</span><span data-state>unanswered</span></div>
+   <div class="bd">
+    <p class="q">A student asks an AI chatbot who won last night's game. It gives a confident, detailed
+    answer — and it's wrong. Which explanation fits?</p>
+    <button class="opt" data-ok="1" data-why="Correct. Its training stopped before the game, and rather than say “I don't know,” it produced a plausible-sounding result.">Its information stops at a certain date, so it filled the gap with a likely-sounding answer</button>
+    <button class="opt" data-ok="0" data-why="No — it didn't search anything. It has no live connection to the web.">It searched the internet and landed on an unreliable website</button>
+    <button class="opt" data-ok="0" data-why="No — there are no stored scores. It kept patterns, not records.">It pulled up the score from a different game it had stored</button>
+    <button class="opt" data-ok="0" data-why="No — other people's questions have no effect on your answer.">Too many people asked at once and the answers got crossed</button>
+   </div>
+  </div>
+
+  <div class="drill" data-drill>
+   <div class="hd"><span>Question 2</span><span data-state>unanswered</span></div>
+   <div class="bd">
+    <p class="q">Your phone groups your photos into an album it names “Trip to Chicago.” How did it do that?</p>
+    <button class="opt" data-ok="0" data-why="No — your photo app can't read your messages.">It read your messages and found where you mentioned the trip</button>
+    <button class="opt" data-ok="1" data-why="Correct. Places, dates and faces are patterns — it grouped the photos that shared them.">It recognized places, dates and faces in the photos and grouped what belonged together</button>
+    <button class="opt" data-ok="0" data-why="No — it works from what's inside the photos themselves.">It checked your calendar and travel bookings</button>
+    <button class="opt" data-ok="0" data-why="No — this happens on your phone, from your own photos.">The album was created online and downloaded to your phone</button>
+   </div>
+  </div>
+ </section>
+
+ <section>
+  <div class="recap">
+   <div class="hd"><b>📌 Lock it in</b><span>Screenshot this. It's the whole article in three lines.</span></div>
+   <div class="row">
+    <div class="qq">Chatbot gives a confident but wrong answer about last night's game →</div>
+    <div class="aa">Its information stops at a certain date, so it filled the gap with a likely-sounding answer</div>
+    <div class="ww">Because: it can't look things up. It guesses fluently.</div>
+   </div>
+   <div class="row">
+    <div class="qq">“Trained on data” — what did training actually produce? →</div>
+    <div class="aa">A set of patterns about which words and ideas tend to go together</div>
+    <div class="ww">Because: it kept the patterns, not the pages.</div>
+   </div>
+   <div class="row">
+    <div class="qq">Phone makes a “Trip to Chicago” album →</div>
+    <div class="aa">It recognized places, dates and faces and grouped what belonged together</div>
+    <div class="ww">Because: pattern recognition — not reading your messages.</div>
+   </div>
+  </div>
+ </section>
+
+ <div class="keep"><p><b>One sentence to remember:</b> AI kept the patterns, not the pages — so when it
+ hits something it never saw, it doesn't look it up, it makes something that sounds right.</p></div>
+</div>
+
+<script>
+ document.querySelectorAll('#sorter .chip').forEach(c=>c.addEventListener('click',()=>{
+  if(c.disabled) return;
+  const pattern=c.dataset.p==='1';
+  c.classList.add(pattern?'pattern':'lookup'); c.disabled=true;
+  const s=document.createElement('span'); s.className='verdict';
+  s.textContent=(pattern?'PATTERN — ':'LOOKUP — ')+c.dataset.v;
+  c.appendChild(s);
+ }));
+ function resetSort(){
+  document.querySelectorAll('#sorter .chip').forEach(c=>{
+   c.disabled=false; c.classList.remove('pattern','lookup');
+   const v=c.querySelector('.verdict'); if(v) v.remove();
+  });
+ }
+ document.querySelectorAll('[data-drill]').forEach(d=>{
+  const state=d.querySelector('[data-state]');
+  const opts=[...d.querySelectorAll('.opt')];
+  const answer=()=>{
+   opts.forEach(o=>{
+    o.addEventListener('click',()=>{
+     if(o.disabled) return;
+     const ok=o.dataset.ok==='1';
+     opts.forEach(x=>{
+      x.disabled=true;
+      if(x.dataset.ok==='1'||x===o){
+       x.classList.add(x.dataset.ok==='1'?'ok':'no');
+       const w=document.createElement('span'); w.className='why'; w.textContent=x.dataset.why; x.appendChild(w);
+      }
+     });
+     state.textContent = ok ? '✓ correct' : 'see the answer';
+     if(!d.querySelector('.retry')){
+      const r=document.createElement('button'); r.className='retry'; r.textContent='Try again';
+      r.onclick=()=>{
+       opts.forEach(x=>{x.disabled=false;x.classList.remove('ok','no');const w=x.querySelector('.why');if(w)w.remove();});
+       state.textContent='unanswered'; r.remove();
+      };
+      d.querySelector('.bd').appendChild(r);
+     }
+    });
+   });
+  };
+  answer();
+ });
+</script>
+</body></html>
