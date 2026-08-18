@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ask So You Can Check It</title>
+<style>
+ :root{--ink:#1a1726;--body:#3d3752;--muted:#6b6580;--line:#e6e3ec;--wash:#f7f6f9;
+   --brand:#4a3f8f;--tint:#efecfa;--warn:#8a4b00;--warnbg:#fcf3e7;--warnln:#e6cfae;
+   --good:#1b6340;--goodbg:#eaf4ee;--goodln:#c3e0d1}
+ *{box-sizing:border-box}
+ body{margin:0;padding:26px 18px 60px;background:#fff;color:var(--body);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.62}
+ .wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+ .eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--brand)}
+ h1{font-size:29px;line-height:1.14;margin:6px 0 0;color:var(--ink);letter-spacing:-.015em}
+ h2{font-size:19px;margin:0;color:var(--ink)}
+ p{margin:0}.lede{font-size:17px}
+ section{display:flex;flex-direction:column;gap:13px}
+ .setup{background:var(--wash);border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:14.5px;color:var(--ink)}
+ .ending{display:block;width:100%;text-align:left;margin-top:9px;padding:13px 15px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:14.5px;color:var(--ink);cursor:pointer;transition:.15s}
+ .ending:hover:not(:disabled){border-color:var(--brand)}
+ .ending:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+ .ending:disabled{cursor:default}
+ .ending.win{background:var(--goodbg);border-color:var(--good)}
+ .ending.lose{background:var(--warnbg);border-color:var(--warnln)}
+ .ending .tag{display:block;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:5px}
+ .ending.win .tag{color:var(--good)}.ending.lose .tag{color:var(--warn)}
+ .ending .why{display:block;font-size:12.5px;margin-top:7px;line-height:1.45;color:var(--muted)}
+ .hint{font-size:12px;color:var(--muted)}
+ .big{background:var(--tint);border:1px solid #d8d1f1;border-radius:11px;padding:18px;font-size:17px;color:var(--ink);line-height:1.5}
+ .big b{color:var(--brand)}
+ .drill{border:2px solid var(--brand);border-radius:12px;overflow:hidden}
+ .drill .hd{background:var(--brand);color:#fff;padding:9px 15px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
+ .drill .bd{padding:16px 17px}
+ .q{font-size:15.5px;color:var(--ink);font-weight:600;line-height:1.45}
+ .opt{display:block;width:100%;text-align:left;margin-top:9px;padding:12px 14px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:14.5px;color:var(--body);cursor:pointer}
+ .opt:hover:not(:disabled){border-color:var(--brand)}
+ .opt:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+ .opt:disabled{cursor:default}
+ .opt.ok{background:var(--goodbg);border-color:var(--good);color:var(--good);font-weight:600}
+ .opt.no{background:var(--warnbg);border-color:#d9a05b;color:var(--warn)}
+ .opt .why{display:block;font-size:12.5px;font-weight:400;margin-top:5px;line-height:1.45}
+ .retry{margin-top:11px;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;cursor:pointer}
+ .recap{border:2px solid var(--ink);border-radius:12px;overflow:hidden}
+ .recap .hd{background:var(--ink);color:#fff;padding:12px 16px}
+ .recap .hd b{font-size:15px}.recap .hd span{display:block;font-size:12px;opacity:.75;margin-top:2px}
+ .row{padding:14px 16px;border-top:1px solid var(--line)}.row:first-of-type{border-top:none}
+ .row .qq{font-size:13px;color:var(--muted);line-height:1.45}
+ .row .aa{font-size:14.5px;color:var(--good);font-weight:600;margin-top:6px;line-height:1.45}
+ .row .ww{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
+ .keep{border-top:2px solid var(--ink);padding-top:15px}.keep b{color:var(--ink)}
+</style></head><body>
+<div class="wrap">
+
+ <header>
+  <div class="eyebrow">AI Foundations · Using AI Well</div>
+  <h1>Ask So You Can Check It</h1>
+ </header>
+
+ <p class="lede">A good prompt isn't a magic phrase. It's one that hands you back something you can
+ <b>go and verify</b> — and then actually use.</p>
+
+ <section>
+  <h2>Same student, four endings</h2>
+  <div class="setup">Every one of these starts:<br><b>“I'm a first-generation junior in Missouri with a
+  3.4 GPA, going into nursing.”</b></div>
+  <p class="hint">Tap each ending to see what it gets you.</p>
+
+  <button class="ending" data-w="0" data-tag="Goes nowhere"
+   data-why="“Best” isn't a fact about the world — it's an opinion the AI will happily invent. You get a friendly paragraph and nothing you can do on Monday.">
+   “What are the best scholarships for someone like me?”</button>
+
+  <button class="ending" data-w="1" data-tag="This is the one"
+   data-why="Every line comes back with something checkable attached — a name, a date, a rule. If one is invented you'll find out in thirty seconds. If it's real, you already know your next step.">
+   “List ones I may qualify for, with each deadline and requirement so I can check them.”</button>
+
+  <button class="ending" data-w="0" data-tag="Sounds careful. Isn't."
+   data-why="It cannot know this. It has no live view of the world and no way to tell what it learned from what it filled in. You haven't added a safety check — you've asked it to sound more sure.">
+   “Only give me scholarships you're certain are accurate and currently open.”</button>
+
+  <button class="ending" data-w="0" data-tag="It has no idea"
+   data-why="It doesn't know who else applied or how winners get picked. It will still answer confidently, because producing confident answers is what it does.">
+   “Tell me which ones I have the best chance of winning.”</button>
+ </section>
+
+ <div class="big">You can't ask AI to vouch for itself. <b>Ask for details you can check yourself.</b></div>
+
+ <section>
+  <h2>Then actually check</h2>
+  <p>Suppose it hands you: <em>“The Horizon Scholars Award — $40,000, all 50 states, deadline March 15.”</em>
+  Before anything else, check the thing everything else depends on: <b>does this award exist, and are those
+  details current?</b> Not whether the money is enough. Not your odds. Search the name, find the real page.
+  A scholarship that doesn't exist can't be applied to.</p>
+ </section>
+
+ <section>
+  <h2>You will see these again</h2>
+  <p style="font-size:14px;color:var(--muted)">Two questions from your end-of-course check.</p>
+
+  <div class="drill" data-drill>
+   <div class="hd"><span>Question 1</span><span data-state>unanswered</span></div>
+   <div class="bd">
+    <p class="q">Each option follows “I'm a first-generation junior in Missouri with a 3.4 GPA, going into
+    nursing.” Which ending gives you scholarships you can actually act on?</p>
+    <button class="opt" data-ok="0" data-why="Too vague. “Best” is an opinion, and you get nothing you can check.">“What are the best scholarships for someone like me?”</button>
+    <button class="opt" data-ok="1" data-why="Correct. Deadlines and requirements are checkable — and they tell you what to do next.">“List ones I may qualify for, with each deadline and requirement so I can check them.”</button>
+    <button class="opt" data-ok="0" data-why="It can't certify itself. Asking for certainty just makes invented answers sound surer.">“Only give me scholarships you're certain are accurate and currently open.”</button>
+    <button class="opt" data-ok="0" data-why="It has no way to know your odds — it doesn't know who applied or how winners are chosen.">“Tell me which ones I have the best chance of winning.”</button>
+   </div>
+  </div>
+
+  <div class="drill" data-drill>
+   <div class="hd"><span>Question 2</span><span data-state>unanswered</span></div>
+   <div class="bd">
+    <p class="q">An AI tells you: “The Horizon Scholars Award gives $40,000 to students in all 50 states;
+    the deadline is March 15.” What matters most to check first?</p>
+    <button class="opt" data-ok="1" data-why="Correct. Everything else depends on this. AI invents real-sounding awards, amounts and dates.">Whether the award exists at all and those details are current</button>
+    <button class="opt" data-ok="0" data-why="Pointless if the award isn't real. Check existence first.">Whether $40,000 would cover your costs</button>
+    <button class="opt" data-ok="0" data-why="You can't find that out, and it doesn't tell you whether this is real.">How many other students are applying</button>
+    <button class="opt" data-ok="0" data-why="More unverified suggestions doesn't help — verify this one first.">Whether the AI can find you similar awards</button>
+   </div>
+  </div>
+ </section>
+
+ <section>
+  <div class="recap">
+   <div class="hd"><b>📌 Lock it in</b><span>Screenshot this. Two questions, two answers, two reasons.</span></div>
+   <div class="row">
+    <div class="qq">Which prompt ending gives scholarships you can act on? →</div>
+    <div class="aa">“List ones I may qualify for, with each deadline and requirement so I can check them.”</div>
+    <div class="ww">Because: ask for specifics you can verify — never for the AI's opinion or a guarantee.</div>
+   </div>
+   <div class="row">
+    <div class="qq">AI names an award, an amount and a deadline. Check what first? →</div>
+    <div class="aa">Whether the award exists at all and those details are current</div>
+    <div class="ww">Because: existence comes before everything. It invents real-sounding awards.</div>
+   </div>
+  </div>
+ </section>
+
+ <div class="keep"><p><b>One sentence to remember:</b> give it your real situation, ask for deadlines and
+ requirements you can check — then check them before you act.</p></div>
+</div>
+
+<script>
+ document.querySelectorAll('.ending').forEach(e=>e.addEventListener('click',()=>{
+  if(e.disabled) return;
+  const win=e.dataset.w==='1';
+  e.classList.add(win?'win':'lose'); e.disabled=true;
+  const t=document.createElement('span'); t.className='tag'; t.textContent=e.dataset.tag;
+  e.prepend(t);
+  const w=document.createElement('span'); w.className='why'; w.textContent=e.dataset.why; e.appendChild(w);
+ }));
+ document.querySelectorAll('[data-drill]').forEach(d=>{
+  const state=d.querySelector('[data-state]'), opts=[...d.querySelectorAll('.opt')];
+  opts.forEach(o=>o.addEventListener('click',()=>{
+   if(o.disabled) return;
+   const ok=o.dataset.ok==='1';
+   opts.forEach(x=>{
+    x.disabled=true;
+    if(x.dataset.ok==='1'||x===o){
+     x.classList.add(x.dataset.ok==='1'?'ok':'no');
+     const w=document.createElement('span'); w.className='why'; w.textContent=x.dataset.why; x.appendChild(w);
+    }
+   });
+   state.textContent = ok ? '✓ correct' : 'see the answer';
+   if(!d.querySelector('.retry')){
+    const r=document.createElement('button'); r.className='retry'; r.textContent='Try again';
+    r.onclick=()=>{opts.forEach(x=>{x.disabled=false;x.classList.remove('ok','no');const w=x.querySelector('.why');if(w)w.remove();});
+     state.textContent='unanswered'; r.remove();};
+    d.querySelector('.bd').appendChild(r);
+   }
+  }));
+ });
+</script>
+</body></html>
