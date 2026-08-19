@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resume-Ready Experience — AI-Ready Educator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#6b3fa0;--purple-dark:#4e2d78;--purple-mid:#7d52b3;--purple-light:#9b6fd4;
+ --purple-pale:#f3eeff;--purple-pale2:#ede5ff;--blue:#1a6fc4;--blue-pale:#eef5ff;
+ --gold:#c9a84c;--gold-light:#e2c07a;--cream:#f8f8ff;--text:#1e1a2e;--muted:#5e5878;--white:#fff;
+ --amber:#8a5a00;--amber-pale:#fdf6e7;--amber-line:#e7d2a3;
+ --shadow:0 8px 40px rgba(107,63,160,.10);--shadow-card:0 4px 24px rgba(107,63,160,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;
+ font-size:16px;line-height:1.65;padding:0 0 70px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;color:var(--text);margin:0;line-height:1.12;text-wrap:balance}
+h1{font-size:clamp(30px,6vw,46px);font-weight:900}
+h2{font-size:clamp(23px,4vw,30px);font-weight:700}
+h3{font-size:18px;font-weight:700}
+p{margin:0}
+.hero{background:linear-gradient(160deg,var(--purple-dark),var(--purple-mid));color:#fff;padding:44px 0 40px;margin-bottom:34px}
+.hero .wrap{display:flex;flex-direction:column;gap:16px}
+.hero h1{color:#fff}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+ padding:7px 14px;border-radius:99px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;align-self:flex-start}
+.hero p{color:#e8e3ff;font-size:17px;max-width:56ch}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.stat{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:14px;text-align:center}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:26px;color:#fff}
+.stat span{display:block;font-size:11.5px;color:#d9d0f5;margin-top:2px;line-height:1.3}
+section{margin-bottom:34px}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.kicker .dot{width:34px;height:34px;border-radius:10px;background:var(--purple-pale);display:grid;place-items:center;font-size:17px}
+/* warning */
+.warn{background:var(--amber-pale);border:2px solid var(--amber-line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow-card)}
+.warn h2{font-size:22px;color:var(--amber)}
+.warn p{margin-top:10px;font-size:15.5px;color:#4a3c1c;line-height:1.6}
+.warn ul{margin:12px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:14.5px;color:#4a3c1c}
+.warn li::marker{color:var(--amber)}
+.warn .stamp{display:inline-block;margin-top:14px;background:var(--amber);color:#fff;font-family:'DM Mono',monospace;
+ font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:7px 13px;border-radius:99px}
+/* filters */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{font:inherit;font-size:13px;padding:8px 14px;border-radius:99px;border:1px solid #ddd4f2;background:#fff;color:var(--muted);cursor:pointer}
+.chip:hover{border-color:var(--purple-light)}
+.chip:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+.chip.on{background:var(--purple);border-color:var(--purple);color:#fff}
+/* bullets */
+.sheet{background:#fff;border:1px solid #e5ddf7;border-radius:16px;box-shadow:var(--shadow-card);overflow:hidden}
+.sheet .bar{background:#2a2139;color:#c4b5fd;padding:11px 18px;font-family:'DM Mono',monospace;font-size:11.5px;display:flex;gap:8px;align-items:center}
+.sheet .bar i{width:10px;height:10px;border-radius:99px;background:#28c840;display:inline-block;font-style:normal}
+.b{padding:20px 22px;border-top:1px solid #f0ebfb;display:flex;gap:14px}
+.b:first-of-type{border-top:none}
+.b .num{font-family:'DM Mono',monospace;font-size:12px;color:var(--purple-light);padding-top:3px;flex:none}
+.b .body{flex:1;min-width:0}
+.b .cat{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+ color:var(--purple);background:var(--purple-pale);padding:4px 9px;border-radius:99px;margin-bottom:9px}
+.b .txt{font-size:15.5px;color:var(--text);line-height:1.55}
+.b .txt mark{background:#fdf3c9;color:#6a5312;padding:1px 4px;border-radius:4px;font-weight:500}
+.b .true{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.5;border-left:2px solid #e5ddf7;padding-left:11px}
+.copy{margin-top:11px;font:inherit;font-size:12.5px;padding:7px 14px;border-radius:8px;border:1px solid #ddd4f2;background:#fff;color:var(--purple);cursor:pointer}
+.copy:hover{background:var(--purple-pale)}
+.copy:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+.copy.done{background:#e7f7ed;border-color:#22c55e;color:#15803d}
+/* generic cards */
+.card{background:#fff;border:1px solid #e5ddf7;border-radius:14px;padding:20px;box-shadow:var(--shadow-card)}
+.grid2{display:grid;gap:12px}
+@media(min-width:620px){.grid2{grid-template-columns:1fr 1fr}}
+.use{display:flex;gap:12px;align-items:flex-start}
+.use .ic{font-size:20px;flex:none}
+.use b{display:block;font-size:14.5px}
+.use span{font-size:13px;color:var(--muted);line-height:1.5}
+.steps{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step .n{width:24px;height:24px;border-radius:99px;background:var(--purple);color:#fff;display:grid;place-items:center;
+ font-family:'DM Mono',monospace;font-size:12px;flex:none}
+.step div{font-size:14.5px}
+.example{margin-top:16px;border:1px dashed #cbbdea;border-radius:12px;padding:16px;background:var(--purple-pale)}
+.example .lab{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--purple)}
+.example p{margin-top:8px;font-size:15px;line-height:1.55}
+.check{display:flex;flex-direction:column;gap:11px;margin-top:12px}
+.check label{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;cursor:pointer}
+.check input{margin-top:4px;accent-color:var(--purple);width:16px;height:16px;flex:none}
+.close{background:linear-gradient(160deg,var(--purple-dark),var(--purple-mid));color:#fff;border-radius:18px;padding:32px 26px;text-align:center}
+.close h2{color:#fff}
+.close p{color:#e8e3ff;margin-top:12px;font-size:16px;max-width:52ch;margin-left:auto;margin-right:auto}
+.foot{text-align:center;font-size:12.5px;color:var(--muted);margin-top:26px}
+</style></head><body>
+
+<div class="hero"><div class="wrap">
+ <div class="badge">🎓 AI-Ready Educator · Foundations &amp; Impact</div>
+ <h1>Turn This Certification Into Resume Language</h1>
+ <p>You didn't sit through a webinar. You worked through how AI actually functions, how to use it with
+ students and families without losing your voice, how to evaluate a tool before adopting it, and where the
+ ethical lines are. That's professional capability — and most résumés never say it out loud.</p>
+ <div class="stats">
+  <div class="stat"><b>12</b><span>bullet options</span></div>
+  <div class="stat"><b>5</b><span>places to use them</span></div>
+  <div class="stat"><b>0</b><span>you should paste unedited</span></div>
+ </div>
+</div></div>
+
+<div class="wrap">
+
+ <section>
+  <div class="warn">
+   <h2>⚠️ Read this before you copy anything</h2>
+   <p><b>These are suggestions, not statements of fact.</b> They were written from the course content —
+   not from watching you teach. An AI suggestion has no idea what you actually did this year, which tools
+   your district approved, or which of these you've genuinely put into practice.</p>
+   <ul>
+    <li><b>Never paste one unedited.</b> Every bullet below has <mark>[bracketed spots]</mark> precisely so
+    it can't be used as-is.</li>
+    <li><b>Only claim what you've actually done.</b> If you haven't yet run an AI tool through an evaluation
+    before adopting it, don't say you have — do it first, then write the bullet.</li>
+    <li><b>Your own words beat these every time.</b> Use them as a starting shape, then rewrite in the
+    language you'd actually use in an interview.</li>
+    <li><b>You'll be asked about it.</b> Assume every line becomes a question. If you can't talk about it
+    for two minutes, it doesn't belong on the page.</li>
+   </ul>
+   <span class="stamp">Suggestions · verify · adapt · own it</span>
+  </div>
+ </section>
+
+ <section>
+  <div class="kicker"><span class="dot">📄</span><h2>Resume-Ready Bullet Points</h2></div>
+  <div class="chips" id="chips">
+   <button class="chip on" data-f="all">All 12</button>
+   <button class="chip" data-f="cred">Credential</button>
+   <button class="chip" data-f="teach">Teaching &amp; Learning</button>
+   <button class="chip" data-f="comm">Communication</button>
+   <button class="chip" data-f="tools">Tool Evaluation</button>
+   <button class="chip" data-f="ethics">Ethics &amp; Privacy</button>
+   <button class="chip" data-f="lead">Leadership</button>
+  </div>
+
+  <div class="sheet" id="sheet">
+   <div class="bar"><i></i> resume.txt — copy, then make it yours</div>
+
+   <div class="b" data-c="cred"><div class="num">01</div><div class="body">
+    <span class="cat">Credential</span>
+    <p class="txt">Completed the AI-Ready Educator: Foundations &amp; Impact certification, covering AI
+    fundamentals, instructional applications, tool evaluation, and responsible use in <mark>[K–12 / higher ed / your setting]</mark>.</p>
+    <p class="true">True for you if: you finished the course. This is the safest bullet on the page — and the
+    one most worth pairing with a second, more specific line.</p>
+   </div></div>
+
+   <div class="b" data-c="teach"><div class="num">02</div><div class="body">
+    <span class="cat">Teaching &amp; Learning</span>
+    <p class="txt">Used AI to differentiate materials for <mark>[subject/grade]</mark>, producing the same
+    content at multiple reading levels so <mark>[number]</mark> students could access grade-level ideas at an
+    appropriate level of challenge.</p>
+    <p class="true">Only if you've actually done it. If you've made one leveled text, say one — small and true
+    beats large and vague.</p>
+   </div></div>
+
+   <div class="b" data-c="teach"><div class="num">03</div><div class="body">
+    <span class="cat">Teaching &amp; Learning</span>
+    <p class="txt">Cut lesson-planning time on <mark>[unit/course]</mark> by using AI to draft outlines,
+    discussion prompts, and exit tickets, then revising each against <mark>[standards / my students' needs]</mark>
+    before use.</p>
+    <p class="true">The second half is the point. "Drafted with AI, revised by me" is the professional claim —
+    not "AI made my lessons."</p>
+   </div></div>
+
+   <div class="b" data-c="teach"><div class="num">04</div><div class="body">
+    <span class="cat">Teaching &amp; Learning</span>
+    <p class="txt">Built a teacher-in-the-loop feedback workflow for <mark>[assignment type]</mark>, using AI
+    for first-pass structural comments while personally reviewing and approving every comment before it
+    reached a student.</p>
+    <p class="true">Strong because it names a safeguard. Say it only if you truly reviewed every one.</p>
+   </div></div>
+
+   <div class="b" data-c="comm"><div class="num">05</div><div class="body">
+    <span class="cat">Communication</span>
+    <p class="txt">Improved family communication by using AI to draft and tone-check messages about
+    <mark>[progress / behaviour / attendance]</mark>, personalising each before sending and keeping student
+    details out of unapproved tools.</p>
+    <p class="true">The privacy clause is doing real work here. Include it — it signals you know the rule.</p>
+   </div></div>
+
+   <div class="b" data-c="comm"><div class="num">06</div><div class="body">
+    <span class="cat">Communication</span>
+    <p class="txt">Expanded access for multilingual families by using AI-assisted translation for
+    <mark>[newsletters / progress updates]</mark>, with review before release to protect accuracy and tone.</p>
+    <p class="true">Equity work, stated plainly. Adjust "review" to whatever you genuinely did — a colleague,
+    a staff translator, your own read.</p>
+   </div></div>
+
+   <div class="b" data-c="tools"><div class="num">07</div><div class="body">
+    <span class="cat">Tool Evaluation</span>
+    <p class="txt">Evaluated <mark>[number]</mark> AI tools against a structured framework — problem fit,
+    level of teacher control, student-data safety, alignment to teaching values, and ease of adoption — and
+    recommended <mark>[tool]</mark> to <mark>[my team / department]</mark>.</p>
+    <p class="true">This is the Five Questions framework from Module 1D. Powerful on a résumé because most
+    educators can't describe a selection process at all.</p>
+   </div></div>
+
+   <div class="b" data-c="tools"><div class="num">08</div><div class="body">
+    <span class="cat">Tool Evaluation</span>
+    <p class="txt">Piloted <mark>[tool]</mark> with <mark>[group]</mark> over <mark>[timeframe]</mark>,
+    evaluated its real classroom impact rather than its demo, and made a documented keep/drop recommendation.</p>
+    <p class="true">"Rather than its demo" is the line interviewers remember. Only use it if you actually ran
+    a pilot and reached a decision.</p>
+   </div></div>
+
+   <div class="b" data-c="ethics"><div class="num">09</div><div class="body">
+    <span class="cat">Ethics &amp; Privacy</span>
+    <p class="txt">Applied student-data privacy practice to AI use, keeping personally identifiable
+    information out of unvetted tools and working only within <mark>[district-approved platforms]</mark> in
+    line with FERPA.</p>
+    <p class="true">Say this only if it's your genuine habit. It's the one bullet a district will test you on.</p>
+   </div></div>
+
+   <div class="b" data-c="ethics"><div class="num">10</div><div class="body">
+    <span class="cat">Ethics &amp; Privacy</span>
+    <p class="txt">Wrote a plain-language AI-use statement for <mark>[students / families]</mark> explaining
+    what AI is used for, what it is never used for, and how student information is protected.</p>
+    <p class="true">If you haven't written one, this is the easiest item here to make true — it takes an
+    afternoon, and it's a real artefact you can attach.</p>
+   </div></div>
+
+   <div class="b" data-c="lead"><div class="num">11</div><div class="body">
+    <span class="cat">Leadership</span>
+    <p class="txt">Led <mark>[a PLC session / department PD / grade-level meeting]</mark> on practical and
+    responsible AI use, helping <mark>[number]</mark> colleagues evaluate tools and set their own classroom
+    boundaries.</p>
+    <p class="true">Only if you led something. "Shared what I learned with two colleagues" is also true and
+    also worth writing — just write that instead.</p>
+   </div></div>
+
+   <div class="b" data-c="lead"><div class="num">12</div><div class="body">
+    <span class="cat">Leadership</span>
+    <p class="txt">Contributed to <mark>[school/district]</mark> AI guidance by advising on
+    <mark>[acceptable use / academic integrity / tool approval]</mark>, representing classroom realities in
+    the policy decision.</p>
+    <p class="true">Strong for anyone moving toward instructional coaching or administration. Requires that
+    you were genuinely consulted.</p>
+   </div></div>
+  </div>
+ </section>
+
+ <section>
+  <div class="kicker"><span class="dot">💪</span><h2>Make It Even Stronger</h2></div>
+  <div class="card">
+   <h3>Three swaps that beat any generic bullet</h3>
+   <div class="steps">
+    <div class="step"><span class="n">1</span><div><b>Name the setting.</b> "7th-grade science," not
+    "the classroom." Specific is believable.</div></div>
+    <div class="step"><span class="n">2</span><div><b>Add a number.</b> Students reached, hours saved per
+    week, tools compared, colleagues trained. Even a small honest number outperforms an adjective.</div></div>
+    <div class="step"><span class="n">3</span><div><b>Say what changed.</b> Not what you used — what was
+    different afterwards for students, families, or your team.</div></div>
+   </div>
+   <div class="example">
+    <span class="lab">Generic</span>
+    <p>Used AI to differentiate materials for students.</p>
+   </div>
+   <div class="example" style="border-style:solid;border-color:var(--purple-light);background:#fff">
+    <span class="lab">⚡ Stronger — and checkable</span>
+    <p>Differentiated a 7th-grade science unit with AI, producing readings at three levels so all 28
+    students worked from the same core content — cutting prep from roughly three hours to forty minutes.</p>
+    <button class="copy" data-t="Differentiated a 7th-grade science unit with AI, producing readings at three levels so all 28 students worked from the same core content — cutting prep from roughly three hours to forty minutes.">Copy this example</button>
+   </div>
+  </div>
+ </section>
+
+ <section>
+  <div class="kicker"><span class="dot">⭐️</span><h2>Where to Use These</h2></div>
+  <div class="grid2">
+   <div class="card use"><span class="ic">📄</span><div><b>Résumé &amp; CV</b><span>Professional learning, or as achievements under your current role</span></div></div>
+   <div class="card use"><span class="ic">📋</span><div><b>Evaluation &amp; PD portfolio</b><span>Evidence for professional growth goals and observation cycles</span></div></div>
+   <div class="card use"><span class="ic">💼</span><div><b>Job applications</b><span>Instructional coach, tech integration, department lead</span></div></div>
+   <div class="card use"><span class="ic">🔗</span><div><b>LinkedIn</b><span>Certification section, plus one specific line in your About</span></div></div>
+   <div class="card use"><span class="ic">🏛️</span><div><b>Grants &amp; accreditation</b><span>Staff-capacity narratives often ask exactly this</span></div></div>
+  </div>
+ </section>
+
+ <section>
+  <div class="kicker"><span class="dot">✅</span><h2>Before You Paste, Check</h2></div>
+  <div class="card">
+   <p style="font-size:15px;color:var(--muted)">Tick all four. If one won't tick, rewrite the bullet until it does.</p>
+   <div class="check">
+    <label><input type="checkbox"><span>I actually did this — not "I learned about it," but <b>did</b> it.</span></label>
+    <label><input type="checkbox"><span>I replaced every <mark>[bracket]</mark> with something real.</span></label>
+    <label><input type="checkbox"><span>Any number in it is one I could defend if asked where it came from.</span></label>
+    <label><input type="checkbox"><span>It sounds like me, not like a certificate.</span></label>
+   </div>
+  </div>
+ </section>
+
+ <div class="close">
+  <h2>You Did the Work. Describe It Accurately.</h2>
+  <p>The strongest version of any bullet here is the one you rewrote because the suggestion wasn't quite
+  right. That edit is the part that's actually yours — and it's the part an interviewer will believe.</p>
+ </div>
+
+ <p class="foot">Suggested language generated from the AI-Ready Educator course. Always adjust to reflect
+ what you personally learned, built, and put into practice.</p>
+</div>
+
+<script>
+ document.querySelectorAll('#chips .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#chips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');
+  const f=c.dataset.f;
+  document.querySelectorAll('#sheet .b').forEach(b=>{
+   b.style.display = (f==='all'||b.dataset.c===f) ? '' : 'none';
+  });
+ }));
+ function attachCopy(btn,text){
+  btn.addEventListener('click',()=>{
+   // Confirm first, copy second. Awaiting the clipboard before showing feedback
+   // means a slow or blocked permission prompt leaves the button looking dead.
+   const old=btn.dataset.label ?? btn.textContent;
+   btn.dataset.label=old;
+   btn.textContent='✓ Copied — now edit it'; btn.classList.add('done');
+   setTimeout(()=>{btn.textContent=old;btn.classList.remove('done');},2200);
+   navigator.clipboard?.writeText(text).catch(()=>{
+    // Clipboard unavailable (older browser, insecure context): leave the text
+    // selectable rather than pretending nothing happened.
+    btn.textContent='Select the text above to copy';
+   });
+  });
+ }
+ document.querySelectorAll('#sheet .b').forEach(b=>{
+  const t=b.querySelector('.txt').innerText.trim();
+  const btn=document.createElement('button'); btn.className='copy'; btn.textContent='Copy';
+  b.querySelector('.body').appendChild(btn); attachCopy(btn,t);
+ });
+ document.querySelectorAll('.copy[data-t]').forEach(b=>attachCopy(b,b.dataset.t));
+</script>
+</body></html>
