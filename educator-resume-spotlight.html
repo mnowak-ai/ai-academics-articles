@@ -60,6 +60,15 @@ section{margin-bottom:34px}
 .b .txt{font-size:15.5px;color:var(--text);line-height:1.55}
 .b .txt mark{background:#fdf3c9;color:#6a5312;padding:1px 4px;border-radius:4px;font-weight:500}
 .b .true{font-size:13px;color:var(--muted);margin-top:9px;line-height:1.5;border-left:2px solid #e5ddf7;padding-left:11px}
+.b .txt[contenteditable]{outline:none;border-bottom:1px dashed #d9cdf2;padding-bottom:3px}
+.b .txt[contenteditable]:focus{border-bottom-color:var(--purple);background:#fbf9ff}
+.meter{display:flex;align-items:center;gap:9px;margin-top:9px;font-family:'DM Mono',monospace;font-size:11px}
+.meter .bar2{flex:1;height:5px;border-radius:99px;background:#efe9fa;overflow:hidden;max-width:190px}
+.meter .fill{height:100%;background:#22c55e;width:0;transition:width .2s,background .2s}
+.meter .lab{color:var(--muted);white-space:nowrap}
+.meter.over .fill{background:#e0a12b}
+.meter.over .lab{color:var(--amber);font-weight:500}
+.editnote{font-size:12px;color:var(--muted);margin-bottom:12px}
 .copy{margin-top:11px;font:inherit;font-size:12.5px;padding:7px 14px;border-radius:8px;border:1px solid #ddd4f2;background:#fff;color:var(--purple);cursor:pointer}
 .copy:hover{background:var(--purple-pale)}
 .copy:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
@@ -97,7 +106,7 @@ section{margin-bottom:34px}
  ethical lines are. That's professional capability — and most résumés never say it out loud.</p>
  <div class="stats">
   <div class="stat"><b>12</b><span>bullet options</span></div>
-  <div class="stat"><b>5</b><span>places to use them</span></div>
+  <div class="stat"><b>1</b><span>line each, every one</span></div>
   <div class="stat"><b>0</b><span>you should paste unedited</span></div>
  </div>
 </div></div>
@@ -136,133 +145,109 @@ section{margin-bottom:34px}
    <button class="chip" data-f="lead">Leadership</button>
   </div>
 
+  <p class="editnote">Each bullet is <b>editable right here</b> — click into one and type. The meter shows
+  whether it still fits a single line in Word once your details replace the brackets.</p>
   <div class="sheet" id="sheet">
-   <div class="bar"><i></i> resume.txt — copy, then make it yours</div>
+   <div class="bar"><i></i> resume.txt — one line each, copy then make it yours</div>
 
    <div class="b" data-c="cred"><div class="num">01</div><div class="body">
     <span class="cat">Credential</span>
-    <p class="txt">Completed the AI-Ready Educator: Foundations &amp; Impact certification, covering AI
-    fundamentals, instructional applications, tool evaluation, and responsible use in <mark>[K–12 / higher ed / your setting]</mark>.</p>
-    <p class="true">True for you if: you finished the course. This is the safest bullet on the page — and the
-    one most worth pairing with a second, more specific line.</p>
+    <p class="txt">AI-Ready Educator certified: AI fundamentals, classroom use, tool evaluation, ethical practice.</p>
+    <p class="true">Safest bullet here: true the moment you finish. Pair it with one specific line below.</p>
    </div></div>
 
    <div class="b" data-c="teach"><div class="num">02</div><div class="body">
     <span class="cat">Teaching &amp; Learning</span>
-    <p class="txt">Used AI to differentiate materials for <mark>[subject/grade]</mark>, producing the same
-    content at multiple reading levels so <mark>[number]</mark> students could access grade-level ideas at an
-    appropriate level of challenge.</p>
-    <p class="true">Only if you've actually done it. If you've made one leveled text, say one — small and true
-    beats large and vague.</p>
+    <p class="txt">Used AI to level <mark>[subject]</mark> readings 3 ways so all <mark>[#]</mark> students met grade-level content.</p>
+    <p class="true">Only if you built them. One leveled text is still true — write "a unit" instead of a number.</p>
    </div></div>
 
    <div class="b" data-c="teach"><div class="num">03</div><div class="body">
     <span class="cat">Teaching &amp; Learning</span>
-    <p class="txt">Cut lesson-planning time on <mark>[unit/course]</mark> by using AI to draft outlines,
-    discussion prompts, and exit tickets, then revising each against <mark>[standards / my students' needs]</mark>
-    before use.</p>
-    <p class="true">The second half is the point. "Drafted with AI, revised by me" is the professional claim —
-    not "AI made my lessons."</p>
+    <p class="txt">Cut <mark>[unit]</mark> planning time <mark>[#]</mark>% by drafting with AI and revising against my standards.</p>
+    <p class="true">"Revising against my standards" is the professional half. Keep it even when trimming.</p>
    </div></div>
 
    <div class="b" data-c="teach"><div class="num">04</div><div class="body">
     <span class="cat">Teaching &amp; Learning</span>
-    <p class="txt">Built a teacher-in-the-loop feedback workflow for <mark>[assignment type]</mark>, using AI
-    for first-pass structural comments while personally reviewing and approving every comment before it
-    reached a student.</p>
-    <p class="true">Strong because it names a safeguard. Say it only if you truly reviewed every one.</p>
+    <p class="txt">Ran AI-drafted feedback on <mark>[assignment]</mark>, approving every comment before students saw it.</p>
+    <p class="true">Names a safeguard. Say it only if you truly reviewed every one.</p>
    </div></div>
 
    <div class="b" data-c="comm"><div class="num">05</div><div class="body">
     <span class="cat">Communication</span>
-    <p class="txt">Improved family communication by using AI to draft and tone-check messages about
-    <mark>[progress / behaviour / attendance]</mark>, personalising each before sending and keeping student
-    details out of unapproved tools.</p>
-    <p class="true">The privacy clause is doing real work here. Include it — it signals you know the rule.</p>
+    <p class="txt">Drafted and tone-checked family messages with AI, personalising each and keeping student data out.</p>
+    <p class="true">The privacy clause is doing real work. Keep it — it shows you know the rule.</p>
    </div></div>
 
    <div class="b" data-c="comm"><div class="num">06</div><div class="body">
     <span class="cat">Communication</span>
-    <p class="txt">Expanded access for multilingual families by using AI-assisted translation for
-    <mark>[newsletters / progress updates]</mark>, with review before release to protect accuracy and tone.</p>
-    <p class="true">Equity work, stated plainly. Adjust "review" to whatever you genuinely did — a colleague,
-    a staff translator, your own read.</p>
+    <p class="txt">Reached multilingual families via AI-translated <mark>[newsletters]</mark>, each reviewed before sending.</p>
+    <p class="true">Equity work, stated plainly. Match "reviewed" to whoever actually checked it.</p>
    </div></div>
 
    <div class="b" data-c="tools"><div class="num">07</div><div class="body">
     <span class="cat">Tool Evaluation</span>
-    <p class="txt">Evaluated <mark>[number]</mark> AI tools against a structured framework — problem fit,
-    level of teacher control, student-data safety, alignment to teaching values, and ease of adoption — and
-    recommended <mark>[tool]</mark> to <mark>[my team / department]</mark>.</p>
-    <p class="true">This is the Five Questions framework from Module 1D. Powerful on a résumé because most
-    educators can't describe a selection process at all.</p>
+    <p class="txt">Evaluated <mark>[#]</mark> AI tools on problem fit, teacher control and data safety; adopted <mark>[tool]</mark>.</p>
+    <p class="true">The Five Questions framework from Module 1D. Few educators can describe a selection process at all.</p>
    </div></div>
 
    <div class="b" data-c="tools"><div class="num">08</div><div class="body">
     <span class="cat">Tool Evaluation</span>
-    <p class="txt">Piloted <mark>[tool]</mark> with <mark>[group]</mark> over <mark>[timeframe]</mark>,
-    evaluated its real classroom impact rather than its demo, and made a documented keep/drop recommendation.</p>
-    <p class="true">"Rather than its demo" is the line interviewers remember. Only use it if you actually ran
-    a pilot and reached a decision.</p>
+    <p class="txt">Piloted <mark>[tool]</mark> with <mark>[group]</mark> for <mark>[time]</mark>, then made a documented keep-or-drop call.</p>
+    <p class="true">Only if you ran a pilot and reached a decision. "Documented" means you can produce it.</p>
    </div></div>
 
    <div class="b" data-c="ethics"><div class="num">09</div><div class="body">
     <span class="cat">Ethics &amp; Privacy</span>
-    <p class="txt">Applied student-data privacy practice to AI use, keeping personally identifiable
-    information out of unvetted tools and working only within <mark>[district-approved platforms]</mark> in
-    line with FERPA.</p>
-    <p class="true">Say this only if it's your genuine habit. It's the one bullet a district will test you on.</p>
+    <p class="txt">Kept student data out of unvetted AI tools, working only in district-approved FERPA-safe platforms.</p>
+    <p class="true">Say this only if it is your genuine habit — a district will test you on it.</p>
    </div></div>
 
    <div class="b" data-c="ethics"><div class="num">10</div><div class="body">
     <span class="cat">Ethics &amp; Privacy</span>
-    <p class="txt">Wrote a plain-language AI-use statement for <mark>[students / families]</mark> explaining
-    what AI is used for, what it is never used for, and how student information is protected.</p>
-    <p class="true">If you haven't written one, this is the easiest item here to make true — it takes an
-    afternoon, and it's a real artefact you can attach.</p>
+    <p class="txt">Wrote a plain-language AI-use statement for <mark>[families]</mark> covering purpose, limits and data.</p>
+    <p class="true">Easiest item here to make true. An afternoon of work, and a real artefact you can attach.</p>
    </div></div>
 
    <div class="b" data-c="lead"><div class="num">11</div><div class="body">
     <span class="cat">Leadership</span>
-    <p class="txt">Led <mark>[a PLC session / department PD / grade-level meeting]</mark> on practical and
-    responsible AI use, helping <mark>[number]</mark> colleagues evaluate tools and set their own classroom
-    boundaries.</p>
-    <p class="true">Only if you led something. "Shared what I learned with two colleagues" is also true and
-    also worth writing — just write that instead.</p>
+    <p class="txt">Led <mark>[PLC/PD]</mark> on responsible AI use, helping <mark>[#]</mark> colleagues evaluate and set limits.</p>
+    <p class="true">Only if you led something. "Shared with two colleagues" is also true — write that instead.</p>
    </div></div>
 
    <div class="b" data-c="lead"><div class="num">12</div><div class="body">
     <span class="cat">Leadership</span>
-    <p class="txt">Contributed to <mark>[school/district]</mark> AI guidance by advising on
-    <mark>[acceptable use / academic integrity / tool approval]</mark>, representing classroom realities in
-    the policy decision.</p>
-    <p class="true">Strong for anyone moving toward instructional coaching or administration. Requires that
-    you were genuinely consulted.</p>
+    <p class="txt">Advised <mark>[school]</mark> AI guidance on <mark>[acceptable use]</mark>, voicing classroom realities in policy.</p>
+    <p class="true">Strong for coaching or admin tracks. Requires that you were genuinely consulted.</p>
    </div></div>
+
   </div>
  </section>
 
  <section>
   <div class="kicker"><span class="dot">💪</span><h2>Make It Even Stronger</h2></div>
   <div class="card">
-   <h3>Three swaps that beat any generic bullet</h3>
+   <h3>Specifics have to replace words, not join them</h3>
+   <p style="font-size:14.5px;color:var(--muted);margin-top:8px">A one-line cap and "add detail" pull against
+   each other. Every specific you add has to push something vaguer out.</p>
    <div class="steps">
-    <div class="step"><span class="n">1</span><div><b>Name the setting.</b> "7th-grade science," not
-    "the classroom." Specific is believable.</div></div>
-    <div class="step"><span class="n">2</span><div><b>Add a number.</b> Students reached, hours saved per
-    week, tools compared, colleagues trained. Even a small honest number outperforms an adjective.</div></div>
-    <div class="step"><span class="n">3</span><div><b>Say what changed.</b> Not what you used — what was
-    different afterwards for students, families, or your team.</div></div>
+    <div class="step"><span class="n">1</span><div><b>Cut the throat-clearing first.</b> "Utilised",
+    "in order to", "various" and "successfully" are pure length. Deleting them buys you a detail.</div></div>
+    <div class="step"><span class="n">2</span><div><b>Trade an adjective for a number.</b> "Multiple tools"
+    (14 chars) becomes "4 tools" (7) — shorter <em>and</em> more credible.</div></div>
+    <div class="step"><span class="n">3</span><div><b>Keep the verb, drop the scaffolding.</b> The strongest
+    bullets are verb, object, result. Anything else is negotiable.</div></div>
    </div>
    <div class="example">
-    <span class="lab">Generic</span>
-    <p>Used AI to differentiate materials for students.</p>
+    <span class="lab">Too long — wraps to two lines (147)</span>
+    <p>Successfully utilised various AI tools in order to differentiate a range of science materials for
+    students of differing reading abilities.</p>
    </div>
    <div class="example" style="border-style:solid;border-color:var(--purple-light);background:#fff">
-    <span class="lab">⚡ Stronger — and checkable</span>
-    <p>Differentiated a 7th-grade science unit with AI, producing readings at three levels so all 28
-    students worked from the same core content — cutting prep from roughly three hours to forty minutes.</p>
-    <button class="copy" data-t="Differentiated a 7th-grade science unit with AI, producing readings at three levels so all 28 students worked from the same core content — cutting prep from roughly three hours to forty minutes.">Copy this example</button>
+    <span class="lab">⚡ One line, more specific (89)</span>
+    <p>Levelled a 7th-grade science unit 3 ways with AI so all 28 students met the same core content.</p>
+    <button class="copy" data-t="Levelled a 7th-grade science unit 3 ways with AI so all 28 students met the same core content.">Copy this example</button>
    </div>
   </div>
  </section>
@@ -287,6 +272,7 @@ section{margin-bottom:34px}
     <label><input type="checkbox"><span>I replaced every <mark>[bracket]</mark> with something real.</span></label>
     <label><input type="checkbox"><span>Any number in it is one I could defend if asked where it came from.</span></label>
     <label><input type="checkbox"><span>It sounds like me, not like a certificate.</span></label>
+    <label><input type="checkbox"><span>It still sits on <b>one line</b> in my actual résumé — checked in the document, not here.</span></label>
    </div>
   </div>
  </section>
@@ -325,10 +311,34 @@ section{margin-bottom:34px}
    });
   });
  }
+ // ~100 characters is about one line at 11pt with 1in margins. It is a guide,
+ // not a guarantee — font and margins move it — hence the nudge to check in Word.
+ const LIMIT=100;
  document.querySelectorAll('#sheet .b').forEach(b=>{
-  const t=b.querySelector('.txt').innerText.trim();
+  const txt=b.querySelector('.txt');
+  txt.setAttribute('contenteditable','true');
+  txt.setAttribute('spellcheck','false');
+  const meter=document.createElement('div'); meter.className='meter';
+  meter.innerHTML='<span class="bar2"><span class="fill"></span></span><span class="lab"></span>';
+  const fill=meter.querySelector('.fill'), lab=meter.querySelector('.lab');
+  const update=()=>{
+   const n=txt.innerText.trim().length;
+   fill.style.width=Math.min(100,n/LIMIT*100)+'%';
+   meter.classList.toggle('over',n>LIMIT);
+   lab.textContent = n>LIMIT ? `${n} / ${LIMIT} — will wrap` : `${n} / ${LIMIT} — fits one line`;
+  };
+  txt.addEventListener('input',update);
   const btn=document.createElement('button'); btn.className='copy'; btn.textContent='Copy';
-  b.querySelector('.body').appendChild(btn); attachCopy(btn,t);
+  b.querySelector('.body').appendChild(meter);
+  b.querySelector('.body').appendChild(btn);
+  // Copy whatever it says NOW, so an edit is what lands on the clipboard.
+  btn.addEventListener('click',()=>{
+   const old=btn.dataset.label ?? btn.textContent; btn.dataset.label=old;
+   btn.textContent='✓ Copied — now edit it'; btn.classList.add('done');
+   setTimeout(()=>{btn.textContent=old;btn.classList.remove('done');},2200);
+   navigator.clipboard?.writeText(txt.innerText.trim()).catch(()=>{btn.textContent='Select the text to copy';});
+  });
+  update();
  });
  document.querySelectorAll('.copy[data-t]').forEach(b=>attachCopy(b,b.dataset.t));
 </script>
